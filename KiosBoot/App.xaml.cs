@@ -3,6 +3,7 @@
 using KiosBoot.Services;
 
 using Windows.ApplicationModel.Activation;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 
 namespace KiosBoot
@@ -22,7 +23,19 @@ namespace KiosBoot
 
             // Deferred execution until used. Check https://msdn.microsoft.com/library/dd642331(v=vs.110).aspx for further info on Lazy<T> class.
             _activationService = new Lazy<ActivationService>(CreateActivationService);
+           
         }
+
+
+        private void EnterKioskMode()
+        {
+            ApplicationView view = ApplicationView.GetForCurrentView();
+            if (!view.IsFullScreenMode)
+            {
+                view.TryEnterFullScreenMode();
+            }
+        }
+
 
         protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
@@ -39,7 +52,8 @@ namespace KiosBoot
 
         private ActivationService CreateActivationService()
         {
-            return new ActivationService(this, typeof(Views.TabbedPage));
+            EnterKioskMode();
+            return new ActivationService(this, typeof(Views.Menu));
         }
     }
 }
