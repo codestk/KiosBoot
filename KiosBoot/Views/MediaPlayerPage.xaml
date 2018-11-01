@@ -6,13 +6,41 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
+
+    <Page.Transitions>
+        <TransitionCollection>
+            <EdgeUIThemeTransition Edge="Right"
+                               x:Name="EntranceAnimation" />
+        </TransitionCollection>
+    </Page.Transitions>
+
     <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+
         <MediaPlayerElement x:Name="mpe"
                             AutoPlay="True"
-                            AreTransportControlsEnabled="True">
+                            AreTransportControlsEnabled="False" IsFullWindow="False">
             <MediaPlayerElement.TransportControls>
                 <MediaTransportControls IsCompact="False"/>
             </MediaPlayerElement.TransportControls>
         </MediaPlayerElement>
+
+        <Grid Width="300" Background="Transparent"  HorizontalAlignment="Right" >
+            <Image x:Name="DestinationImage"  Opacity=".6"  Source="ms-appx:///Assets/Logo/dgaLogo.png" VerticalAlignment="Top" Margin="0,20,20,0"/>
+
+        </Grid>
+
+
+        <Button x:Name="Back" Style="{StaticResource BackButtonStyle}" Width="56" Height="56" Content="dddd" FontSize="9999" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Back_Click" >
+            <Button.Background>
+                <ImageBrush ImageSource="ms-appx:///Assets/icon/back.png" Stretch="UniformToFill"/>
+            </Button.Background>
+        </Button>
+
+        <ScrollViewer x:Name="scrollviewer"    VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden"
+              VerticalScrollMode="Disabled" HorizontalScrollMode="Enabled" Grid.Row="1" Loaded="scrollViewer_Loaded"
+              Unloaded="scrollviewer_Unloaded" Background="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <TextBlock Text="Start:The Universal Windows Platform (UWP) background task API allows apps to execute code periodically, execute code in response to certain events such as incoming push notifications or the acquisition of an internet connection, and more—even when the apps aren't running. In this course, learn how to use the Universal Windows Platform (UWP) background task API in development. Instructor Scott Peterson introduces background tasks, triggers, and conditions. In addition, he shows examples of how and when these background tasks should be used.:End" TextWrapping="NoWrap"
+           Foreground="White"    FontSize="50" FocusVisualPrimaryBrush="#FFC32424" RenderTransformOrigin="0.761,0.495" />
+        </ScrollViewer>
     </Grid>
 </Page>

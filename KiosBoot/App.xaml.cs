@@ -21,8 +21,11 @@ namespace KiosBoot
         {
             InitializeComponent();
 
+        ;
+
             // Deferred execution until used. Check https://msdn.microsoft.com/library/dd642331(v=vs.110).aspx for further info on Lazy<T> class.
             _activationService = new Lazy<ActivationService>(CreateActivationService);
+
            
         }
 
@@ -41,6 +44,7 @@ namespace KiosBoot
         {
             if (!args.PrelaunchActivated)
             {
+                EnterKioskMode();
                 await ActivationService.ActivateAsync(args);
             }
         }
@@ -52,7 +56,7 @@ namespace KiosBoot
 
         private ActivationService CreateActivationService()
         {
-            EnterKioskMode();
+          
             return new ActivationService(this, typeof(Views.Menu));
         }
     }
