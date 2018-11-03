@@ -128,6 +128,8 @@
     <Compile Include="Helpers\EnumToBooleanConverter.cs" />
     <Compile Include="Helpers\Json.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
+    <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\GroupInfoList.cs" />
     <Compile Include="Models\SampleImage.cs" />
     <Compile Include="Models\SampleOrder.cs" />
     <Compile Include="Services\ActivationService.cs" />
@@ -161,6 +163,15 @@
     </Compile>
     <Compile Include="Views\MasterDetailPage.xaml.cs">
       <DependentUpon>MasterDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MasterDetailSelection\DetailsPage.xaml.cs">
+      <DependentUpon>DetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MasterDetailSelection\MasterDetailSelection.xaml.cs">
+      <DependentUpon>MasterDetailSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MasterDetailSelection\SamplesPane.xaml.cs">
+      <DependentUpon>SamplesPane.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MediaPlayerPage.xaml.cs">
       <DependentUpon>MediaPlayerPage.xaml</DependentUpon>
@@ -252,6 +263,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\MasterDetailSelection\DetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MasterDetailSelection\MasterDetailSelection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MasterDetailSelection\SamplesPane.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\MediaPlayerPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -290,14 +313,25 @@
   <ItemGroup>
     <Content Include="Assets\Animate\light.png" />
     <Content Include="Assets\Animate\main%402x.png" />
+    <Content Include="Assets\Background\40512.jpg" />
+    <Content Include="Assets\Background\7121.jpg" />
+    <Content Include="Assets\Background\backgroundDigital.jpg" />
+    <Content Include="Assets\Background\BgLight.jpg" />
     <Content Include="Assets\Background\Bg_Sky_Menu.png" />
-    <Content Include="Assets\Background\Loading.png" />
     <Content Include="Assets\Background\Poster.jpg" />
     <Content Include="Assets\icon\back.png" />
     <Content Include="Assets\icon\back.svg" />
+    <Content Include="Assets\icon\next-3-icon.png" />
+    <Content Include="Assets\icon\previous-3-icon.png" />
+    <Content Include="Assets\Logo\Circle.png" />
     <Content Include="Assets\Logo\dgaLogo.png" />
     <Content Include="Assets\Mp4\demo.mp4" />
     <Content Include="Assets\PlaceholderImage.png" />
+    <Content Include="Assets\Product1\p1.jpg" />
+    <Content Include="Assets\Product1\p2.jpg" />
+    <Content Include="Assets\Product1\p3.jpg" />
+    <Content Include="Assets\Product1\p4.jpg" />
+    <Content Include="Assets\Product1\p5.jpg" />
     <Content Include="Assets\SampleData\SamplePhoto1.png" />
     <Content Include="Assets\SampleData\SamplePhoto10.png" />
     <Content Include="Assets\SampleData\SamplePhoto2.png" />

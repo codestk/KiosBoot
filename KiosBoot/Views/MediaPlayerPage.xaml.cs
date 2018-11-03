@@ -33,11 +33,11 @@ namespace KiosBoot.Views
         {
             InitializeComponent();
 
-            ApplicationView view = ApplicationView.GetForCurrentView();
-            if (!view.IsFullScreenMode)
-            {
-                view.TryEnterFullScreenMode();
-            }
+            //ApplicationView view = ApplicationView.GetForCurrentView();
+            //if (!view.IsFullScreenMode)
+            //{
+            //    view.TryEnterFullScreenMode();
+            //}
             //mpe.Source = MediaSource.CreateFromUri(new Uri(DefaultSource));
 
             LoadEmbeddedAppFile();
@@ -99,6 +99,17 @@ namespace KiosBoot.Views
             }
         }
 
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            mpe.MediaPlayer.Pause();
+            mpe.MediaPlayer.PlaybackSession.PlaybackStateChanged -= PlaybackSession_PlaybackStateChanged;
+        }
+
+
+        #region Effecft
+
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             if (e.NavigationMode == NavigationMode.Back)
@@ -129,12 +140,7 @@ namespace KiosBoot.Views
             mpe.MediaPlayer.PlaybackSession.PlaybackStateChanged += PlaybackSession_PlaybackStateChanged;
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            base.OnNavigatedFrom(e);
-            mpe.MediaPlayer.Pause();
-            mpe.MediaPlayer.PlaybackSession.PlaybackStateChanged -= PlaybackSession_PlaybackStateChanged;
-        }
+        #endregion
 
         private async void PlaybackSession_PlaybackStateChanged(MediaPlaybackSession sender, object args)
         {

@@ -10,6 +10,9 @@
     d:DesignWidth="400">
     <ScrollViewer Name="ForegroundElement" VerticalScrollMode="Enabled" HorizontalAlignment="Stretch" Padding="12,0">
         <StackPanel HorizontalAlignment="Left">
+            <StackPanel.Background>
+                <ImageBrush ImageSource="ms-appx:///Assets/LockScreenLogo.png" Stretch="Uniform"/>
+            </StackPanel.Background>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="0,8,0,0">
                 <FontIcon
                     FontSize="40"

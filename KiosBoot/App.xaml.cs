@@ -57,7 +57,7 @@ namespace KiosBoot
         private ActivationService CreateActivationService()
         {
           
-            return new ActivationService(this, typeof(Views.Menu));
+            return new ActivationService(this, typeof(Views.MasterDetailSelection));
         }
     }
 }

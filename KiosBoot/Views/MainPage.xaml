@@ -6,7 +6,48 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
-    <Grid
+
+
+    <!--Adding Animation-->
+    <Page.Transitions>
+        <TransitionCollection>
+            <EdgeUIThemeTransition Edge="Right"
+                               x:Name="EntranceAnimation" />
+        </TransitionCollection>
+    </Page.Transitions>
+    <!--<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    </Grid>-->
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="ms-appx:///Assets/Background/Bg_Sky_Menu.png" Stretch="UniformToFill" />
+        </Grid.Background>
+
+        <RelativePanel Height="697" HorizontalAlignment="Right" Margin="0,0,60,0">
+            <Button  x:Name='btn_Screen' Content="Screen Server" HorizontalAlignment="Stretch"     VerticalAlignment="Stretch" Height="164" Width="580" Click="btn_Screen_Click"  Style="{StaticResource CircleButton}" FontSize="{StaticResource  BigFontSize}" />
+            <Button  x:Name='btn_Game' Content="เกมส์" HorizontalAlignment="Right" Margin="0,267,0,0" VerticalAlignment="Top" Height="164" Width="580" Click="btn_Game_Click"  Style="{StaticResource CircleButton}" FontSize="{StaticResource BigFontSize}" />
+            <Button  x:Name='btn_Product'   Content="ผลิตภัณฑ์" HorizontalAlignment="Right" Margin="0,533,0,-0.2" VerticalAlignment="Top" Height="164" Width="580" Click="btn_Product_Click"  Style="{StaticResource CircleButton}" FontSize="{StaticResource BigFontSize}" />
+
+
+
+
+
+        </RelativePanel>
+
+        <TextBlock Height="100"  FontSize="50"  Text="ยินดีต้อนรับ......" TextWrapping="Wrap" VerticalAlignment="Center"  RenderTransformOrigin="0.5,0.5" Margin="100,800,0,0" Width="1609" FocusVisualPrimaryBrush="Aqua"  Foreground="#666" />
+        <!--<Image  x:Name="capturedPhoto" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5"   Source="ms-appx:///Assets/icon/main@2x.png" Stretch="Fill" Width="555" Height="441" Margin="419,129,835,330" FocusVisualSecondaryBrush="{x:Null}" FocusVisualPrimaryBrush="{x:Null}"/>-->
+
+        <Image x:Name="SourceImage"  Source="ms-appx:///Assets/Animate/main@2x.png" Stretch="Uniform" Width="500" Margin="0,0,500,0"/>
+
+
+    </Grid>
+
+
+
+
+
+
+
+    <!--<Grid
         x:Name="ContentArea"
         Margin="{StaticResource MediumLeftRightMargin}">
         <Grid.RowDefinitions>
@@ -21,8 +62,8 @@
         <Grid
             Grid.Row="1" 
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-            <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
-                Place your content here.-->
+            --><!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
+                Place your content here.--><!--
         </Grid>
-    </Grid>
+    </Grid>-->
 </Page>

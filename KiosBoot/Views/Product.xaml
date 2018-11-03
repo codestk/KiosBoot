@@ -5,9 +5,194 @@
     xmlns:local="using:KiosBoot.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"  >
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <!-- Storyboard resource: Animates a rectangle's opacity. -->
+        <Storyboard x:Key="Storyboard" BeginTime="00:00:00.000" Duration="00:00:10.000">
+            <DoubleAnimation Storyboard.TargetName="spinrect"
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                             From="0" To="360" BeginTime="00:00:05.000" Duration="00:00:05.000" />
+            <DoubleAnimation Storyboard.TargetName="OpacityImage"
+                             Storyboard.TargetProperty="Opacity"
+                             From="1" To="0" Duration="00:00:10.000" />
+            <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).RotateTransform.Angle)" To="360" Duration="0:0:1" RepeatBehavior="Forever" />
+        </Storyboard>
+    </Page.Resources>
 
+
+
+    <Grid  x:Name="layoutRoot" Opacity="1">
+        <Image    Source="ms-appx:///Assets/Background/backgroundDigital.jpg" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill">
+
+        </Image>
+
+
+
+
+
+
+
+        <StackPanel Width="auto" Height="auto" VerticalAlignment="Top" HorizontalAlignment="Center">
+
+            <TextBlock x:Name="Head" HorizontalAlignment="Center"   Text=" The dealer's guide to digital advertising" TextWrapping="Wrap"  Width="auto"  FontSize="70"    RelativePanel.Above="Title" Margin="0,50,0,0" FontFamily="Haettenschweiler" FontWeight="Bold" Foreground="White" FocusVisualPrimaryBrush="#FF3D3D3D" />
+            <TextBlock x:Name="Title"  HorizontalAlignment="Center"   Text="Four essential strategies for successful digital advertising" TextWrapping="Wrap"   Width="auto"  FontSize="50" Foreground="#FFF37D06" />
+        </StackPanel>
+
+
+        <Grid Background="Transparent" Width="1400" Height="800" Margin="0,200,0,0">
+
+
+        
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                <controls:DropShadowPanel BlurRadius="99"  
+                               ShadowOpacity=".8"
+                               OffsetX="0"
+                               OffsetY="5"
+                               Color="#003765"
+                         
+                              >
+                    <Button Style="{StaticResource   DefaultButtonStyle}"  
+               Content="Demo1"   />
+                </controls:DropShadowPanel>
+            </StackPanel>
+
+
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                <controls:DropShadowPanel BlurRadius="99"  
+                               ShadowOpacity=".8"
+                               OffsetX="0"
+                               OffsetY="5"
+                               Color="#003765"
+                         
+                              >
+                    <Button Style="{StaticResource   DefaultButtonStyle}"  
+               Content="Demo1"   />
+                </controls:DropShadowPanel>
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top">
+                <controls:DropShadowPanel BlurRadius="99"  
+                               ShadowOpacity=".8"
+                               OffsetX="0"
+                               OffsetY="5"
+                               Color="#003765"
+                         
+                              >
+                    <Button Style="{StaticResource   DefaultButtonStyle}"  
+               Content="Demo1"   />
+                </controls:DropShadowPanel>
+            </StackPanel>
+
+
+            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                <controls:DropShadowPanel BlurRadius="99"  
+                               ShadowOpacity=".8"
+                               OffsetX="0"
+                               OffsetY="5"
+                               Color="#003765"
+                         
+                              >
+                    <Button Style="{StaticResource   DefaultButtonStyle}"  
+               Content="Demo1"   />
+                </controls:DropShadowPanel>
+            </StackPanel>
+
+
+
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                <controls:DropShadowPanel BlurRadius="99"  
+                               ShadowOpacity=".8"
+                               OffsetX="0"
+                               OffsetY="5"
+                               Color="#003765"
+                         
+                              >
+                    <Button Style="{StaticResource   DefaultButtonStyle}"  
+               Content="Demo1"   />
+                </controls:DropShadowPanel>
+            </StackPanel>
+
+
+
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                <controls:DropShadowPanel BlurRadius="99"  
+                               ShadowOpacity=".8"
+                               OffsetX="0"
+                               OffsetY="5"
+                               Color="#003765"
+                         
+                              >
+                    <Button Style="{StaticResource   DefaultButtonStyle}"  
+               Content="Demo1"   />
+                </controls:DropShadowPanel>
+            </StackPanel>
+
+
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <controls:DropShadowPanel BlurRadius="99"  
+                               ShadowOpacity=".8"
+                               OffsetX="0"
+                               OffsetY="5"
+                               Color="#003765"
+                         
+                              >
+                    <Button Style="{StaticResource   DefaultButtonStyle}"  
+               Content="Demo1"   />
+                </controls:DropShadowPanel>
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <controls:DropShadowPanel BlurRadius="99"  
+                               ShadowOpacity=".8"
+                               OffsetX="0"
+                               OffsetY="5"
+                               Color="#003765"
+                         
+                              >
+                    <Button Style="{StaticResource   DefaultButtonStyle}"  
+               Content="Demo1"   />
+                </controls:DropShadowPanel>
+            </StackPanel>
+
+
+
+
+        </Grid>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,200,0,0">
+            <StackPanel.Resources>
+                <Storyboard x:Name="myStoryboard">
+                    <DoubleAnimation
+       Storyboard.TargetName="myTransform"
+       Storyboard.TargetProperty="Angle"
+       From="0" To="360" Duration="0:2:0"
+       RepeatBehavior="Forever" />
+                </Storyboard>
+            </StackPanel.Resources>
+            <Ellipse x:Name="circle"  Width="300" Height="300" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5"  >
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="ms-appx:///Assets/Logo/Circle.png" Stretch="UniformToFill" />
+                </Ellipse.Fill>
+                <Ellipse.RenderTransform>
+                    <RotateTransform x:Name="myTransform" Angle="0" />
+                </Ellipse.RenderTransform>
+            </Ellipse>
+
+
+        </StackPanel>
+
+
+        <Button x:Name="Back" Style="{StaticResource BackButtonStyle}" Width="56" Height="56" Content="dddd" FontSize="9999" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Back_Click" >
+            <Button.Background>
+                <ImageBrush ImageSource="ms-appx:///Assets/icon/back.png" Stretch="UniformToFill"/>
+            </Button.Background>
+        </Button>
     </Grid>
+
+
+
+
 </Page>

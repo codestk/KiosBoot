@@ -37,8 +37,13 @@
             <TextBlock x:Uid="MasterDetail_NoSelection" Style="{StaticResource ListNoSelectionTextStyle}" />
         </DataTemplate>
     </Page.Resources>
+    <Page.Background>
+        <ImageBrush/>
+    </Page.Background>
 
     <Grid x:Name="ContentArea">
+       
+
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
@@ -46,7 +51,7 @@
 
         <TextBlock
             Grid.Row="0"
-            x:Uid="MasterDetail_Title"
+            x:Uid="รายการ"
             Margin="{StaticResource MediumLeftRightMargin}"
             Style="{StaticResource PageTitleStyle}" />
 

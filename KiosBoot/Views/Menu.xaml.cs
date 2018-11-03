@@ -73,7 +73,7 @@ namespace KiosBoot.Views
 
         private void btn_Product_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(MasterDetailPage), null, new EntranceNavigationTransitionInfo());
+            this.Frame.Navigate(typeof(Product), null, new EntranceNavigationTransitionInfo());
         }
     }
 }
