@@ -69,11 +69,54 @@ namespace KiosBoot.Views
 
 
 
+
         #endregion
 
-        private void Product_1_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
+            DemoRedirect();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            DemoRedirect();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            DemoRedirect();
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            DemoRedirect();
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            DemoRedirect();
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            DemoRedirect();
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            DemoRedirect();
+        }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            DemoRedirect();
+        }
+
+        void DemoRedirect()
+        {
+            this.Frame.Navigate(typeof(MasterDetailSelection), null, new DrillInNavigationTransitionInfo());
 
         }
+
     }
 }

@@ -54,7 +54,7 @@
                          
                               >
                     <Button Style="{StaticResource   DefaultButtonStyle}"  
-               Content="Demo1"   />
+               Content="Demo1" Click="Button_Click"   />
                 </controls:DropShadowPanel>
             </StackPanel>
 
@@ -68,7 +68,7 @@
                          
                               >
                     <Button Style="{StaticResource   DefaultButtonStyle}"  
-               Content="Demo1"   />
+               Content="Demo1" Click="Button_Click_2"   />
                 </controls:DropShadowPanel>
             </StackPanel>
 
@@ -81,7 +81,7 @@
                          
                               >
                     <Button Style="{StaticResource   DefaultButtonStyle}"  
-               Content="Demo1"   />
+               Content="Demo1" Click="Button_Click_1"   />
                 </controls:DropShadowPanel>
             </StackPanel>
 
@@ -95,7 +95,7 @@
                          
                               >
                     <Button Style="{StaticResource   DefaultButtonStyle}"  
-               Content="Demo1"   />
+               Content="Demo1" Click="Button_Click_5"   />
                 </controls:DropShadowPanel>
             </StackPanel>
 
@@ -110,7 +110,7 @@
                          
                               >
                     <Button Style="{StaticResource   DefaultButtonStyle}"  
-               Content="Demo1"   />
+               Content="Demo1" Click="Button_Click_3"   />
                 </controls:DropShadowPanel>
             </StackPanel>
 
@@ -125,7 +125,7 @@
                          
                               >
                     <Button Style="{StaticResource   DefaultButtonStyle}"  
-               Content="Demo1"   />
+               Content="Demo1" Click="Button_Click_4"   />
                 </controls:DropShadowPanel>
             </StackPanel>
 
@@ -140,7 +140,7 @@
                          
                               >
                     <Button Style="{StaticResource   DefaultButtonStyle}"  
-               Content="Demo1"   />
+               Content="Demo1" Click="Button_Click_6"   />
                 </controls:DropShadowPanel>
             </StackPanel>
 
@@ -153,7 +153,7 @@
                          
                               >
                     <Button Style="{StaticResource   DefaultButtonStyle}"  
-               Content="Demo1"   />
+               Content="Demo1" Click="Button_Click_7"   />
                 </controls:DropShadowPanel>
             </StackPanel>
 

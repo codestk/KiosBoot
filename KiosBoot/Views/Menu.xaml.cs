@@ -1,8 +1,12 @@
-﻿using Windows.UI.Xaml;
+﻿using KiosBoot.Models;
+using ServiceHelpers;
+using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -19,6 +23,30 @@ namespace KiosBoot.Views
             this.InitializeComponent();
 
             this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
+
+
+            if (FaceObjct.MyFace !=null)
+            {
+                //face.FaceAttributes.Gender
+              string gender =  FaceObjct.MyFace.FaceAttributes.Gender;
+
+                ImageAnalyzer img = this.DataContext as ImageAnalyzer;
+                if (img != null)
+                {
+                    img.UpdateDecodedImageSize(100, 100);
+                }
+
+                if (string.Compare(gender, "male", true) == 0)
+                {
+                    this.SourceImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Animate/male.png"));
+                }
+                else if (string.Compare(gender, "female", true) == 0)
+                {
+                    this.SourceImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Animate/female.png"));
+                }
+
+
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

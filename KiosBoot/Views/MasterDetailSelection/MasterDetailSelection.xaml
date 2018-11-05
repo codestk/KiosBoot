@@ -75,7 +75,7 @@
         </DataTemplate>
     </Page.Resources>
     <Page.Background>
-        <ImageBrush ImageSource="ms-appx:///Assets/Background/BgLight.jpg" Stretch="Fill"/>
+        <ImageBrush ImageSource="ms-appx:///Assets/Background/backgroundDigital.jpg" Stretch="Fill"/>
     </Page.Background>
 
     <Grid>
@@ -270,13 +270,13 @@
                                    Margin="0,9"
                                    TextWrapping="WrapWholeWords"
                                    Text="Text Animation เป็นเครื่องมือสำหรับใส่เทคนิคพิเศษให้กับข้อความ ตัวอย่างเช่น หัวข้อเรื่องต่างๆ หรือสไลค์หน้าแรกที่เราต้องการจะเน้นจุดสนใจให้ดูสะดุดตา โดย Captivate จะมีรูปแบบของการเคลื่อนไหวให้เลือกอยู่มากมาย" />-->
-                                <Grid>  
-                                    <Button VerticalAlignment="Center" HorizontalAlignment="Left"    Width="100"  Height="100" Click="Button_Click_1">
+                                <Grid>
+                                    <Button VerticalAlignment="Center" HorizontalAlignment="Left"    Width="100"  Height="100" Click="Button_Click_1" Style="{StaticResource BackButtonStyle}" >
                                         <Button.Background>
                                             <ImageBrush ImageSource="ms-appx:///Assets/icon/previous-3-icon.png" Stretch="Uniform" />
                                         </Button.Background>
                                     </Button>
-                                    <Button VerticalAlignment="Top" HorizontalAlignment="Right"  Width="100" Height="100" Click="Button_Click_2">
+                                    <Button VerticalAlignment="Top" HorizontalAlignment="Right"  Width="100" Height="100" Click="Button_Click_2" Style="{StaticResource BackButtonStyle}">
                                         <Button.Background>
                                             <ImageBrush ImageSource="ms-appx:///Assets/icon/next-3-icon.png" Stretch="Uniform" />
                                         </Button.Background>

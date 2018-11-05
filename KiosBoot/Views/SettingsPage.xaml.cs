@@ -39,10 +39,10 @@ namespace KiosBoot.Views
             InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            Initialize();
-        }
+        //protected override void OnNavigatedTo(NavigationEventArgs e)
+        //{
+        //    Initialize();
+        //}
 
         private void Initialize()
         {
