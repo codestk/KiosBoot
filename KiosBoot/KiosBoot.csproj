@@ -181,6 +181,9 @@
     <Compile Include="Views\Face\AutomaticPhotoCapturePage.xaml.cs">
       <DependentUpon>AutomaticPhotoCapturePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Face\FaceIdentificationSetup.xaml.cs">
+      <DependentUpon>FaceIdentificationSetup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Face\RecognitionPage.xaml.cs">
       <DependentUpon>RecognitionPage.xaml</DependentUpon>
     </Compile>
@@ -303,6 +306,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Face\AutomaticPhotoCapturePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Face\FaceIdentificationSetup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

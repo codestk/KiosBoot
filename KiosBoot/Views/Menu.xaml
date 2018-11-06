@@ -17,6 +17,9 @@
     <!--<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     </Grid>-->
     <Grid>
+     
+
+
         <Grid.Background>
             <ImageBrush ImageSource="ms-appx:///Assets/Background/Bg_Sky_Menu.png" Stretch="UniformToFill" />
         </Grid.Background>
@@ -25,19 +28,24 @@
             <Button  x:Name='btn_Screen' Content="Screen Server" HorizontalAlignment="Stretch"     VerticalAlignment="Stretch" Height="164" Width="580" Click="btn_Screen_Click"  Style="{StaticResource CircleButton}" FontSize="{StaticResource  BigFontSize}" />
             <Button  x:Name='btn_Game' Content="เกมส์" HorizontalAlignment="Right" Margin="0,267,0,0" VerticalAlignment="Top" Height="164" Width="580" Click="btn_Game_Click"  Style="{StaticResource CircleButton}" FontSize="{StaticResource BigFontSize}" />
             <Button  x:Name='btn_Product'   Content="ผลิตภัณฑ์" HorizontalAlignment="Right" Margin="0,533,0,-0.2" VerticalAlignment="Top" Height="164" Width="580" Click="btn_Product_Click"  Style="{StaticResource CircleButton}" FontSize="{StaticResource BigFontSize}" />
-     
 
 
 
 
+        
         </RelativePanel>
 
-        <TextBlock Height="100"  FontSize="50"  Text="ยินดีต้อนรับ......" TextWrapping="Wrap" VerticalAlignment="Center"  RenderTransformOrigin="0.5,0.5" Margin="100,800,0,0" Width="1609" FocusVisualPrimaryBrush="Aqua"  Foreground="#666" />
+        <TextBlock x:Name="Greeting"  Text="ยินดีต้อนรับ......" TextWrapping="Wrap" VerticalAlignment="Bottom"     Width="1609" FocusVisualPrimaryBrush="Aqua"  Foreground="#666" FontWeight="Bold" LineHeight="22" HorizontalAlignment="Left" FontSize="50" IsHitTestVisible="False" Margin="100,0,0,50" />
         <!--<Image  x:Name="capturedPhoto" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5"   Source="ms-appx:///Assets/icon/main@2x.png" Stretch="Fill" Width="555" Height="441" Margin="419,129,835,330" FocusVisualSecondaryBrush="{x:Null}" FocusVisualPrimaryBrush="{x:Null}"/>-->
 
         <Image x:Name="SourceImage"  Source="ms-appx:///Assets/Animate/main@2x.png" Stretch="Uniform" Width="500" Margin="0,0,500,0"/>
-       
 
+
+        <Button x:Name="Back" Style="{StaticResource BackButtonStyle}" Width="56" Height="56" Content="dddd" FontSize="9999" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Back_Click" >
+            <Button.Background>
+                <ImageBrush ImageSource="ms-appx:///Assets/icon/back.png" Stretch="UniformToFill"/>
+            </Button.Background>
+        </Button>
     </Grid>
     
 </Page>

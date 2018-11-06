@@ -1,6 +1,7 @@
 ﻿
 
 using Microsoft.ProjectOxford.Face.Contract;
+using ServiceHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,13 @@ namespace KiosBoot.Models
    public class FaceObjct
     {
         public static Face MyFace { get; set; }
+        public static IdentifiedPerson faceIdIdentification { get; set; }
 
+
+        public static void Clear()
+        {
+             MyFace = null;
+            faceIdIdentification = null;
+        }
     }
 }

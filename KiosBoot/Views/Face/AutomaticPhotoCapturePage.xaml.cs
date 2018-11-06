@@ -56,13 +56,38 @@ namespace KiosBoot.Views
         public AutomaticPhotoCapturePage()
         {
             this.InitializeComponent();
-
+            Window.Current.CoreWindow.CharacterReceived += CoreWindow_CharacterReceived;
             Window.Current.Activated += CurrentWindowActivationStateChanged;
             this.cameraControl.EnableAutoCaptureMode = true;
             this.cameraControl.FilterOutSmallFaces = true;
             this.cameraControl.AutoCaptureStateChanged += CameraControl_AutoCaptureStateChanged;
             this.cameraControl.CameraAspectRatioChanged += CameraControl_CameraAspectRatioChanged;
+
+
+            FaceObjct.Clear();
         }
+
+
+
+
+        private async void CoreWindow_CharacterReceived(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.CharacterReceivedEventArgs args)
+        {
+
+            if (args.KeyCode == 27) //esc
+            {
+                this.Frame.Navigate(typeof(SettingsPage), null, new EntranceNavigationTransitionInfo());
+            }
+
+            if (args.KeyCode == 9) //tab
+            {
+                // your code here fore Escape key
+                this.Frame.Navigate(typeof(FaceIdentificationSetup), null, new EntranceNavigationTransitionInfo());
+            }
+          
+        }
+
+
+
 
         private void CameraControl_CameraAspectRatioChanged(object sender, EventArgs e)
         {

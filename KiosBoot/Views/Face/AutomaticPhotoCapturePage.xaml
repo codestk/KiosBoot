@@ -25,7 +25,7 @@
             <StackPanel Grid.Row="1">
                 
                 <!--<TextBlock Text="ระบบตรวจสอบใบหน้า" Foreground="Blue" HorizontalAlignment="Center" FontFamily="Segoe UI Light" Style="{StaticResource HeaderTextBlockStyle}"/>-->
-                <TextBlock Text="จับภาพอัตโนมัติผ่านการติดตามใบหน้าและการตรวจจับการเคลื่อนไหว" Foreground="#FFF37D06" HorizontalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}"  />
+                <!--<TextBlock Text="จับภาพอัตโนมัติผ่านการติดตามใบหน้าและการตรวจจับการเคลื่อนไหว" Foreground="#FFF37D06" HorizontalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}"  />-->
 
             </StackPanel>
 
@@ -43,7 +43,7 @@
 
                 <Grid Grid.Column="1" x:Name="cameraGuideHost">
 
-                    <Grid Name="cameraGuideBallon" VerticalAlignment="Top" HorizontalAlignment="Right" Opacity="0.8" Margin="0,0,10,0" Width="200">
+                    <Grid Name="cameraGuideBallon" VerticalAlignment="Top" HorizontalAlignment="Right" Opacity="0.8" Margin="0,0,10,0" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
@@ -54,8 +54,8 @@
                                HorizontalAlignment="Left"
                                Points="0,0,0,10,12,10" Fill="#ECCF11" />
 
-                        <Border Grid.Row="1" Background="#ECCF11" Padding="10,5,10,5">
-                            <TextBlock x:Name="cameraGuideText" Foreground="#D86C2A" Text="ก้าวไปข้างหน้ากล้องเพื่อเริ่มต้น!"  Style="{StaticResource SubtitleTextBlockStyle}" FontStyle="Italic" />
+                        <Border Grid.Row="1" Background="Orange" Padding="10,5,10,5" >
+                            <TextBlock x:Name="cameraGuideText" Foreground="#fff" Text="ก้าวไปข้างหน้ากล้องเพื่อเริ่มต้น!"   Style="{StaticResource SubtitleTextBlockStyle}" FontSize="60"   FontStyle="Italic"   />
                         </Border>
                     </Grid>
 
@@ -85,12 +85,12 @@
                 <Polyline StrokeThickness="0" Grid.Row="0" Margin="0,0,10,0"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Right"
-                        Points="10,0,10,10,-5,10" Fill="#ECCF11" />
+                        Points="10,0,10,10,-5,10" Fill="#DC640E" />
 
-                <Border Grid.Row="1" Background="#ECCF11" Padding="10,5,10,5">
+                <Border Grid.Row="1" Background="#DC640E" Padding="10,5,10,5">
                     <StackPanel>
-                        <TextBlock Foreground="#D86C2A" Text="ลองทำท่าทางที่แตกต่างกันในครั้งต่อไป!&#10;อีกรอบจะเริ่มในไม่ช้า..." Style="{StaticResource SubtitleTextBlockStyle}" FontStyle="Italic" />
-                        <ProgressBar x:Name="resultDisplayTimerUI" Height="6" Opacity="0.8" Margin="0,6,0,0" Foreground="#f8f7bb" VerticalAlignment="Bottom" />
+                        <TextBlock Foreground="#fff" Text="ลองทำท่าทางที่แตกต่างกันในครั้งต่อไป!&#10;อีกรอบครับ..." FontSize="60" FontStyle="Italic" />
+                        <ProgressBar x:Name="resultDisplayTimerUI" Height="16" Opacity="0.8" Margin="0,6,0,0" Foreground="#333" VerticalAlignment="Bottom" />
                     </StackPanel>
                 </Border>
             </Grid>

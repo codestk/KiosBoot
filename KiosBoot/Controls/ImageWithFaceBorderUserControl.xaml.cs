@@ -356,8 +356,9 @@ namespace KiosBoot.Controls
 
                                 faceUI.ShowIdentificationData(age, gender, (uint)Math.Round(confidence * 100), name);
 
+                                //Save Data in memory
                                 FaceObjct.MyFace = face;
-
+                                FaceObjct.faceIdIdentification = faceIdIdentification;
 
 
                             }

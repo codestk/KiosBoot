@@ -3,7 +3,6 @@ using ServiceHelpers;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
@@ -24,11 +23,12 @@ namespace KiosBoot.Views
 
             this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
 
+         
 
-            if (FaceObjct.MyFace !=null)
+            if (FaceObjct.MyFace != null)
             {
                 //face.FaceAttributes.Gender
-              string gender =  FaceObjct.MyFace.FaceAttributes.Gender;
+                string gender = FaceObjct.MyFace.FaceAttributes.Gender;
 
                 ImageAnalyzer img = this.DataContext as ImageAnalyzer;
                 if (img != null)
@@ -39,13 +39,23 @@ namespace KiosBoot.Views
                 if (string.Compare(gender, "male", true) == 0)
                 {
                     this.SourceImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Animate/male.png"));
+                    Greeting.Text = "ยินดีต้อนรับครับ";
                 }
                 else if (string.Compare(gender, "female", true) == 0)
                 {
-                    this.SourceImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Animate/female.png"));
+                    //this.SourceImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Animate/female.png"));
+
+                    this.SourceImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Animate/main@2x.png"));
+                    Greeting.Text = "ยินดีต้อนรับค่ะ";
+                    //
                 }
 
-
+                //if มี Name
+                if (FaceObjct.faceIdIdentification != null)
+                {
+                    string Name = FaceObjct.faceIdIdentification.Person.Name;
+                    Greeting.Text = "ยินดีต้อนรับคุณ " + Name + " ";
+                }
             }
         }
 
@@ -61,12 +71,9 @@ namespace KiosBoot.Views
                 animation.TryStart(SourceImage);
             }
 
-
             base.OnNavigatedTo(e);
         }
 
-
-     
         private void SourceImage_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
             // Navigate to detail page.
@@ -84,11 +91,6 @@ namespace KiosBoot.Views
             // animation.Configuration = new BasicConnectedAnimationConfiguration();
         }
 
-
-
-
-
-
         private void btn_Screen_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(MediaPlayerPage), null, new DrillInNavigationTransitionInfo());
@@ -102,6 +104,16 @@ namespace KiosBoot.Views
         private void btn_Product_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Product), null, new EntranceNavigationTransitionInfo());
+        }
+
+        private void btn_SettingFace_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(FaceIdentificationSetup), null, new EntranceNavigationTransitionInfo());
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AutomaticPhotoCapturePage), null, new EntranceNavigationTransitionInfo());
         }
     }
 }

@@ -208,7 +208,7 @@
                   ShowsScrollingPlaceholders="False"
                   ItemTemplate="{StaticResource ContactListViewTemplate }"
                   ItemClick="OnItemClick"
-                  Grid.Row="1" Background="Transparent" Foreground="#FFED0A0A">
+                  Grid.Row="1" Background="#292D35" >
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />

@@ -111,10 +111,12 @@ namespace KiosBoot
         private ActivationService CreateActivationService()
         {
 
-            //return new ActivationService(this, typeof(Views.SettingsPage));
+    
 
             //return new ActivationService(this, typeof(Views.RecognitionPage));
             return new ActivationService(this, typeof(Views.AutomaticPhotoCapturePage));
+            //return new ActivationService(this, typeof(Views.SettingsPage));
+            //return new ActivationService(this, typeof(Views.FaceIdentificationSetup));
         }
     }
 }
