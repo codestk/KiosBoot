@@ -57,13 +57,13 @@ namespace KiosBoot.Views
         {
             this.InitializeComponent();
             Window.Current.CoreWindow.CharacterReceived += CoreWindow_CharacterReceived;
-            Window.Current.Activated += CurrentWindowActivationStateChanged;
+   
             this.cameraControl.EnableAutoCaptureMode = true;
             this.cameraControl.FilterOutSmallFaces = true;
             this.cameraControl.AutoCaptureStateChanged += CameraControl_AutoCaptureStateChanged;
             this.cameraControl.CameraAspectRatioChanged += CameraControl_CameraAspectRatioChanged;
 
-
+            Window.Current.Activated += CurrentWindowActivationStateChanged;
             FaceObjct.Clear();
         }
 
