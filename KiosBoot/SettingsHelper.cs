@@ -115,6 +115,9 @@ namespace KiosBoot
 
         private async void LoadRoamingSettings()
         {
+
+
+
             object value = ApplicationData.Current.RoamingSettings.Values["FaceApiKey"];
             if (value != null)
             {
