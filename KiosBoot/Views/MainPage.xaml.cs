@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KiosBoot.Views.Game;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Windows.UI.Core;
@@ -98,7 +99,7 @@ namespace KiosBoot.Views
 
         private void btn_Game_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(Game), null, new SuppressNavigationTransitionInfo());
+            this.Frame.Navigate(typeof(MainWindow), null, new SuppressNavigationTransitionInfo());
         }
 
         private void btn_Product_Click(object sender, RoutedEventArgs e)

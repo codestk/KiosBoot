@@ -155,13 +155,23 @@
     <Compile Include="Helpers\CameraOrientationExtensions.cs" />
     <Compile Include="Helpers\EnumToBooleanConverter.cs" />
     <Compile Include="Helpers\Json.cs" />
+    <Compile Include="Helpers\MyDataTemplateSelector.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
+    <Compile Include="Helpers\SoundManager.cs" />
     <Compile Include="KioskExperiences.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\FaceObjct.cs" />
+    <Compile Include="ViewModels\GameInfoViewModel.cs" />
+    <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="Models\GroupInfoList.cs" />
+    <Compile Include="ViewModels\ObservableObject.cs" />
+    <Compile Include="Models\PictureModel.cs" />
+    <Compile Include="Models\PictureViewModel.cs" />
     <Compile Include="Models\SampleImage.cs" />
     <Compile Include="Models\SampleOrder.cs" />
+    <Compile Include="Models\SlideCollectionViewModel.cs" />
+    <Compile Include="ViewModels\StartMenuViewModel.cs" />
+    <Compile Include="ViewModels\TimerViewModel.cs" />
     <Compile Include="Services\ActivationService.cs" />
     <Compile Include="Activation\DefaultLaunchActivationHandler.cs" />
     <Compile Include="Services\NavigationService.cs" />
@@ -187,8 +197,17 @@
     <Compile Include="Views\Face\RecognitionPage.xaml.cs">
       <DependentUpon>RecognitionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Game.xaml.cs">
-      <DependentUpon>Game.xaml</DependentUpon>
+    <Compile Include="Views\Game\GamePage.xaml.cs">
+      <DependentUpon>GamePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Game\MainMenuView.xaml.cs">
+      <DependentUpon>MainMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Game\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Game\StartMenuView.xaml.cs">
+      <DependentUpon>StartMenuView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ImageGalleryDetailPage.xaml.cs">
       <DependentUpon>ImageGalleryDetailPage.xaml</DependentUpon>
@@ -317,9 +336,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Game.xaml">
+    <Page Include="Views\Game\GamePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Game\MainMenuView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Game\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Game\StartMenuView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ImageGalleryDetailPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -394,6 +425,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Animals\bear_image.jpg" />
+    <Content Include="Assets\Animals\deer_image.jpg" />
+    <Content Include="Assets\Animals\eagle_image.jpg" />
+    <Content Include="Assets\Animals\fish_image.jpg" />
+    <Content Include="Assets\Animals\fox_image.jpg" />
+    <Content Include="Assets\Animals\rabbit_image.jpg" />
     <Content Include="Assets\Animate\Female.png" />
     <Content Include="Assets\Animate\light.png" />
     <Content Include="Assets\Animate\main%402x.png" />
@@ -405,6 +442,22 @@
     <Content Include="Assets\Background\BgLight.jpg" />
     <Content Include="Assets\Background\Bg_Sky_Menu.png" />
     <Content Include="Assets\Background\Poster.jpg" />
+    <Content Include="Assets\background_music.mp3" />
+    <Content Include="Assets\black_background.jpg" />
+    <Content Include="Assets\Cars\blackcar_image.jpg" />
+    <Content Include="Assets\Cars\bluecar_image.jpg" />
+    <Content Include="Assets\Cars\greencar_image.jpeg" />
+    <Content Include="Assets\Cars\orangecar_image.jpg" />
+    <Content Include="Assets\Cars\redcar_image2.jpg" />
+    <Content Include="Assets\Cars\whitecar_image.jpg" />
+    <Content Include="Assets\Cars\yellowcar_image.jpg" />
+    <Content Include="Assets\Foods\apple_image.jpg" />
+    <Content Include="Assets\Foods\banana_image.jpg" />
+    <Content Include="Assets\Foods\grape_image.jpg" />
+    <Content Include="Assets\Foods\orange_image.jpg" />
+    <Content Include="Assets\Foods\pepper_image.jpg" />
+    <Content Include="Assets\Foods\pineapple_image.jpg" />
+    <Content Include="Assets\greenblock.png" />
     <Content Include="Assets\icon\back.png" />
     <Content Include="Assets\icon\back.svg" />
     <Content Include="Assets\icon\next-3-icon.png" />
@@ -412,6 +465,7 @@
     <Content Include="Assets\Logo\Circle.png" />
     <Content Include="Assets\Logo\dgaLogo.png" />
     <Content Include="Assets\Mp4\demo.mp4" />
+    <Content Include="Assets\mystery_image.jpg" />
     <Content Include="Assets\PlaceholderImage.png" />
     <Content Include="Assets\Product1\p1.jpg" />
     <Content Include="Assets\Product1\p2.jpg" />
@@ -428,6 +482,9 @@
     <Content Include="Assets\SampleData\SamplePhoto7.png" />
     <Content Include="Assets\SampleData\SamplePhoto8.png" />
     <Content Include="Assets\SampleData\SamplePhoto9.png" />
+    <Content Include="Assets\SoundEffects\card_flip.mp3" />
+    <Content Include="Assets\SoundEffects\correct_match.mp3" />
+    <Content Include="Assets\SoundEffects\incorrect_match.mp3" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -442,6 +499,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+    <None Include="Assets\Cars\Thumbs.db" />
     <None Include="KiosBoot_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

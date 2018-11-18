@@ -1,4 +1,5 @@
 ﻿using KiosBoot.Models;
+using KiosBoot.Views.Game;
 using ServiceHelpers;
 using System;
 using Windows.UI.Xaml;
@@ -98,7 +99,7 @@ namespace KiosBoot.Views
 
         private void btn_Game_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(Game), null, new SuppressNavigationTransitionInfo());
+            this.Frame.Navigate(typeof(MainWindow), null, new SuppressNavigationTransitionInfo());
         }
 
         private void btn_Product_Click(object sender, RoutedEventArgs e)

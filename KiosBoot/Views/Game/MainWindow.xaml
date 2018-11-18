@@ -1,0 +1,54 @@
+﻿<Page
+    x:Class="KiosBoot.Views.Game.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local1="using:KiosBoot.Views"
+    xmlns:views="using:KiosBoot.Views"
+    xmlns:viewmodels="using:KiosBoot.ViewModels"
+    mc:Ignorable="d"   >
+
+    <Page.Resources>
+
+        <!--<DataTemplate x:Key="AdaptTemplate" x:DataType="local:AdaptItem">
+            <Grid
+            Background="White"
+            BorderBrush="Black"
+            BorderThickness="1">
+                <Image
+                Source="{x:Bind Image}"
+                Stretch="UniformToFill"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+            </Grid>
+        </DataTemplate>-->
+
+      <DataTemplate x:Key="AdaptTemplate" >
+          
+        </DataTemplate>
+        <DataTemplate x:Key="AdaptTemplate2" >
+         
+        </DataTemplate> 
+
+
+        <!--<views:StartMenuView x:Name="FremaStart" DataContext="{Binding StartMenuViewModel}"    Canvas.ZIndex="1" />
+
+
+        <views:MainMenuView x:Name="FrameGame"  DataContext="{Binding GameViewModel}"   Canvas.ZIndex="1"/>-->
+
+
+    </Page.Resources>
+    <Grid>
+
+
+        <!--<GridView     x:Name="itemGridView"    ItemTemplateSelector="{StaticResource MyDataTemplateSelector}"  Background="Red"></GridView>-->
+     <!--<ContentControl Content="{Binding}"/>-->
+
+        <views:MainMenuView DataContext="{Binding}"  Background="Tan" Canvas.ZIndex="1"/>
+        <views:StartMenuView DataContext="{Binding}" Background="DarkGray"   Canvas.ZIndex="1" />
+        <!--<views:MainMenuView DataContext="{Binding GameViewModel}"  Background="Tan" Canvas.ZIndex="97"/>
+        <views:StartMenuView DataContext="{Binding StartMenuViewModel}" Background="DarkGray"   Canvas.ZIndex="1" />-->
+    </Grid>
+</Page>
