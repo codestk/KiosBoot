@@ -211,6 +211,11 @@ namespace KiosBoot
                 ExifOrientationMode.IgnoreExifOrientation,
                 ColorManagementMode.ColorManageToSRgb);
 
+
+
+
+
+
             return pix.DetachPixelData();
         }
 

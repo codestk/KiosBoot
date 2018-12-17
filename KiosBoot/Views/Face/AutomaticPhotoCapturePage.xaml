@@ -10,31 +10,22 @@
     mc:Ignorable="d">
 
     <Grid>
-        
+
         <Grid x:Name="MainGrid" Background="Transparent"
               EntranceNavigationTransitionInfo.IsTargetElement="True">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.05*" />
                 <RowDefinition Height="auto" />
-                <RowDefinition Height="0.05*" />            
+                <RowDefinition Height="0.05*" />
                 <RowDefinition />
                 <RowDefinition Height="0.1*" />
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="1">
-                
-                <!--<TextBlock Text="ระบบตรวจสอบใบหน้า" Foreground="Blue" HorizontalAlignment="Center" FontFamily="Segoe UI Light" Style="{StaticResource HeaderTextBlockStyle}"/>-->
-                <!--<TextBlock Text="จับภาพอัตโนมัติผ่านการติดตามใบหน้าและการตรวจจับการเคลื่อนไหว" Foreground="#FFF37D06" HorizontalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}"  />-->
+          
 
-            </StackPanel>
-
-            <Grid Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"  >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.05*"/>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="0.05*"/>
-                </Grid.ColumnDefinitions>
+            <Grid Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top">
+            
 
                 <Grid x:Name="cameraHostGrid" Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Center">
                     <ctl:CameraControl x:Name="cameraControl" />
@@ -43,43 +34,35 @@
 
                 <Grid Grid.Column="1" x:Name="cameraGuideHost">
 
-                    <Grid Name="cameraGuideBallon" VerticalAlignment="Top" HorizontalAlignment="Right" Opacity="0.8" Margin="0,0,10,0" >
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
+                    <Grid Name="cameraGuideBallon" VerticalAlignment="Top" HorizontalAlignment="Right" Opacity="0.8" Margin="0,0,10,0">
+                  
 
                         <Polyline StrokeThickness="0" Grid.Row="0" Margin="10,0,0,0"
                                VerticalAlignment="Top"
                                HorizontalAlignment="Left"
                                Points="0,0,0,10,12,10" Fill="#ECCF11" />
 
-                        <Border Grid.Row="1" Background="Orange" Padding="10,5,10,5" >
-                            <TextBlock x:Name="cameraGuideText" Foreground="#fff" Text="ก้าวไปข้างหน้ากล้องเพื่อเริ่มต้น!"   Style="{StaticResource SubtitleTextBlockStyle}" FontSize="60"   FontStyle="Italic"   />
+                        <Border Grid.Row="1" Background="Orange" Padding="10,5,10,5">
+                            <TextBlock x:Name="cameraGuideText" Foreground="#fff" Text="ก้าวไปข้างหน้ากล้องเพื่อเริ่มต้น!"   Style="{StaticResource SubtitleTextBlockStyle}" FontSize="60"   FontStyle="Italic" />
                         </Border>
                     </Grid>
 
                     <Grid Name="cameraGuideCountdownHost">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="0.05*"/>
-                            <RowDefinition/>
-                            <RowDefinition Height="0.2*"/>
-                        </Grid.RowDefinitions>
+                     
 
                         <Viewbox Grid.Row="1">
-                            <TextBlock Name="countDownTextBlock" Foreground="#ECCF11" FontWeight="Bold" Opacity="0.9"  />
+                            <TextBlock Name="countDownTextBlock" Foreground="#ECCF11" FontWeight="Bold" Opacity="0.9" />
                         </Viewbox>
                     </Grid>
                 </Grid>
-
             </Grid>
         </Grid>
 
         <Grid Name="photoCaptureBalloonHost" Opacity="0" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-            <Grid  Margin="10,0,0,10" >
+            <Grid  Margin="10,0,0,10">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
                 <Polyline StrokeThickness="0" Grid.Row="0" Margin="0,0,10,0"
@@ -95,8 +78,10 @@
                 </Border>
             </Grid>
         </Grid>
-            
+
+        <Grid Name="imgFaceCapture" VerticalAlignment="Bottom"  HorizontalAlignment="Right">
+
+            <Image Name="captureImage"   Height="360"  Width="360" Margin="0"  HorizontalAlignment="Right"/>
+        </Grid>
     </Grid>
-
 </Page>
-

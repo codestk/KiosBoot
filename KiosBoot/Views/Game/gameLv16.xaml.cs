@@ -1,6 +1,4 @@
-﻿
-using KiosBoot.Model;
-using KiosBoot.Models;
+﻿using KiosBoot.Models;
 using KiosBoot.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -25,26 +23,18 @@ namespace KiosBoot.Views.Game
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainWindow : Page
+    public sealed partial class gameLv16 : Page
     {
-        public MainWindow()
+        public gameLv16()
         {
             this.InitializeComponent();
             DataContext = new StartMenuViewModel(this);
 
 
-         
+
             ScrollSEt();
 
-            var startMenu = DataContext as StartMenuViewModel;
 
-            //startMenu.StartNewGame(categoryBox.SelectedIndex);
-
-
-
-
-            Menu.Visibility = Visibility.Collapsed;
-            Game.Visibility = Visibility.Visible;
 
         }
 
@@ -90,12 +80,12 @@ namespace KiosBoot.Views.Game
             //startMenu.StartNewGame(categoryBox.SelectedIndex);
 
 
-           
+
 
             Menu.Visibility = Visibility.Collapsed;
             Game.Visibility = Visibility.Visible;
 
-           
+
 
         }
 
@@ -108,7 +98,7 @@ namespace KiosBoot.Views.Game
             game.ClickedSlide(button.DataContext);
 
 
-           
+
         }
 
         private void PlayAgain_C(object sender, RoutedEventArgs e)
@@ -116,8 +106,5 @@ namespace KiosBoot.Views.Game
             var game = DataContext as GameViewModel;
             game.Restart();
         }
-
-
-
     }
 }

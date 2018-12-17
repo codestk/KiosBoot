@@ -111,62 +111,62 @@ namespace KiosBoot.Model
         {
             ObservableCollection<Contact> contacts = new ObservableCollection<Contact>();
 
-            //for (int i = 0; i < numberOfContacts; i++)
-            //{
-            //    contacts.Add(GetNewContact());
-            //}
+            for (int i = 0; i < numberOfContacts; i++)
+            {
+                contacts.Add(GetNewContact());
+            }
 
-            Contact c1 = new Contact();
-            c1.firstName = "Product 1";
-            c1.FirstName = "Product 1";
-            c1.Biography = "Text Animation เป็นเครื่องมือสำหรับใส่เทคนิคพิเศษให้กับข้อความ ตัวอย่างเช่น หัวข้อเรื่องต่างๆ หรือสไลค์หน้าแรกที่เราต้องการจะเน้นจุดสนใจให้ดูสะดุดตา โดย Captivate จะมีรูปแบบของการเคลื่อนไหวให้เลือกอยู่มากมาย";
-            c1.name = "Product 1";
-            c1.Position = "2143045311828";
-            c1.image = "ms-appx:///Assets/Product1/p1.jpg";
-            contacts.Add(c1);
+            //Contact c1 = new Contact();
+            //c1.firstName = "Product 1";
+            //c1.FirstName = "Product 1";
+            //c1.Biography = "Text Animation เป็นเครื่องมือสำหรับใส่เทคนิคพิเศษให้กับข้อความ ตัวอย่างเช่น หัวข้อเรื่องต่างๆ หรือสไลค์หน้าแรกที่เราต้องการจะเน้นจุดสนใจให้ดูสะดุดตา โดย Captivate จะมีรูปแบบของการเคลื่อนไหวให้เลือกอยู่มากมาย";
+            //c1.name = "Product 1";
+            //c1.Position = "2143045311828";
+            //c1.image = "ms-appx:///Assets/Product1/p1.jpg";
+            //contacts.Add(c1);
 
-            Contact c2 = new Contact();
-            c2.firstName = "Product 1";
-            c2.FirstName = "Product 1";
-            c2.Biography = "เปิดตัวแรงส่งท้ายปีกับ ASUS TUF Gaming FX505 ที่เป็นการต่อยอดมาจาก ASUS TUF Gaming FX504 รุ่นก่อนหน้าที่ประสบความสำเร็จเป็นอย่างดี จากความคุ้มค่าที่ตัวเครื่องมอบให้ รวมถึงการระบายความร้อนที่ยอดเยี่ยม ไม่แปลกที่หลายร้านของหมดอยากจะได้ทีต้องสั่งจองล่วงหน้ากันทีเดียว และแน่นอนว่า FX505 ก็ถือเป็นรุ่นที่พัฒนาอัปเกรดจาก FX504 ขึ้นมาอีกขั้น โดยดีไซน์ยังคงเอกลักษณ์แบบเดิม เพิ่มเติมคือขอบจอบางตามสมัยนิยม และวัสดุแข็งแรงขึ้น";
-            c2.name = "Product 2";
-            c2.Position = "7273662773690";
+            //Contact c2 = new Contact();
+            //c2.firstName = "Product 1";
+            //c2.FirstName = "Product 1";
+            //c2.Biography = "เปิดตัวแรงส่งท้ายปีกับ ASUS TUF Gaming FX505 ที่เป็นการต่อยอดมาจาก ASUS TUF Gaming FX504 รุ่นก่อนหน้าที่ประสบความสำเร็จเป็นอย่างดี จากความคุ้มค่าที่ตัวเครื่องมอบให้ รวมถึงการระบายความร้อนที่ยอดเยี่ยม ไม่แปลกที่หลายร้านของหมดอยากจะได้ทีต้องสั่งจองล่วงหน้ากันทีเดียว และแน่นอนว่า FX505 ก็ถือเป็นรุ่นที่พัฒนาอัปเกรดจาก FX504 ขึ้นมาอีกขั้น โดยดีไซน์ยังคงเอกลักษณ์แบบเดิม เพิ่มเติมคือขอบจอบางตามสมัยนิยม และวัสดุแข็งแรงขึ้น";
+            //c2.name = "Product 2";
+            //c2.Position = "7273662773690";
             
             
-            c2.video = "ms-appx:///Assets/Mp4/demo.mp4";//"ms-appx:///Assets/Mp4/Demo.mkv";
-            c2.image = " ";
-            contacts.Add(c2);
+            //c2.video = "ms-appx:///Assets/Mp4/demo.mp4";//"ms-appx:///Assets/Mp4/Demo.mkv";
+            //c2.image = " ";
+            //contacts.Add(c2);
 
 
-            Contact c3 = new Contact();
-            c3.firstName = "Product 1";
-            c3.FirstName = "Product 1";
-            c3.Biography = "ทางด้านราคาของ ASUS TUF Gaming FX505 รุ่นที่ทีมงานรีวิวในบทความนี้รหัส FX505GM-BQ163T สนนราคาอยู่ที่ 35,990 บาท การรับประกัน 2 ปี และที่สำคัญเมื่อเอาซีเรียลไปลงทะเบียนในเว็บไซต์ ASUS จะได้รับประกันอุบัติเหตุฟรี 1 ปีแรกจากทาง ASUS อีกด้วยอุ่นใจจัดเต็ม";
-            c3.name = "Product 3";
-            c3.Position = "4400352543379";
-            c3.image = "ms-appx:///Assets/Product1/p3.jpg";
-            c3.video = "";
-            contacts.Add(c3);
+            //Contact c3 = new Contact();
+            //c3.firstName = "Product 1";
+            //c3.FirstName = "Product 1";
+            //c3.Biography = "ทางด้านราคาของ ASUS TUF Gaming FX505 รุ่นที่ทีมงานรีวิวในบทความนี้รหัส FX505GM-BQ163T สนนราคาอยู่ที่ 35,990 บาท การรับประกัน 2 ปี และที่สำคัญเมื่อเอาซีเรียลไปลงทะเบียนในเว็บไซต์ ASUS จะได้รับประกันอุบัติเหตุฟรี 1 ปีแรกจากทาง ASUS อีกด้วยอุ่นใจจัดเต็ม";
+            //c3.name = "Product 3";
+            //c3.Position = "4400352543379";
+            //c3.image = "ms-appx:///Assets/Product1/p3.jpg";
+            //c3.video = "";
+            //contacts.Add(c3);
 
-            Contact c4 = new Contact();
-            c4.firstName = "Product 1";
-            c4.FirstName = "Product 1";
-            c4.Biography = "เด็กรุ่นใหม่หลายคนอาจจะสงสัยกันว่าแบรนด์ ATEN นี่คือแบรนด์อะไร ไม่เคยได้ยินมาก่อน ซึ่งจริงๆ แล้วแบรนด์ ATEN นี่อายุเกือบจะ 40 ปีล่ะ ก่อตั้งขึ้นในปี 1979 มี โดยเป็นแบรนด์ที่มีความเชี่ยวชาญเกี่ยวกับสายเชื่อมต่อ สายแปลงต่างๆ ที่มีมาตรฐานไต้หวันระดับมืออาชีพ มีการประกัน ซื้อไปแล้วใช้ได้ชัวร์ไม่ต้องลุ้น เป็นอีกหนึ่งแบรนด์ที่การันตีได้เลยว่าสินค้าเขามีคุณภาพแน่นอน";
-            c4.name = "Product 4";
-            c4.Position = "9862955023171";
-            c4.image = "ms-appx:///Assets/Product1/p4.jpg";
-            contacts.Add(c4);
+            //Contact c4 = new Contact();
+            //c4.firstName = "Product 1";
+            //c4.FirstName = "Product 1";
+            //c4.Biography = "เด็กรุ่นใหม่หลายคนอาจจะสงสัยกันว่าแบรนด์ ATEN นี่คือแบรนด์อะไร ไม่เคยได้ยินมาก่อน ซึ่งจริงๆ แล้วแบรนด์ ATEN นี่อายุเกือบจะ 40 ปีล่ะ ก่อตั้งขึ้นในปี 1979 มี โดยเป็นแบรนด์ที่มีความเชี่ยวชาญเกี่ยวกับสายเชื่อมต่อ สายแปลงต่างๆ ที่มีมาตรฐานไต้หวันระดับมืออาชีพ มีการประกัน ซื้อไปแล้วใช้ได้ชัวร์ไม่ต้องลุ้น เป็นอีกหนึ่งแบรนด์ที่การันตีได้เลยว่าสินค้าเขามีคุณภาพแน่นอน";
+            //c4.name = "Product 4";
+            //c4.Position = "9862955023171";
+            //c4.image = "ms-appx:///Assets/Product1/p4.jpg";
+            //contacts.Add(c4);
 
 
-            Contact c5 = new Contact();
-            c5.firstName = "Product 1";
-            c5.FirstName = "Product 1";
-            c5.Biography = "พอร์ตเทพที่สามารถทำได้ทุกอย่างจากที่กล่าวมาบนก่อนหน้านี้ ที่เทพขนาดนี้ก็เพราะตัวเครื่องจะมีคอนโทรลเลอร์พิเศษไว้ควบคุมเฉพาะตัว ซึ่งสามารถจ่ายไฟได้สูงสุดถึง 100 w รับส่งข้อมูลด้วยความเร็วสูงสุดถึงระดับ 40 GB/s และยังสามารถต่อ eGPU หรือกล่องการ์ดจอแยกได้อีกด้วย ปกติแล้วพอร์ตนี้จะอยู่ในเฉพาะอัลตร้าบุ๊คระดับสูงเท่านั้น สัญลักษณ์จะใช้เป็นรูปสายฟ้าเฉยๆ";
-            c5.name = "Product 5";
-            c5.Position = "6477567444173";
-            c5.image = "ms-appx:///Assets/Product1/p5.jpg";
-            c5.video = "";
-            contacts.Add(c5);
+            //Contact c5 = new Contact();
+            //c5.firstName = "Product 1";
+            //c5.FirstName = "Product 1";
+            //c5.Biography = "พอร์ตเทพที่สามารถทำได้ทุกอย่างจากที่กล่าวมาบนก่อนหน้านี้ ที่เทพขนาดนี้ก็เพราะตัวเครื่องจะมีคอนโทรลเลอร์พิเศษไว้ควบคุมเฉพาะตัว ซึ่งสามารถจ่ายไฟได้สูงสุดถึง 100 w รับส่งข้อมูลด้วยความเร็วสูงสุดถึงระดับ 40 GB/s และยังสามารถต่อ eGPU หรือกล่องการ์ดจอแยกได้อีกด้วย ปกติแล้วพอร์ตนี้จะอยู่ในเฉพาะอัลตร้าบุ๊คระดับสูงเท่านั้น สัญลักษณ์จะใช้เป็นรูปสายฟ้าเฉยๆ";
+            //c5.name = "Product 5";
+            //c5.Position = "6477567444173";
+            //c5.image = "ms-appx:///Assets/Product1/p5.jpg";
+            //c5.video = "";
+            //contacts.Add(c5);
 
 
             return contacts;

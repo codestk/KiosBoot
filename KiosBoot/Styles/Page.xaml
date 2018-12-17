@@ -53,7 +53,7 @@
                             </Rectangle.RenderTransform>
                         </Rectangle>
 
-                        <ContentPresenter x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <ContentPresenter x:Name="content" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

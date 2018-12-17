@@ -84,8 +84,8 @@ namespace KiosBoot.Views
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            ConnectedAnimationService.GetForCurrentView()
-                .PrepareToAnimate("forwardAnimation", SourceImage);
+            //ConnectedAnimationService.GetForCurrentView()
+            //    .PrepareToAnimate("forwardAnimation", SourceImage);
             // You don't need to explicitly set the Configuration property because
             // the recommended Gravity configuration is default.
             // For custom animation, use:
@@ -99,7 +99,7 @@ namespace KiosBoot.Views
 
         private void btn_Game_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(MainWindow), null, new SuppressNavigationTransitionInfo());
+            this.Frame.Navigate(typeof(gameLv10), null, new SuppressNavigationTransitionInfo());
         }
 
         private void btn_Product_Click(object sender, RoutedEventArgs e)
@@ -115,6 +115,7 @@ namespace KiosBoot.Views
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(AutomaticPhotoCapturePage), null, new EntranceNavigationTransitionInfo());
+            //this.Frame.Navigate(typeof(AutomaticPhotoCapturePage), null, new EntranceNavigationTransitionInfo());
         }
     }
 }

@@ -18,6 +18,9 @@ namespace KiosBoot.Models
         //ID of this slide
         public int Id { get; private set; }
 
+        public string Name { get;   set; }
+
+
         //Slide status
         private bool _isViewed;
         private bool _isMatched;
@@ -91,9 +94,10 @@ namespace KiosBoot.Models
                     return _model.ImageSource;
                 if (isViewed)
                     return _model.ImageSource;
+                
 
-
-                return "/KiosBoot;component/Assets/mystery_image.jpg";
+                //return "/KiosBoot;component/Assets/mystery_image.jpg";
+                return "ms-appx:///Assets/mystery_image.jpg";
             }
         }
 
@@ -118,11 +122,13 @@ namespace KiosBoot.Models
             }
         }
 
-
-        public PictureViewModel(PictureModel model)
+       
+        public PictureViewModel(PictureModel model,string ViewMaster)
         {
             _model = model;
             Id = model.Id;
+
+            Name = "btn"+ model.Id + ViewMaster;
         }
 
         //Has been matched

@@ -16,7 +16,7 @@ namespace KiosBoot
     {
         //private static MediaPlayer _mediaPlayer = new MediaPlayer();
         //private static MediaPlayer _effectPlayer = new MediaPlayer();
-        private static MediaPlayerElement _mediaPlayer = new MediaPlayerElement();
+        public static MediaPlayerElement _mediaPlayer = new MediaPlayerElement();
         private static MediaPlayerElement _effectPlayer = new MediaPlayerElement();
        
         public static async void OpenMusicAsync(string relativePath)
@@ -53,6 +53,7 @@ namespace KiosBoot
             //new Uri(Path.Combine(Environment.CurrentDirectory, "Assets/background_music.mp3"))
             Uri pathUri = new Uri("ms-appx:///Assets/background_music.mp3");
             _mediaPlayer.Source = MediaSource.CreateFromUri(pathUri);
+            _mediaPlayer.MediaPlayer.IsLoopingEnabled = true;
             _mediaPlayer.MediaPlayer.Play();
 
         }

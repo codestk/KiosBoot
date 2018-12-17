@@ -40,6 +40,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace ServiceHelpers
 {
@@ -50,6 +52,10 @@ namespace ServiceHelpers
 
         public event EventHandler FaceDetectionCompleted;
         public event EventHandler FaceRecognitionCompleted;
+
+    
+        public event EventHandler FaceRecognitionUnCompleted;
+
         public event EventHandler ComputerVisionAnalysisCompleted;
         public event EventHandler OcrAnalysisCompleted;
 
@@ -378,13 +384,29 @@ namespace ServiceHelpers
             {
                 this.FaceDetectionCompleted(this, EventArgs.Empty);
             }
+            else
+            {
+                this.FaceRecognitionUnCompleted(this, EventArgs.Empty);
+            }
+        //   else
+        //     {
+        //         //public event EventHandler FaceDetectionUnCompleted;
+        ////public event EventHandler FaceRecognitionUnCompleted;
+        //        this.FaceDetectionUnCompleted(this, EventArgs.Empty);
+        //    }
         }
 
         private void OnFaceRecognitionCompleted()
         {
             if (this.FaceRecognitionCompleted != null)
             {
+              
                 this.FaceRecognitionCompleted(this, EventArgs.Empty);
+            }
+            else
+            {
+                this.FaceRecognitionUnCompleted(this, EventArgs.Empty);
+
             }
         }
     }

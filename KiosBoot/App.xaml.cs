@@ -111,12 +111,21 @@ namespace KiosBoot
         private ActivationService CreateActivationService()
         {
 
-    
+
 
             //return new ActivationService(this, typeof(Views.RecognitionPage));
-            return new ActivationService(this, typeof(Views.Game.MainWindow));
+
             //return new ActivationService(this, typeof(Views.SettingsPage));
             //return new ActivationService(this, typeof(Views.FaceIdentificationSetup));
+
+            //return new ActivationService(this, typeof(Views.Game.MainWindow));
+
+            //return new ActivationService(this, typeof(Views.Game.gameLv10));
+
+            //return new ActivationService(this, typeof(Views.Game.gameLv10));
+
+            return new ActivationService(this, typeof(Views.MediaPlayerPage));
+          
         }
     }
 }

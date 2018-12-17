@@ -10,7 +10,7 @@ namespace KiosBoot.ViewModels
 {
     public class GameInfoViewModel : ObservableObject
     {
-        private const int _maxAttempts = 4;
+        private const int _maxAttempts = 5;
         private const int _pointAward = 75;
         private const int _pointDeduction = 15;
 
@@ -72,14 +72,17 @@ namespace KiosBoot.ViewModels
         {
             if (!win)
             {
+  
                 _gameLost = true;
                 OnPropertyChanged("LostMessage");
+                
             }
 
             if (win)
             {
                 _gameWon = true;
                 OnPropertyChanged("WinMessage");
+
             }
         }
 

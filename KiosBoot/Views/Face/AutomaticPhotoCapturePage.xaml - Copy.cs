@@ -49,13 +49,20 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 
- 
+using Microsoft.ProjectOxford.Face.Contract;
+using ServiceHelpers;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 using KiosBoot.Helpers.Profile;
-using KiosBoot.Helpers.Server;
-using KiosBoot.ViewModels;
-using KiosBoot.Helpers.Config;
-
 
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -80,10 +87,6 @@ namespace KiosBoot.Views
 
             Window.Current.Activated += CurrentWindowActivationStateChanged;
             FaceObjct.Clear();
-
-
-
-            //ScrollGame.AddScrollInfo(555, "00444");
         }
 
 
@@ -182,8 +185,8 @@ namespace KiosBoot.Views
 
             // Crop the primary face and return it as the result
             FaceRectangle rect = img.DetectedFaces.First().FaceRectangle;
-            double heightScaleFactor = 1.6;
-            double widthScaleFactor = 1.6;
+            double heightScaleFactor = 1.8;
+            double widthScaleFactor = 1.8;
             FaceRectangle biggerRectangle = new FaceRectangle
             {
                 Height = Math.Min((int)(rect.Height * heightScaleFactor), img.DecodedImageHeight),
@@ -192,39 +195,11 @@ namespace KiosBoot.Views
             biggerRectangle.Left = Math.Max(0, rect.Left - (int)(rect.Width * ((widthScaleFactor - 1) / 2)));
             biggerRectangle.Top = Math.Max(0, rect.Top - (int)(rect.Height * ((heightScaleFactor - 1) / 1.4)));
 
-
- 
-
-           StorageFolder appInstalledFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
-            //StorageFolder assetsFolder = await appInstalledFolder.GetFolderAsync("Temp");
-            //StorageFolder Temp = await Task.Run(() => appInstalledFolder.GetFolderAsync("Temp")).Result;
-
-             StorageFolder Temp = await Task.Run(() => appInstalledFolder.GetFolderAsync("Assets")).Result;
-
-            StorageFolder PictureProfile = await Temp.GetFolderAsync("PictureProfile");
-
-
-            string nameImage = DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg";
-            StorageFile tempFile = await PictureProfile.CreateFileAsync(nameImage, CreationCollisionOption.GenerateUniqueName);
-
-
-
-
+            StorageFile tempFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(
+                                                    "FaceRecoCameraCapture.jpg",
+                                                    CreationCollisionOption.GenerateUniqueName);
 
             await Util.CropBitmapAsync(img.GetImageStreamCallback, biggerRectangle, tempFile);
-
-          
-
-            string imagePath = tempFile.Path;
-            Uri uri = new Uri(imagePath, UriKind.RelativeOrAbsolute);
-            ImageSource imgSource = new BitmapImage(uri);
-            captureImage.Source = imgSource;
-
-            //Save image for Game
-            UserProfile.PictureProfile = imgSource;
-            UserProfile.PicturePath = DataConfig.ProfileFolder() + tempFile.Name;
-            //Assets\PictureProfile tempFile.hName
-
 
             return new ImageAnalyzer(tempFile.OpenStreamForReadAsync, tempFile.Path);
         }
@@ -233,7 +208,6 @@ namespace KiosBoot.Views
 
         private void ProcessCameraCapture(ImageAnalyzer e)
         {
-            this.photoCaptureBalloonHost.Opacity = 0;
             if (e == null)
             {
                 this.cameraControl.RestartAutoCaptureCycle();
@@ -245,175 +219,116 @@ namespace KiosBoot.Views
             e.FaceRecognitionCompleted += async (s, args) =>
             {
 
-                if (e.DetectedFaces.Count() == 0)
-                    return;
-
                 this.photoCaptureBalloonHost.Opacity = 0;
 
-             
-                
-                    await GetPrimaryFaceFromCameraCaptureAsync(e);
-                    if (FaceObjct.faceIdIdentification != null)
-                    {
-                        UserProfile.Name = FaceObjct.faceIdIdentification.Person.Name;
-                    }
-                    await Task.Delay(5000);
-
-                    Frame.Navigate(typeof(Wellcome), null, new SuppressNavigationTransitionInfo());
-                    return;
-             
-
-
-                // string imagePath = "ms -appx:///Assets/Category-other-dark.png";
-                //string imagePath = "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b?ver=5c31";
-
- 
-
-            };
-
-            e.FaceRecognitionUnCompleted += async (s, args) =>
-            {
-                if (e.DetectedFaces.Count() > 0)
-                    return;
-
-                this.photoCaptureBalloonHost.Opacity = 1;
-
+                //int photoDisplayDuration = 10;
                 int photoDisplayDuration = 10;
                 double decrementPerSecond = 100.0 / photoDisplayDuration;
                 for (double i = 100; i >= 0; i -= decrementPerSecond)
                 {
+
+                    if (FaceObjct.MyFace != null)
+                    {
+
+                        //this.cameraControl.RestartAutoCaptureCycle();
+
+
+                        try
+                        {
+
+                       
+                        this.photoCaptureBalloonHost.Opacity = 0;
+
+                        FaceRectangle rect = e.DetectedFaces.First().FaceRectangle;
+                        double heightScaleFactor = 1.8;
+                        double widthScaleFactor = 1.8;
+                        FaceRectangle biggerRectangle = new FaceRectangle
+                        {
+                            Height = Math.Min((int)(rect.Height * heightScaleFactor), e.DecodedImageHeight),
+                            Width = Math.Min((int)(rect.Width * widthScaleFactor), e.DecodedImageWidth)
+                        };
+                        biggerRectangle.Left = Math.Max(0, rect.Left - (int)(rect.Width * ((widthScaleFactor - 1) / 2)));
+                        biggerRectangle.Top = Math.Max(0, rect.Top - (int)(rect.Height * ((heightScaleFactor - 1) / 1.4)));
+
+                        //StorageFile tempFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(
+                        //                                        "FaceRecoCameraCapture.jpg",
+                        //                                        CreationCollisionOption.GenerateUniqueName);
+
+
+
+                        //work
+                        //StorageFile tempFile = await Windows.ApplicationModel.Package.Current.InstalledLocation.CreateFileAsync(
+                        //                                        "FaceRecoCameraCapture.jpg",
+                        //                                        CreationCollisionOption.GenerateUniqueName); 
+                        //======================================================================================================
+
+
+                        StorageFolder appInstalledFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+                        //StorageFolder assetsFolder = await appInstalledFolder.GetFolderAsync("Temp");
+                        StorageFolder Temp = await Task.Run(() => appInstalledFolder.GetFolderAsync("Temp")).Result;
+                        //move file from public folder to assets
+                        //StorageFile tempFile = await appInstalledFolder.CreateFileAsync(
+                        //                                        "FaceRecoCameraCapture.jpg",
+                        //                                        CreationCollisionOption.GenerateUniqueName);
+
+                        StorageFile tempFile = await Temp.CreateFileAsync("FaceRecoCameraCapture.jpg", CreationCollisionOption.GenerateUniqueName);
+
+
+                        //StorageFile tempFile = await appInstalledFolder.CreateFileAsync("FaceRecoCameraCapture.jpg", CreationCollisionOption.GenerateUniqueName);
+                  
+                        //
+                        await Util.CropBitmapAsync(e.GetImageStreamCallback, biggerRectangle, tempFile);
+                        //await Task.Run(() => Util.CropBitmapAsync(e.GetImageStreamCallback, biggerRectangle, tempFile));
+
+
+                        // string imagePath = "ms -appx:///Assets/Category-other-dark.png";
+                        //string imagePath = "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b?ver=5c31";
+
+                        string imagePath = tempFile.Path;
+                        Uri uri = new Uri(imagePath, UriKind.RelativeOrAbsolute);
+                        ImageSource imgSource = new BitmapImage(uri);
+                        captureImage.Source = imgSource;
+
+
+                        UserProfile.PictureProfile = imgSource;
+                        UserProfile.Name = FaceObjct.faceIdIdentification.Person.Name;
+
+
+                        this.photoCaptureBalloonHost.Opacity = 0;
+                       
+
+                            break;
+                        
+                        }
+                        catch (Exception ex)
+                        {
+                         this.cameraControl.RestartAutoCaptureCycle();
+
+                        }
+
+                        
+                    }
+                    //Show Ballon
+                    this.photoCaptureBalloonHost.Opacity = 1;
                     this.resultDisplayTimerUI.Value = i;
                     await Task.Delay(1000);
                 }
 
                 this.photoCaptureBalloonHost.Opacity = 0;
                 this.imageFromCameraWithFaces.DataContext = null;
+                //if (FaceObjct.MyFace != null)
+                //{
+
+                //    Frame.Navigate(typeof(Menu), null, new SuppressNavigationTransitionInfo());
+
+                //    return;
+                //}
+
+
+             
 
                 this.cameraControl.RestartAutoCaptureCycle();
             };
-
-
-            //if (e == null)
-            //{
-            //    this.cameraControl.RestartAutoCaptureCycle();
-            //    return;
-            //}
-
-            //this.imageFromCameraWithFaces.DataContext = e;
-
-            //e.FaceRecognitionCompleted += async (s, args) =>
-            //{
-
-            //    this.photoCaptureBalloonHost.Opacity = 0;
-
-            //    //int photoDisplayDuration = 10;
-            //    int photoDisplayDuration = 10;
-            //    double decrementPerSecond = 100.0 / photoDisplayDuration;
-            //    for (double i = 100; i >= 0; i -= decrementPerSecond)
-            //    {
-
-            //        if (FaceObjct.MyFace != null)
-            //        {
-
-            //            //this.cameraControl.RestartAutoCaptureCycle();
-
-
-            //            try
-            //            {
-
-
-            //            this.photoCaptureBalloonHost.Opacity = 0;
-
-            //            FaceRectangle rect = e.DetectedFaces.First().FaceRectangle;
-            //            double heightScaleFactor = 1.8;
-            //            double widthScaleFactor = 1.8;
-            //            FaceRectangle biggerRectangle = new FaceRectangle
-            //            {
-            //                Height = Math.Min((int)(rect.Height * heightScaleFactor), e.DecodedImageHeight),
-            //                Width = Math.Min((int)(rect.Width * widthScaleFactor), e.DecodedImageWidth)
-            //            };
-            //            biggerRectangle.Left = Math.Max(0, rect.Left - (int)(rect.Width * ((widthScaleFactor - 1) / 2)));
-            //            biggerRectangle.Top = Math.Max(0, rect.Top - (int)(rect.Height * ((heightScaleFactor - 1) / 1.4)));
-
-            //            //StorageFile tempFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(
-            //            //                                        "FaceRecoCameraCapture.jpg",
-            //            //                                        CreationCollisionOption.GenerateUniqueName);
-
-
-
-            //            //work
-            //            //StorageFile tempFile = await Windows.ApplicationModel.Package.Current.InstalledLocation.CreateFileAsync(
-            //            //                                        "FaceRecoCameraCapture.jpg",
-            //            //                                        CreationCollisionOption.GenerateUniqueName); 
-            //            //======================================================================================================
-
-
-            //            StorageFolder appInstalledFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
-            //            //StorageFolder assetsFolder = await appInstalledFolder.GetFolderAsync("Temp");
-            //            StorageFolder Temp = await Task.Run(() => appInstalledFolder.GetFolderAsync("Temp")).Result;
-            //            //move file from public folder to assets
-            //            //StorageFile tempFile = await appInstalledFolder.CreateFileAsync(
-            //            //                                        "FaceRecoCameraCapture.jpg",
-            //            //                                        CreationCollisionOption.GenerateUniqueName);
-
-            //            StorageFile tempFile = await Temp.CreateFileAsync("FaceRecoCameraCapture.jpg", CreationCollisionOption.GenerateUniqueName);
-
-
-            //            //StorageFile tempFile = await appInstalledFolder.CreateFileAsync("FaceRecoCameraCapture.jpg", CreationCollisionOption.GenerateUniqueName);
-
-            //            //
-            //            await Util.CropBitmapAsync(e.GetImageStreamCallback, biggerRectangle, tempFile);
-            //            //await Task.Run(() => Util.CropBitmapAsync(e.GetImageStreamCallback, biggerRectangle, tempFile));
-
-
-            //            // string imagePath = "ms -appx:///Assets/Category-other-dark.png";
-            //            //string imagePath = "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b?ver=5c31";
-
-            //            string imagePath = tempFile.Path;
-            //            Uri uri = new Uri(imagePath, UriKind.RelativeOrAbsolute);
-            //            ImageSource imgSource = new BitmapImage(uri);
-            //            captureImage.Source = imgSource;
-
-
-            //            UserProfile.PictureProfile = imgSource;
-            //            UserProfile.Name = FaceObjct.faceIdIdentification.Person.Name;
-
-
-            //            this.photoCaptureBalloonHost.Opacity = 0;
-
-
-            //                break;
-
-            //            }
-            //            catch (Exception ex)
-            //            {
-            //             this.cameraControl.RestartAutoCaptureCycle();
-
-            //            }
-
-
-            //        }
-            //        //Show Ballon
-            //        this.photoCaptureBalloonHost.Opacity = 1;
-            //        this.resultDisplayTimerUI.Value = i;
-            //        await Task.Delay(1000);
-            //    }
-
-            //    this.photoCaptureBalloonHost.Opacity = 0;
-            //    this.imageFromCameraWithFaces.DataContext = null;
-            //    //if (FaceObjct.MyFace != null)
-            //    //{
-
-            //    //    Frame.Navigate(typeof(Menu), null, new SuppressNavigationTransitionInfo());
-
-            //    //    return;
-            //    //}
-
-
-
-
-            //    this.cameraControl.RestartAutoCaptureCycle();
-            //};
 
 
 

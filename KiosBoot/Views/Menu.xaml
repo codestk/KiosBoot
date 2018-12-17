@@ -25,9 +25,9 @@
         </Grid.Background>
 
         <RelativePanel Height="697" HorizontalAlignment="Right" Margin="0,0,60,0">
-            <Button  x:Name='btn_Screen' Content="Screen Server" HorizontalAlignment="Stretch"     VerticalAlignment="Stretch" Height="164" Width="580" Click="btn_Screen_Click"  Style="{StaticResource CircleButton}" FontSize="{StaticResource  BigFontSize}" />
-            <Button  x:Name='btn_Game' Content="เกมส์" HorizontalAlignment="Right" Margin="0,267,0,0" VerticalAlignment="Top" Height="164" Width="580" Click="btn_Game_Click"  Style="{StaticResource CircleButton}" FontSize="{StaticResource BigFontSize}" />
-            <Button  x:Name='btn_Product'   Content="ผลิตภัณฑ์" HorizontalAlignment="Right" Margin="0,533,0,-0.2" VerticalAlignment="Top" Height="164" Width="580" Click="btn_Product_Click"  Style="{StaticResource CircleButton}" FontSize="{StaticResource BigFontSize}" />
+            <Button  x:Name='btn_Screen' Content="DGA" HorizontalAlignment="Stretch"     VerticalAlignment="Stretch" Height="164" Width="580" Click="btn_Screen_Click"  Style="{StaticResource CircleButton}" FontSize="{StaticResource  BigFontSize}" />
+            <Button  x:Name='btn_Game' Content="Game" HorizontalAlignment="Right" Margin="0,267,0,0" VerticalAlignment="Top" Height="164" Width="580" Click="btn_Game_Click"  Style="{StaticResource CircleButton}" FontSize="{StaticResource BigFontSize}" />
+            <Button  x:Name='btn_Product'   Content="Service" HorizontalAlignment="Right" Margin="0,533,0,-0.2" VerticalAlignment="Top" Height="164" Width="580" Click="btn_Product_Click"  Style="{StaticResource CircleButton}" FontSize="{StaticResource BigFontSize}" />
 
 
 

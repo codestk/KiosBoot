@@ -4,19 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="using:KiosBoot.Helpers"
-             mc:Ignorable="d"    
-              >
-    
+             mc:Ignorable="d">
 
     <Grid>
+
         <Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/black_background.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="ms-appx:///Assets/black_background.jpg" Stretch="UniformToFill" />
         </Grid.Background>
-        <TextBlock  VerticalAlignment="Center"  HorizontalAlignment="Center" Text="{Binding Timer.Time}" Foreground="#FF8AFF7E" FontSize="24" />
+
         <StackPanel Margin="10"  VerticalAlignment="Bottom">
 
+            <Grid>
 
-            <Grid   > 
                 <Grid DataContext="{Binding GameInfo}" MinWidth="1000" HorizontalAlignment="Right">
                     <StackPanel Visibility="{Binding WinMessage}">
                         <TextBlock Foreground="#FF51FF00">You Won!</TextBlock>
@@ -28,156 +27,138 @@
                     </StackPanel>
                 </Grid>
 
-
-
-                <StackPanel DataContext="{Binding GameInfo}"  >
+                <StackPanel DataContext="{Binding GameInfo}">
                     <TextBlock         Text="{Binding Score}" Foreground="#FFFFF163" FontSize="24" />
                     <TextBlock     Text="{Binding MatchAttempts}" Foreground="#FFFF7D41" FontSize="22" />
                 </StackPanel>
             </Grid>
-
-
-
-
         </StackPanel>
+
         <ContentControl IsEnabled="{Binding areSlidesActive}">
-        <Grid DataContext="{Binding Slides}"   Margin="10" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"   >
-            <Grid.RowDefinitions>
-                    <RowDefinition   />
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition  />
-                    <ColumnDefinition   />
-                    <ColumnDefinition  />
-                    <ColumnDefinition  />
-            </Grid.ColumnDefinitions>
+            <Grid DataContext="{Binding Slides}"   Margin="100" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center">
 
                 <Grid.Resources>
                     <Style  x:Key="imgGidStyle"  TargetType="Button">
-                    <Setter Property="Margin" Value="1" />
-                        <Setter Property="Width" Value="300" />
-                        <Setter Property="Height" Value="300" />
+                        <Setter Property="Margin" Value="1" />
+                        <Setter Property="Width" Value="100" />
+                        <Setter Property="Height" Value="100" />
                         <Setter Property="Background" Value="Red" />
-                    </Style> 
-            </Grid.Resources>
+                    </Style>
+                </Grid.Resources>
 
-              
-            <!-- Left -->
-                <Button Grid.Row="0" Style="{StaticResource imgGidStyle}"   Grid.Column="0" IsEnabled="{Binding isSelectable}" DataContext="{Binding MemorySlides[0]}" Click="Slide_Clicked">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
-                            <Image Stretch="Fill" Source="{Binding SlideImage}" />
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-                <Button Grid.Row="1" Style="{StaticResource imgGidStyle}" Grid.Column="0"  IsEnabled="{Binding isSelectable}" DataContext="{Binding MemorySlides[1]}" Click="Slide_Clicked">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
-                            <Image Stretch="Fill" Source="{Binding SlideImage}" />
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+                <!-- Left -->
+                <Button Style="{StaticResource imgGidStyle}"   Grid.Column="0" IsEnabled="{Binding isSelectable}" DataContext="{Binding MemorySlides[0]}" Click="Slide_Clicked">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
+                                <Image Stretch="Fill" Source="{Binding SlideImage}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button   Style="{StaticResource imgGidStyle}" Grid.Column="0"  IsEnabled="{Binding isSelectable}" DataContext="{Binding MemorySlides[1]}" Click="Slide_Clicked">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
+                                <Image Stretch="Fill" Source="{Binding SlideImage}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
                 <Button Grid.Row="2"  Grid.Column="0" Style="{StaticResource imgGidStyle}" IsEnabled="{Binding isSelectable}" DataContext="{Binding MemorySlides[2]}" Click="Slide_Clicked">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
-                            <Image Stretch="Fill" Source="{Binding SlideImage}" />
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <!-- Middle-->
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
+                                <Image Stretch="Fill" Source="{Binding SlideImage}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <!-- Middle-->
                 <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource imgGidStyle}" IsEnabled="{Binding isSelectable}" DataContext="{Binding MemorySlides[3]}" Click="Slide_Clicked">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
-                            <Image Stretch="Fill" Source="{Binding SlideImage}" />
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
+                                <Image Stretch="Fill" Source="{Binding SlideImage}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
                 <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource imgGidStyle}" IsEnabled="{Binding isSelectable}" DataContext="{Binding MemorySlides[4]}" Click="Slide_Clicked">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
-                            <Image Stretch="Fill" Source="{Binding SlideImage}" />
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
+                                <Image Stretch="Fill" Source="{Binding SlideImage}"  Width="100" Height="100" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
                 <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource imgGidStyle}" IsEnabled="{Binding isSelectable}" DataContext="{Binding MemorySlides[5]}" Click="Slide_Clicked">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
-                            <Image Stretch="Fill" Source="{Binding SlideImage}" />
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <!-- Right -->
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
+                                <Image Stretch="Fill" Source="{Binding SlideImage}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <!-- Right -->
                 <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource imgGidStyle}" IsEnabled="{Binding isSelectable}" DataContext="{Binding MemorySlides[6]}" Click="Slide_Clicked">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
-                            <Image Stretch="Fill" Source="{Binding SlideImage}" />
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
+                                <Image Stretch="Fill" Source="{Binding SlideImage}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
                 <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource imgGidStyle}" IsEnabled="{Binding isSelectable}" DataContext="{Binding MemorySlides[7]}" Click="Slide_Clicked">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
-                            <Image Stretch="Fill" Source="{Binding SlideImage}" />
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
+                                <Image Stretch="Fill" Source="{Binding SlideImage}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
                 <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource imgGidStyle}" IsEnabled="{Binding isSelectable}" DataContext="{Binding MemorySlides[8]}" Click="Slide_Clicked">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
-                            <Image Stretch="Fill" Source="{Binding SlideImage}" />
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <!-- More right -->
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
+                                <Image Stretch="Fill" Source="{Binding SlideImage}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <!-- More right -->
                 <Button Grid.Row="0" Grid.Column="3" Style="{StaticResource imgGidStyle}" IsEnabled="{Binding isSelectable}" DataContext="{Binding MemorySlides[9]}" Click="Slide_Clicked">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
-                            <Image Stretch="Fill" Source="{Binding SlideImage}" />
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
+                                <Image Stretch="Fill" Source="{Binding SlideImage}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
                 <Button Grid.Row="1" Grid.Column="3" Style="{StaticResource imgGidStyle}" IsEnabled="{Binding isSelectable}" DataContext="{Binding MemorySlides[10]}" Click="Slide_Clicked">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
-                            <Image Stretch="Fill" Source="{Binding SlideImage}" />
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
+                                <Image Stretch="Fill" Source="{Binding SlideImage}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
                 <Button Grid.Row="2" Grid.Column="3" Style="{StaticResource imgGidStyle}" IsEnabled="{Binding isSelectable}" DataContext="{Binding MemorySlides[11]}" Click="Slide_Clicked">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
-                            <Image Stretch="Fill" Source="{Binding SlideImage}" />
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-        </Grid>
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border Style="{StaticResource SlideBorder}" BorderBrush="{Binding BorderBrush}">
+                                <Image Stretch="Fill" Source="{Binding SlideImage}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
         </ContentControl>
-
     </Grid>
 </UserControl>

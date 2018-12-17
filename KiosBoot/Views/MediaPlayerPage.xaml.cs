@@ -1,15 +1,17 @@
-﻿using System;
+﻿using KiosBoot.Helpers.Config;
+using KiosBoot.Helpers.ConvertModel;
+using KiosBoot.Helpers.Server;
+using Newtonsoft.Json;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
+using System.Threading.Tasks;
 using Windows.Media.Core;
 using Windows.Media.Playback;
 using Windows.System.Display;
 using Windows.UI.Core;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
@@ -27,7 +29,10 @@ namespace KiosBoot.Views
 
         // The DisplayRequest is used to stop the screen dimming while watching for extended periods
         private DisplayRequest _displayRequest = new DisplayRequest();
+
         private bool _isRequestActive = false;
+
+        private DisplayModel MediaDisplay;
 
         public MediaPlayerPage()
         {
@@ -39,10 +44,116 @@ namespace KiosBoot.Views
             //    view.TryEnterFullScreenMode();
             //}
             //mpe.Source = MediaSource.CreateFromUri(new Uri(DefaultSource));
+            LoadDataFromServer();
+            //LoadEmbeddedAppFile();
 
-            LoadEmbeddedAppFile();
+            //Set 1st Vdo
+            SetFirstVdeo();
 
+            mpe.MediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
         }
+
+        private void SetFirstVdeo()
+        {
+            string vdoPAth = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[0].Vdo.Path;
+
+            string PhotoPAth = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[0].Photo.Path;
+
+            string Logo = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[0].Logo.Path;
+
+            string text = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[0].Text;
+
+            string Topic = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[0].Topic;
+
+            DateTimeOffset Date = MediaDisplay.Entries[0].Date;
+
+            mpe.PosterSource = new BitmapImage(new Uri("ms-appx:///Assets/Animate/light.png"));
+            Uri pathUri = new Uri(vdoPAth);
+            // Uri pathUri = new Uri("ms-appx:///Assets/Mp4/demo.mp4");
+            //mediaPlayer.Source = MediaSource.CreateFromUri(pathUri);
+            mpe.Source = MediaSource.CreateFromUri(pathUri);
+            mpe.MediaPlayer.Play();
+
+            CurrentSet++;
+        }
+
+        private void setCorrentRender(int rowSet, MediaPlayer _MediaPlayer)
+        {
+            string vdoPAth = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[rowSet].Vdo.Path;
+
+            string PhotoPAth = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[rowSet].Photo.Path;
+
+            string Logo = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[rowSet].Logo.Path;
+
+            string text = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[rowSet].Text;
+
+            string Topic = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[rowSet].Topic;
+
+            DateTimeOffset Date = MediaDisplay.Entries[rowSet].Date;
+
+            //Reder แต่ละ item
+            try
+            {
+              
+                textSlide.Text = text;
+
+
+                Uri pathLogo = new Uri(Logo);
+                DestinationImage.Source = new BitmapImage(pathLogo);
+
+
+                Uri pathPhoto = new Uri(PhotoPAth);
+                PhotoImage.Source = new BitmapImage(pathPhoto);
+
+                //Set Vdo
+                //present loading
+                //mpe.PosterSource = new BitmapImage(new Uri("ms-appx:///Assets/Animate/light.png"));
+                Uri pathUri = new Uri(vdoPAth);
+                // Uri pathUri = new Uri("ms-appx:///Assets/Mp4/demo.mp4");
+                //mediaPlayer.Source = MediaSource.CreateFromUri(pathUri);
+                _MediaPlayer.Source = MediaSource.CreateFromUri(pathUri);
+                _MediaPlayer.Play();
+                //Set Logo ======================================================
+            }
+            catch (Exception ex)
+            {
+                if (ex is FormatException)
+                {
+                    // handle exception.
+                    // For example: Log error or notify user problem with file
+                }
+            }
+            CurrentSet++;
+            if (CurrentSet == MaxSet)
+            {
+                CurrentSet = 0;
+            }
+        }
+
+        private void MediaPlayer_MediaEnded(MediaPlayer sender, object args)
+        {
+            setCorrentRender(CurrentSet, sender);
+        }
+
+        private int CurrentSet = 0;
+        private int MaxSet = 0;
+
+        public void LoadDataFromServer()
+        {
+            ApiData api = new ApiData();
+
+            //string url = DataConfig.ApiDomain() + "/cockpit/api/collections/get/GameTypeA";
+            ////string url = DataConfig.ApiDomain() + "/cockpit/api/collections/get/GameTypeB";
+            string url = DataConfig.ApiDomain() + "/api/collections/get/DISPLAY";
+
+            var result = Task.Run(() => api.GetDataFromServerAsync(url)).Result;
+
+            MediaDisplay = JsonConvert.DeserializeObject<DisplayModel>(result);
+
+            MaxSet = (int)MediaDisplay.Total;
+        }
+
+        #region SlideShow
 
         //ScrollBar
         private DispatcherTimer timer;
@@ -55,14 +166,11 @@ namespace KiosBoot.Views
             {
                 if (timer.Interval.Ticks == 300)
                 {
-
-
                     //each time set the offset to scrollviewer.HorizontalOffset + 5
                     scrollviewer.ScrollToHorizontalOffset(scrollviewer.HorizontalOffset + 2);
                     //if the scrollviewer scrolls to the end, scroll it back to the start.
                     if (scrollviewer.HorizontalOffset == (scrollviewer.ScrollableWidth))
                     {
-
                         scrollviewer.ScrollToHorizontalOffset(0);
                     }
                 }
@@ -76,18 +184,17 @@ namespace KiosBoot.Views
             timer.Stop();
         }
 
+        #endregion SlideShow
+
         private void LoadEmbeddedAppFile()
         {
             try
             {
-
                 //present loading
                 mpe.PosterSource = new BitmapImage(new Uri("ms-appx:///Assets/Animate/light.png"));
                 Uri pathUri = new Uri("ms-appx:///Assets/Mp4/demo.mp4");
                 //mediaPlayer.Source = MediaSource.CreateFromUri(pathUri);
                 mpe.Source = MediaSource.CreateFromUri(pathUri);
-
-            
             }
             catch (Exception ex)
             {
@@ -99,14 +206,12 @@ namespace KiosBoot.Views
             }
         }
 
-
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
             mpe.MediaPlayer.Pause();
             mpe.MediaPlayer.PlaybackSession.PlaybackStateChanged -= PlaybackSession_PlaybackStateChanged;
         }
-
 
         #region Effecft
 
@@ -127,7 +232,6 @@ namespace KiosBoot.Views
             //if (e.NavigationMode == NavigationMode.Back)
             //    EntranceAnimation.Edge = EdgeTransitionLocation.Top;
 
-
             ConnectedAnimation animation =
                 ConnectedAnimationService.GetForCurrentView().GetAnimation("forwardAnimation");
             if (animation != null)
@@ -135,12 +239,11 @@ namespace KiosBoot.Views
                 animation.TryStart(DestinationImage);
             }
 
-
             base.OnNavigatedTo(e);
             mpe.MediaPlayer.PlaybackSession.PlaybackStateChanged += PlaybackSession_PlaybackStateChanged;
         }
 
-        #endregion
+        #endregion Effecft
 
         private async void PlaybackSession_PlaybackStateChanged(MediaPlaybackSession sender, object args)
         {
@@ -188,9 +291,7 @@ namespace KiosBoot.Views
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            Frame.GoBack();
+           // Frame.GoBack();
         }
-
-   
     }
 }
