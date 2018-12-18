@@ -4,8 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:MarqueeText"
     Style="{StaticResource PageStyle}"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+   xmlns:interactivity="using:Microsoft.Xaml.Interactivity"  
+    xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
+    >
 
     <Page.Transitions>
         <TransitionCollection>
@@ -26,23 +30,62 @@
             </MediaPlayerElement.TransportControls>
         </MediaPlayerElement>
 
-        <Grid Width="300" Background="Transparent"  HorizontalAlignment="Right" >
+        <StackPanel Width="300" Background="Transparent"  HorizontalAlignment="Right" >
             <Image x:Name="DestinationImage"  Opacity=".6"  Source="ms-appx:///Assets/Logo/dgaLogo.png" VerticalAlignment="Top" Margin="0,20,20,0"/>
-            <Image x:Name="PhotoImage"  Opacity=".6"  Source="ms-appx:///Assets/Logo/dgaLogo.png" VerticalAlignment="Top" Margin="0,20,20,0"/>
+            <Image x:Name="PhotoImage"  Opacity=".6"  Source="ms-appx:///Assets/Logo/dgaLogo.png" VerticalAlignment="Top" Margin="0,50,20,0"/>
+
+
+    
+
+        </StackPanel>
+
+
+
+
+
+
+        <Grid   VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                
+                <ColumnDefinition Width="1920"/>
+              
+            </Grid.ColumnDefinitions>
+
+
+
+            <StackPanel Grid.Column="1"  Background="Transparent"  >
+
+                <local:MarqueeTextControl x:Name="textSlide"  Background="Transparent"   Foreground="White" AnimationDuration="0:2:9" IsTicker="True"  FontSize="40"    >
+                        <local:MarqueeTextControl.Text >
+                       ****  Marquee control for Universal Windows Platform written by Sanjeev. Visit http://sanjeev.wordpress.com for more information about this project. Marquee control for Universal Windows Platform written by Sanjeev. Visit http://sanjeev.wordpress.com for more information about this project. Marquee control for Universal Windows Platform written by Sanjeev. Visit http://sanjeev.wordpress.com for more information about this project.
+                    </local:MarqueeTextControl.Text>
+                    </local:MarqueeTextControl>
+                </StackPanel>
+
+           
+
+      
         </Grid>
 
-
-        <Button x:Name="Back" Style="{StaticResource BackButtonStyle}" Width="56" Height="56" Content="dddd" FontSize="9999" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Back_Click" >
-            <Button.Background>
-                <ImageBrush ImageSource="ms-appx:///Assets/icon/back.png" Stretch="UniformToFill"/>
-            </Button.Background>
-        </Button>
-
-        <ScrollViewer x:Name="scrollviewer"    VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden"
+        <!--<ScrollViewer x:Name="scrollviewer"    VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden"
               VerticalScrollMode="Disabled" HorizontalScrollMode="Enabled" Grid.Row="1" Loaded="scrollViewer_Loaded"
               Unloaded="scrollviewer_Unloaded" Background="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Bottom">
             <TextBlock x:Name="textSlide" Text="Start:The Universal Windows Platform (UWP) background task API allows apps to execute code periodically, execute code in response to certain events such as incoming push notifications or the acquisition of an internet connection, and more—even when the apps aren't running. In this course, learn how to use the Universal Windows Platform (UWP) background task API in development. Instructor Scott Peterson introduces background tasks, triggers, and conditions. In addition, he shows examples of how and when these background tasks should be used.:End" TextWrapping="NoWrap"
            Foreground="White"    FontSize="50" FocusVisualPrimaryBrush="#FFC32424" RenderTransformOrigin="0.761,0.495" />
-        </ScrollViewer>
+        </ScrollViewer>-->
+        <Button x:Name="Back" Style="{StaticResource BackButtonStyle}" Width="56" Height="56" Content="dddd" FontSize="9999" VerticalAlignment="Top"  HorizontalAlignment="Left" Click="Back_Click" >
+            <Button.Background>
+                <ImageBrush ImageSource="ms-appx:///Assets/icon/back.png" Stretch="UniformToFill"/>
+            </Button.Background>
+            <interactivity:Interaction.Behaviors>
+                <interactivity:BehaviorCollection>
+                    <behaviors:Blur Value="10" Duration="2500" AutomaticallyStart="True"/>
+                    <behaviors:Scale ScaleX="2" ScaleY="2" Duration="2500" AutomaticallyStart="True"/>
+                    <!-- Others -->
+                </interactivity:BehaviorCollection>
+            </interactivity:Interaction.Behaviors>
+
+        </Button>
+    
     </Grid>
 </Page>

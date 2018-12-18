@@ -1,0 +1,59 @@
+﻿<Page
+    x:Class="KiosBoot.BlankPage1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:MarqueeText"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1">
+            <StackPanel Margin="0,140,0,0">
+                <TextBlock Text="Normal marquee" FontWeight="SemiBold"/>
+                <local:MarqueeTextControl Background="Green" Foreground="White" AnimationDuration="0:0:8" FontSize="30">
+                    <local:MarqueeTextControl.Text>
+                        Marquee control for Universal Windows Platform written by Sanjeev. Visit http://sanjeev.wordpress.com for more information about this project.
+                    </local:MarqueeTextControl.Text>
+                </local:MarqueeTextControl>
+            </StackPanel>
+
+            <StackPanel Margin="0,40,0,0">
+              
+                <local:MarqueeTextControl Background="Red" Foreground="White" AnimationDuration="0:0:8" IsTicker="True">
+                    <local:MarqueeTextControl.Text>
+                        Marquee control for Universal Windows Platform written by Sanjeev. Visit http://sanjeev.wordpress.com for more information about this project.
+                    </local:MarqueeTextControl.Text>
+                </local:MarqueeTextControl>
+            </StackPanel>
+
+            <StackPanel Margin="0,40,0,0">
+                <TextBlock Text="Marquee With Easing Function" FontWeight="SemiBold"/>
+                <local:MarqueeTextControl Background="Blue" Foreground="White" AnimationDuration="0:0:8">
+                    <local:MarqueeTextControl.Text>
+                        Marquee control for Universal Windows Platform written by Sanjeev. Visit http://sanjeev.wordpress.com for more information about this project.
+                    </local:MarqueeTextControl.Text>
+                    <local:MarqueeTextControl.EasingFunction>
+                        <BounceEase EasingMode="EaseOut"/>
+                    </local:MarqueeTextControl.EasingFunction>
+                </local:MarqueeTextControl>
+            </StackPanel>
+
+            <StackPanel Margin="0,40,0,0">
+                <TextBlock Text="Short text has no marquee animation" FontWeight="SemiBold"/>
+                <local:MarqueeTextControl Background="Black" Foreground="White" AnimationDuration="0:0:8">
+                    <local:MarqueeTextControl.Text>
+                        This text is too short to have an animation.
+                    </local:MarqueeTextControl.Text>
+                </local:MarqueeTextControl>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

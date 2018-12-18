@@ -132,6 +132,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activation\ActivationHandler.cs" />
+    <Compile Include="BlankPage1.xaml.cs">
+      <DependentUpon>BlankPage1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CameraControl.xaml.cs">
       <DependentUpon>CameraControl.xaml</DependentUpon>
     </Compile>
@@ -151,6 +154,7 @@
     <Compile Include="Controls\ImageWithFaceBorderUserControl.xaml.cs">
       <DependentUpon>ImageWithFaceBorderUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MarqueeTextControl.cs" />
     <Compile Include="Controls\OCRBorder.xaml.cs">
       <DependentUpon>OCRBorder.xaml</DependentUpon>
     </Compile>
@@ -274,6 +278,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="BlankPage1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\CameraControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -549,6 +557,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Temp\" />
+    <Folder Include="NewFolder1\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

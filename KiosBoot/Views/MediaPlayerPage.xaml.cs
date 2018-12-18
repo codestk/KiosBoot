@@ -15,7 +15,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-
+using Microsoft.Xaml.Interactivity;
+using Microsoft.Toolkit.Uwp.UI.Animations.Behaviors;
 namespace KiosBoot.Views
 {
     public sealed partial class MediaPlayerPage : Page, INotifyPropertyChanged
@@ -51,7 +52,12 @@ namespace KiosBoot.Views
             SetFirstVdeo();
 
             mpe.MediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
+
+
         }
+  
+
+
 
         private void SetFirstVdeo()
         {
@@ -61,11 +67,17 @@ namespace KiosBoot.Views
 
             string Logo = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[0].Logo.Path;
 
-            string text = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[0].Text;
+            string text = MediaDisplay.Entries[0].Text;
 
             string Topic = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[0].Topic;
 
             DateTimeOffset Date = MediaDisplay.Entries[0].Date;
+
+            Uri pathLogo = new Uri(Logo);
+            DestinationImage.Source = new BitmapImage(pathLogo);
+
+            Uri pathPhoto = new Uri(PhotoPAth);
+            PhotoImage.Source = new BitmapImage(pathPhoto);
 
             mpe.PosterSource = new BitmapImage(new Uri("ms-appx:///Assets/Animate/light.png"));
             Uri pathUri = new Uri(vdoPAth);
@@ -75,6 +87,12 @@ namespace KiosBoot.Views
             mpe.MediaPlayer.Play();
 
             CurrentSet++;
+
+            textSlide.Text = text;
+
+
+     
+
         }
 
         private void setCorrentRender(int rowSet, MediaPlayer _MediaPlayer)
@@ -85,35 +103,38 @@ namespace KiosBoot.Views
 
             string Logo = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[rowSet].Logo.Path;
 
-            string text = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[rowSet].Text;
+            string text = MediaDisplay.Entries[rowSet].Text;
 
-            string Topic = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[rowSet].Topic;
+            string Topic = MediaDisplay.Entries[rowSet].Topic;
 
             DateTimeOffset Date = MediaDisplay.Entries[rowSet].Date;
 
             //Reder แต่ละ item
             try
             {
-              
-                textSlide.Text = text;
+                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+() =>
+{
+    // Your UI update code goes here!
+    textSlide.Text = text;
 
+    Uri pathLogo = new Uri(Logo);
+    DestinationImage.Source = new BitmapImage(pathLogo);
 
-                Uri pathLogo = new Uri(Logo);
-                DestinationImage.Source = new BitmapImage(pathLogo);
+    Uri pathPhoto = new Uri(PhotoPAth);
+    PhotoImage.Source = new BitmapImage(pathPhoto);
 
-
-                Uri pathPhoto = new Uri(PhotoPAth);
-                PhotoImage.Source = new BitmapImage(pathPhoto);
-
-                //Set Vdo
-                //present loading
-                //mpe.PosterSource = new BitmapImage(new Uri("ms-appx:///Assets/Animate/light.png"));
-                Uri pathUri = new Uri(vdoPAth);
-                // Uri pathUri = new Uri("ms-appx:///Assets/Mp4/demo.mp4");
-                //mediaPlayer.Source = MediaSource.CreateFromUri(pathUri);
-                _MediaPlayer.Source = MediaSource.CreateFromUri(pathUri);
-                _MediaPlayer.Play();
-                //Set Logo ======================================================
+    //Set Vdo
+    //present loading
+    //mpe.PosterSource = new BitmapImage(new Uri("ms-appx:///Assets/Animate/light.png"));
+    Uri pathUri = new Uri(vdoPAth);
+    // Uri pathUri = new Uri("ms-appx:///Assets/Mp4/demo.mp4");
+    //mediaPlayer.Source = MediaSource.CreateFromUri(pathUri);
+    _MediaPlayer.Source = MediaSource.CreateFromUri(pathUri);
+    _MediaPlayer.Play();
+    //Set Logo ======================================================
+}
+);
             }
             catch (Exception ex)
             {
@@ -158,31 +179,31 @@ namespace KiosBoot.Views
         //ScrollBar
         private DispatcherTimer timer;
 
-        private void scrollViewer_Loaded(object sender, RoutedEventArgs e)
-        {
-            timer = new DispatcherTimer();
+        //private void scrollViewer_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    timer = new DispatcherTimer();
 
-            timer.Tick += (ss, ee) =>
-            {
-                if (timer.Interval.Ticks == 300)
-                {
-                    //each time set the offset to scrollviewer.HorizontalOffset + 5
-                    scrollviewer.ScrollToHorizontalOffset(scrollviewer.HorizontalOffset + 2);
-                    //if the scrollviewer scrolls to the end, scroll it back to the start.
-                    if (scrollviewer.HorizontalOffset == (scrollviewer.ScrollableWidth))
-                    {
-                        scrollviewer.ScrollToHorizontalOffset(0);
-                    }
-                }
-            };
-            timer.Interval = new TimeSpan(300);
-            timer.Start();
-        }
+        //    timer.Tick += (ss, ee) =>
+        //    {
+        //        if (timer.Interval.Ticks == 300)
+        //        {
+        //            //each time set the offset to scrollviewer.HorizontalOffset + 5
+        //            scrollviewer.ScrollToHorizontalOffset(scrollviewer.HorizontalOffset + 2);
+        //            //if the scrollviewer scrolls to the end, scroll it back to the start.
+        //            if (scrollviewer.HorizontalOffset == (scrollviewer.ScrollableWidth))
+        //            {
+        //                scrollviewer.ScrollToHorizontalOffset(0);
+        //            }
+        //        }
+        //    };
+        //    timer.Interval = new TimeSpan(300);
+        //    timer.Start();
+        //}
 
-        private void scrollviewer_Unloaded(object sender, RoutedEventArgs e)
-        {
-            timer.Stop();
-        }
+        //private void scrollviewer_Unloaded(object sender, RoutedEventArgs e)
+        //{
+        //    timer.Stop();
+        //}
 
         #endregion SlideShow
 
@@ -291,7 +312,8 @@ namespace KiosBoot.Views
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-           // Frame.GoBack();
+            // Frame.GoBack();
+            this.Frame.Navigate(typeof(Menu), null, new DrillInNavigationTransitionInfo());
         }
     }
 }
