@@ -39,10 +39,11 @@ namespace KiosBoot.Views.Game
 
             //Menu.Visibility = Visibility.Collapsed;
             Game.Visibility = Visibility.Visible;
-
-
-
-            userPicture.Source = UserProfile.PictureProfile;
+           
+            ImageBrush imgBrush = new ImageBrush();
+            imgBrush.ImageSource = UserProfile.PictureProfile;
+            userPicture.Fill = imgBrush;
+            //userPicture.Source = UserProfile.PictureProfile;
 
             //ScrollGame.AddScrollInfo(255, "http://www.javascriptthai.com/wp-content/uploads/2013/08/JavaScriptThai174_131-1.png");
         }

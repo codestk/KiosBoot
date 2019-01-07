@@ -36,8 +36,8 @@
 
         <StackPanel Width="auto" Height="auto" VerticalAlignment="Top" HorizontalAlignment="Center">
 
-            <TextBlock x:Name="Head" HorizontalAlignment="Center"   Text=" The dealer's guide to digital advertising" TextWrapping="Wrap"  Width="auto"  FontSize="70"    RelativePanel.Above="Title" Margin="0,50,0,0" FontFamily="Haettenschweiler" FontWeight="Bold" Foreground="White" FocusVisualPrimaryBrush="#FF3D3D3D" />
-            <TextBlock x:Name="Title"  HorizontalAlignment="Center"   Text="Four essential strategies for successful digital advertising" TextWrapping="Wrap"   Width="auto"  FontSize="50" Foreground="#FFF37D06" />
+
+            <TextBlock x:Name="Title"  HorizontalAlignment="Center"   Text="Service" TextWrapping="Wrap"   Width="auto"  FontSize="100" Foreground="#FFF37D06" />
         </StackPanel>
 
 
@@ -53,7 +53,7 @@
                                Color="#003765"
                          
                               >
-                    <Button Style="{StaticResource   DefaultButtonStyle}"  
+                    <Button x:Name="btnTopic2" Style="{StaticResource   DefaultButtonStyle}"  
                Content="Demo1" Click="Button_Click"   />
                 </controls:DropShadowPanel>
             </StackPanel>
@@ -62,15 +62,16 @@
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
                 <controls:DropShadowPanel BlurRadius="99"  
                                ShadowOpacity=".8"
-                               OffsetX="0"
+                               OffsetX="6"
                                OffsetY="5"
                                Color="#003765"
                          
                               >
-                    <Button Style="{StaticResource   DefaultButtonStyle}"  
-               Content="Demo1" Click="Button_Click_2"   />
+                    <Button x:Name="btnTopic1" Style="{StaticResource   DefaultButtonStyle}"  
+               Content="Demo1" Click="Button_Click"   />
                 </controls:DropShadowPanel>
-            </StackPanel>
+
+ </StackPanel>
 
             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top">
                 <controls:DropShadowPanel BlurRadius="99"  
@@ -80,8 +81,8 @@
                                Color="#003765"
                          
                               >
-                    <Button Style="{StaticResource   DefaultButtonStyle}"  
-               Content="Demo1" Click="Button_Click_1"   />
+                    <Button x:Name="btnTopic3" Style="{StaticResource   DefaultButtonStyle}"  
+               Content="Demo1" Click="Button_Click"      />
                 </controls:DropShadowPanel>
             </StackPanel>
 
@@ -94,8 +95,8 @@
                                Color="#003765"
                          
                               >
-                    <Button Style="{StaticResource   DefaultButtonStyle}"  
-               Content="Demo1" Click="Button_Click_5"   />
+                    <Button x:Name="btnTopic4" Style="{StaticResource   DefaultButtonStyle}"  
+               Content="Demo1" Click="Button_Click"   />
                 </controls:DropShadowPanel>
             </StackPanel>
 
@@ -109,8 +110,8 @@
                                Color="#003765"
                          
                               >
-                    <Button Style="{StaticResource   DefaultButtonStyle}"  
-               Content="Demo1" Click="Button_Click_3"   />
+                    <Button x:Name="btnTopic8"  Style="{StaticResource   DefaultButtonStyle}"  
+               Content="Demo1" Click="Button_Click"   />
                 </controls:DropShadowPanel>
             </StackPanel>
 
@@ -124,8 +125,8 @@
                                Color="#003765"
                          
                               >
-                    <Button Style="{StaticResource   DefaultButtonStyle}"  
-               Content="Demo1" Click="Button_Click_4"   />
+                    <Button x:Name="btnTopic7" Style="{StaticResource   DefaultButtonStyle}"  
+               Content="Demo1" Click="Button_Click"   />
                 </controls:DropShadowPanel>
             </StackPanel>
 
@@ -139,8 +140,8 @@
                                Color="#003765"
                          
                               >
-                    <Button Style="{StaticResource   DefaultButtonStyle}"  
-               Content="Demo1" Click="Button_Click_6"   />
+                    <Button x:Name="btnTopic6" Style="{StaticResource   DefaultButtonStyle}"  
+               Content="Demo1" Click="Button_Click"   />
                 </controls:DropShadowPanel>
             </StackPanel>
 
@@ -152,8 +153,8 @@
                                Color="#003765"
                          
                               >
-                    <Button Style="{StaticResource   DefaultButtonStyle}"  
-               Content="Demo1" Click="Button_Click_7"   />
+                    <Button x:Name="btnTopic5" Style="{StaticResource   DefaultButtonStyle}"  
+               Content="Demo1" Click="Button_Click"   />
                 </controls:DropShadowPanel>
             </StackPanel>
 

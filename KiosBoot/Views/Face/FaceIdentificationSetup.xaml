@@ -11,8 +11,8 @@
     <Page.Resources>
         <ctl:NullToVisibilityConverter x:Key="nullToVisibilityConverter"/>
     </Page.Resources>
-
-    <Grid  >
+    
+    <Grid  Visibility="Collapsed">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>

@@ -1,17 +1,69 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
+using System.Net;
+using System.Threading.Tasks;
 using System.Xml;
+using KiosBoot.Helpers.Faces;
 using KiosBoot.Services;
+using KiosBoot.Views;
 using ServiceHelpers;
 using Windows.ApplicationModel.Activation;
+using Windows.Storage;
+using Windows.UI.Core;
 using Windows.UI.Notifications;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace KiosBoot
 {
     public sealed partial class App : Application
     {
+        #region IDel Tiem
+
+        public static new App Current => (App)Application.Current;
+
+        public event EventHandler IsIdleChanged;
+
+        private DispatcherTimer idleTimer;
+
+        private bool isIdle;
+        public bool IsIdle
+        {
+            get
+            {
+                return isIdle;
+            }
+
+            private set
+            {
+                if (isIdle != value)
+                {
+                    isIdle = value;
+                    IsIdleChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+
+        private void onIdleTimerTick(object sender, object e)
+        {
+          
+            idleTimer.Stop();
+            IsIdle = true;
+        }
+
+        private void onCoreWindowPointerMoved(CoreWindow sender, PointerEventArgs args)
+        {
+            idleTimer.Stop();
+            idleTimer.Start();
+            IsIdle = false;
+        }
+
+        #endregion
+
+
+
         private Lazy<ActivationService> _activationService;
 
         private ActivationService ActivationService
@@ -28,8 +80,19 @@ namespace KiosBoot
             // Deferred execution until used. Check https://msdn.microsoft.com/library/dd642331(v=vs.110).aspx for further info on Lazy<T> class.
             _activationService = new Lazy<ActivationService>(CreateActivationService);
 
+            //FaceTain ft = new FaceTain();
+            //Task.Run(() => ft.LoadPersonGroupsFromService());
+            //ft.AddPerson("Momojojoj000");
+
+            //CreateProfile
+
+
            
+
         }
+
+ 
+
 
 
         private void EnterKioskMode()
@@ -44,6 +107,18 @@ namespace KiosBoot
 
         protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
+
+            idleTimer = new DispatcherTimer();
+            idleTimer.Interval = TimeSpan.FromSeconds(10);  // 10s idle delay
+            idleTimer.Tick += onIdleTimerTick;
+            Window.Current.CoreWindow.PointerMoved += onCoreWindowPointerMoved;
+
+
+
+
+
+
+
             if (!args.PrelaunchActivated)
             {
 
@@ -124,8 +199,20 @@ namespace KiosBoot
 
             //return new ActivationService(this, typeof(Views.Game.gameLv10));
 
-            return new ActivationService(this, typeof(Views.MediaPlayerPage));
-          
+            // return new ActivationService(this, typeof(Views.MediaPlayerPage));
+
+
+            return new ActivationService(this, typeof(Views.Menu));
+           // return new ActivationService(this, typeof(Views.FaceIdentificationSetup));
+
         }
+
+
+
+ 
+
+
+
+
     }
 }

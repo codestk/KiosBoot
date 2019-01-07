@@ -2,6 +2,7 @@
 using KiosBoot.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -97,7 +98,10 @@ namespace KiosBoot.Models
                 
 
                 //return "/KiosBoot;component/Assets/mystery_image.jpg";
-                return "ms-appx:///Assets/mystery_image.jpg";
+                //return "ms-appx:///Assets/mystery_image.jpg";
+
+                
+                return "ms-appx:///Assets/Game/question.png";
             }
         }
 
@@ -108,17 +112,24 @@ namespace KiosBoot.Models
 
             get
             {
-                
+                     
                 if (isFailed)
-                    return new SolidColorBrush(Windows.UI.Colors.Red);
+                    return new SolidColorBrush(Windows.UI.Colors.OrangeRed);
                 if (isMatched)
-                    return new SolidColorBrush(Windows.UI.Colors.Green);
+                    return new SolidColorBrush(Windows.UI.Colors.LightGreen);
                 if (isViewed)
-                    return new SolidColorBrush(Windows.UI.Colors.Yellow);
+                    return new SolidColorBrush(Windows.UI.Colors.Gold);
+
+                //if (isFailed)
+                //    return new SolidColorBrush(Windows.UI.Colors.Red);
+                //if (isMatched)
+                //    return new SolidColorBrush(Windows.UI.Colors.Green);
+                //if (isViewed)
+                //    return new SolidColorBrush(Windows.UI.Colors.Yellow);
 
 
 
-                return new SolidColorBrush(Windows.UI.Colors.Black);
+                return new SolidColorBrush(Windows.UI.Colors.Gray);
             }
         }
 

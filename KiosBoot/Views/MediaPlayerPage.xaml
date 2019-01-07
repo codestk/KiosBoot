@@ -9,7 +9,7 @@
     mc:Ignorable="d"
    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"  
     xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
-    >
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls">
 
     <Page.Transitions>
         <TransitionCollection>
@@ -17,25 +17,98 @@
                                x:Name="EntranceAnimation" />
         </TransitionCollection>
     </Page.Transitions>
+    <Page.Resources>
+        <Storyboard x:Name="AutoFlipView" RepeatBehavior="Forever" AutoReverse="True">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Selector.SelectedIndex)" Storyboard.TargetName="flipView1">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>0</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:1">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>1</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:2">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>2</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:3">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>2</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
 
-    <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+        <DataTemplate x:Key="PhotoTemplate">
+            <Grid Margin="0,0,0,0" Background="Transparent">
+                <Image HorizontalAlignment="Center"   Width="500" Height="550"
+               Stretch="Fill">
+                    <Image.Source>
+                        <BitmapImage  UriSource="{Binding image}" />
+                        <!--<BitmapImage UriSource="https://notebookspec.com/nbs/upload_notebook/20180509-113115_c.jpg"  />-->
 
+
+                    </Image.Source>
+
+                </Image>
+
+
+
+                <!--<MediaElement x:Name="mpe"   Height="800" Margin="0,50,0,0" Source="ms-appx:///Assets/Mp4/fishes.wmv"
+                    MaxWidth="1500"  IsLooping="True"  
+                    AutoPlay="True" />-->
+                <Border VerticalAlignment="Bottom">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0,1">
+                            <GradientStop Offset="0" Color="Transparent" />
+                            <GradientStop Offset="1" Color="Gray" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <TextBlock Margin="5,29,5,5"
+                     VerticalAlignment="Bottom"
+                     Foreground="White"   FontSize="52" TextAlignment="Center"
+                     Text="{Binding IName}" />
+                </Border>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid  >
+        <Grid.Background>
+            <ImageBrush ImageSource="ms-appx:///Assets/Background/Bg_Sky_Menu.png" Stretch="UniformToFill" />
+        </Grid.Background>
         <!--AutoPlay="True"-->
 
-        <MediaPlayerElement x:Name="mpe"
+        <MediaPlayerElement x:Name="mpe"   Height="700"  HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Stretch" Margin="50,100,0,0" Background="DodgerBlue"
                            
-                            AreTransportControlsEnabled="False" IsFullWindow="False">
+                            AreTransportControlsEnabled="False" IsFullWindow="False" HorizontalAlignment="Left" VerticalAlignment="Top">
             <MediaPlayerElement.TransportControls>
                 <MediaTransportControls IsCompact="False"/>
             </MediaPlayerElement.TransportControls>
         </MediaPlayerElement>
 
-        <StackPanel Width="300" Background="Transparent"  HorizontalAlignment="Right" >
-            <Image x:Name="DestinationImage"  Opacity=".6"  Source="ms-appx:///Assets/Logo/dgaLogo.png" VerticalAlignment="Top" Margin="0,20,20,0"/>
-            <Image x:Name="PhotoImage"  Opacity=".6"  Source="ms-appx:///Assets/Logo/dgaLogo.png" VerticalAlignment="Top" Margin="0,50,20,0"/>
+        <StackPanel Width="500" Margin="50,100,50,0" Background="Transparent"  HorizontalAlignment="Right"  Padding="10,0,10,0"  >
+            <Image x:Name="DestinationImage"   Width="500" Height="300" Stretch="Fill"   Source="ms-appx:///Assets/Logo/dgaLogo.png" VerticalAlignment="Top"  />
+            <!--<Image x:Name="PhotoImage"  Opacity="1"  Source="ms-appx:///Assets/Logo/dgaLogo.png" VerticalAlignment="Top" Margin="0,50,0,0"/>-->
 
+            <!--<FlipView  Margin="0,50,0,0"   Height="400">
+                <Image Source="ms-appx:///Assets/SampleData/SamplePhoto1.png" AutomationProperties.Name="Cliff"/>
+                <Image Source="ms-appx:///Assets/SampleData/SamplePhoto2.png" AutomationProperties.Name="Grapes"/>
+                <Image Source="ms-appx:///Assets/SampleData/SamplePhoto3.png" AutomationProperties.Name="Rainier"/>
+                <Image Source="ms-appx:///Assets/SampleData/SamplePhoto4.png" AutomationProperties.Name="Sunset"/>
+                <Image Source="ms-appx:///Assets/SampleData/SamplePhoto5.png" AutomationProperties.Name="Valley"/>
+            </FlipView>-->
 
-    
+            <controls:RotatorTile x:Name="Tile1"
+                                Height="330"  
+                                Margin="0,70,0,0"
+                                RotationDelay="0:0:10"
+                                ExtraRandomDuration="0:0:0"
+                                Direction="Right" 
+                                ItemTemplate="{StaticResource PhotoTemplate}" />
 
         </StackPanel>
 
@@ -46,25 +119,31 @@
 
         <Grid   VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
-                
+
                 <ColumnDefinition Width="1920"/>
-              
+
             </Grid.ColumnDefinitions>
 
 
 
-            <StackPanel Grid.Column="1"  Background="Transparent"  >
+            <StackPanel   Grid.Column="1"   Width="1500" Height="120"  Margin="50,70,0,100"   HorizontalAlignment="Center"  x:Name="maqeru"  >
+                <StackPanel.Background>
+                    <ImageBrush ImageSource="ms-appx:///Assets/Background/ScreenMaquuerFrame.png" Stretch="None"/>
+                </StackPanel.Background>
 
-                <local:MarqueeTextControl x:Name="textSlide"  Background="Transparent"   Foreground="White" AnimationDuration="0:2:9" IsTicker="True"  FontSize="40"    >
-                        <local:MarqueeTextControl.Text >
-                       ****  Marquee control for Universal Windows Platform written by Sanjeev. Visit http://sanjeev.wordpress.com for more information about this project. Marquee control for Universal Windows Platform written by Sanjeev. Visit http://sanjeev.wordpress.com for more information about this project. Marquee control for Universal Windows Platform written by Sanjeev. Visit http://sanjeev.wordpress.com for more information about this project.
-                    </local:MarqueeTextControl.Text>
-                    </local:MarqueeTextControl>
-                </StackPanel>
 
-           
+                <!--<local:MarqueeTextControl  x:Name="textSlide" Background="Azure" Foreground="White" AnimationDuration="0:2:8" FontSize="50"   Height="100" IsTicker="True"   Padding="20,10,20,0" >
+                    <local:MarqueeTextControl.Text >
+                       A
+                     </local:MarqueeTextControl.Text>
+                </local:MarqueeTextControl>-->
 
-      
+
+            </StackPanel>
+
+
+
+
         </Grid>
 
         <!--<ScrollViewer x:Name="scrollviewer"    VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden"
@@ -73,19 +152,12 @@
             <TextBlock x:Name="textSlide" Text="Start:The Universal Windows Platform (UWP) background task API allows apps to execute code periodically, execute code in response to certain events such as incoming push notifications or the acquisition of an internet connection, and more—even when the apps aren't running. In this course, learn how to use the Universal Windows Platform (UWP) background task API in development. Instructor Scott Peterson introduces background tasks, triggers, and conditions. In addition, he shows examples of how and when these background tasks should be used.:End" TextWrapping="NoWrap"
            Foreground="White"    FontSize="50" FocusVisualPrimaryBrush="#FFC32424" RenderTransformOrigin="0.761,0.495" />
         </ScrollViewer>-->
-        <Button x:Name="Back" Style="{StaticResource BackButtonStyle}" Width="56" Height="56" Content="dddd" FontSize="9999" VerticalAlignment="Top"  HorizontalAlignment="Left" Click="Back_Click" >
+        <Button x:Name="back" Content="" HorizontalAlignment="Right"  Style="{StaticResource CircleBack}"  VerticalAlignment="Bottom" Height="200" Width="200"  FontFamily="Tahoma" FontWeight="Bold" Click="Back_Click" Margin="0,0,-56,-44">
             <Button.Background>
-                <ImageBrush ImageSource="ms-appx:///Assets/icon/back.png" Stretch="UniformToFill"/>
+                <ImageBrush ImageSource="{StaticResource backbtnImageSource}" Stretch="Uniform"/>
             </Button.Background>
-            <interactivity:Interaction.Behaviors>
-                <interactivity:BehaviorCollection>
-                    <behaviors:Blur Value="10" Duration="2500" AutomaticallyStart="True"/>
-                    <behaviors:Scale ScaleX="2" ScaleY="2" Duration="2500" AutomaticallyStart="True"/>
-                    <!-- Others -->
-                </interactivity:BehaviorCollection>
-            </interactivity:Interaction.Behaviors>
 
         </Button>
-    
+
     </Grid>
 </Page>

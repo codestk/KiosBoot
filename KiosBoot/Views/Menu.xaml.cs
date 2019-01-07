@@ -2,6 +2,7 @@
 using KiosBoot.Views.Game;
 using ServiceHelpers;
 using System;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -24,7 +25,12 @@ namespace KiosBoot.Views
 
             this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
 
-         
+            ApplicationView view = ApplicationView.GetForCurrentView();
+            if (!view.IsFullScreenMode)
+            {
+                view.TryEnterFullScreenMode();
+            }
+
 
             if (FaceObjct.MyFace != null)
             {
@@ -60,10 +66,18 @@ namespace KiosBoot.Views
             }
         }
 
+        private void onIsIdleChanged(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine($"IsIdle: {App.Current.IsIdle}");
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             //if (e.NavigationMode == NavigationMode.Back)
             //    EntranceAnimation.Edge = EdgeTransitionLocation.Right;
+            App.Current.IsIdleChanged += onIsIdleChanged;
+
+
 
             ConnectedAnimation animation =
               ConnectedAnimationService.GetForCurrentView().GetAnimation("backAnimation");
@@ -84,6 +98,7 @@ namespace KiosBoot.Views
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
+            App.Current.IsIdleChanged -= onIsIdleChanged;
             //ConnectedAnimationService.GetForCurrentView()
             //    .PrepareToAnimate("forwardAnimation", SourceImage);
             // You don't need to explicitly set the Configuration property because
@@ -104,7 +119,7 @@ namespace KiosBoot.Views
 
         private void btn_Product_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(Product), null, new EntranceNavigationTransitionInfo());
+            this.Frame.Navigate(typeof(Service), null, new EntranceNavigationTransitionInfo());
         }
 
         private void btn_SettingFace_Click(object sender, RoutedEventArgs e)

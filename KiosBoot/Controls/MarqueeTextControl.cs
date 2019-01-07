@@ -58,7 +58,15 @@ namespace MarqueeText
         public string Text
         {
             get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            set {
+                //  StartMarqueeAnimationIfNeeded();
+
+               
+
+
+                SetValue(TextProperty, value);
+
+            }
         }
 
         private static readonly DependencyProperty IsStoppedProperty = DependencyProperty.Register(nameof(IsStopped), typeof(bool), typeof(MarqueeTextControl), new PropertyMetadata(false,

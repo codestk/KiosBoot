@@ -71,7 +71,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <DefineConstants>DEBUG;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS</DefineConstants>
     <NoWarn>NU1603;2008;</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -123,6 +123,9 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>11.0.2</Version>
     </PackageReference>
+    <PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Uwp.Managed">
+      <Version>2.0.1-uno.28</Version>
+    </PackageReference>
     <PackageReference Include="WriteableBitmapEx">
       <Version>1.5.1</Version>
     </PackageReference>
@@ -168,6 +171,8 @@
     <Compile Include="Helpers\ConvertModel\GameObjectModel.cs" />
     <Compile Include="Helpers\ConvertModel\ScrollInfo.cs" />
     <Compile Include="Helpers\EnumToBooleanConverter.cs" />
+    <Compile Include="Helpers\Faces\FaceTain.cs" />
+    <Compile Include="Helpers\Instance\TopicInstance.cs" />
     <Compile Include="Helpers\Json.cs" />
     <Compile Include="Helpers\MyDataTemplateSelector.cs" />
     <Compile Include="Helpers\Api\ApiData.cs" />
@@ -175,10 +180,14 @@
     <Compile Include="Helpers\Profile\UserProfile.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
     <Compile Include="Helpers\SoundManager.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="KioskExperiences.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\FaceObjct.cs" />
     <Compile Include="Models\Scroll.cs" />
+    <Compile Include="Models\TopicDetailasModel.cs" />
+    <Compile Include="Models\TopicModel.cs" />
+    <Compile Include="ViewModels\FaceModel.cs" />
     <Compile Include="ViewModels\GameInfoViewModel.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="Models\GroupInfoList.cs" />
@@ -201,17 +210,35 @@
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Util.cs" />
+    <Compile Include="ViewModels\TopicCollectionModell.cs" />
+    <Compile Include="ViewModels\TopicViewModel.cs" />
     <Compile Include="Views\BlankPage.xaml.cs">
       <DependentUpon>BlankPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\connectAnimation\CardPage.xaml.cs">
+      <DependentUpon>CardPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\connectAnimation\CustomDataObject.cs" />
+    <Compile Include="Views\connectAnimation\CollectionPage.xaml.cs">
+      <DependentUpon>CollectionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\connectAnimation\DetailedInfoPage.xaml.cs">
+      <DependentUpon>DetailedInfoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DataGridPage.xaml.cs">
       <DependentUpon>DataGridPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Ebook.xaml.cs">
+      <DependentUpon>Ebook.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Face\AutomaticPhotoCapturePage.xaml.cs">
       <DependentUpon>AutomaticPhotoCapturePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Face\FaceIdentificationSetup.xaml.cs">
       <DependentUpon>FaceIdentificationSetup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Face\ManageFace.xaml.cs">
+      <DependentUpon>ManageFace.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Face\RecognitionPage.xaml.cs">
       <DependentUpon>RecognitionPage.xaml</DependentUpon>
@@ -260,6 +287,18 @@
     </Compile>
     <Compile Include="Views\Product.xaml.cs">
       <DependentUpon>Product.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Product2.xaml.cs">
+      <DependentUpon>Product2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Service.xaml.cs">
+      <DependentUpon>Service.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ServiceTopic.xaml.cs">
+      <DependentUpon>ServiceTopic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ServiceTopicDetail.xaml.cs">
+      <DependentUpon>ServiceTopicDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TabbedPage.xaml.cs">
       <DependentUpon>TabbedPage.xaml</DependentUpon>
@@ -346,9 +385,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\connectAnimation\CardPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\connectAnimation\CollectionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\connectAnimation\DetailedInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DataGridPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Ebook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Face\AutomaticPhotoCapturePage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -357,6 +412,10 @@
     <Page Include="Views\Face\FaceIdentificationSetup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Face\ManageFace.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Face\RecognitionPage.xaml">
       <SubType>Designer</SubType>
@@ -422,6 +481,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Product2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Service.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ServiceTopic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ServiceTopicDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\TabbedPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -449,18 +524,16 @@
       <Project>{fc5a0250-b742-40a8-82ca-bec2df66982f}</Project>
       <Name>KioskRuntimeComponent</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RichTextControls\RichTextControls.csproj">
+      <Project>{e3bd6f6f-b39e-4180-8182-dfe85c780bf4}</Project>
+      <Name>RichTextControls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceHelpers\ServiceHelpers.csproj">
       <Project>{5d9320af-a9e4-48e3-89bc-9f7f0954b298}</Project>
       <Name>ServiceHelpers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Animals\bear_image.jpg" />
-    <Content Include="Assets\Animals\deer_image.jpg" />
-    <Content Include="Assets\Animals\eagle_image.jpg" />
-    <Content Include="Assets\Animals\fish_image.jpg" />
-    <Content Include="Assets\Animals\fox_image.jpg" />
-    <Content Include="Assets\Animals\rabbit_image.jpg" />
     <Content Include="Assets\Animate\Female.png" />
     <Content Include="Assets\Animate\light.png" />
     <Content Include="Assets\Animate\main%402x.png" />
@@ -472,6 +545,7 @@
     <Content Include="Assets\Background\BgLight.jpg" />
     <Content Include="Assets\Background\Bg_Sky_Menu.png" />
     <Content Include="Assets\Background\Poster.jpg" />
+    <Content Include="Assets\Background\ScreenMaquuerFrame.png" />
     <Content Include="Assets\background_music.mp3" />
     <Content Include="Assets\black_background.jpg" />
     <Content Include="Assets\Cars\blackcar_image.jpg" />
@@ -481,26 +555,50 @@
     <Content Include="Assets\Cars\redcar_image2.jpg" />
     <Content Include="Assets\Cars\whitecar_image.jpg" />
     <Content Include="Assets\Cars\yellowcar_image.jpg" />
+    <Content Include="Assets\FaceProfile\mystery_image.jpg" />
+    <Content Include="Assets\FinalDesign1\3-Menu.png" />
+    <Content Include="Assets\FinalDesign1\3-Topic.png" />
+    <Content Include="Assets\FinalDesign1\BG-01.png" />
+    <Content Include="Assets\FinalDesign1\BG-02.png" />
+    <Content Include="Assets\FinalDesign1\Camera-detect-Page.png" />
+    <Content Include="Assets\FinalDesign1\Game-Page.png" />
+    <Content Include="Assets\FinalDesign1\Munu-Page.png" />
+    <Content Include="Assets\FinalDesign1\Topic-Page.png" />
     <Content Include="Assets\Foods\apple_image.jpg" />
     <Content Include="Assets\Foods\banana_image.jpg" />
     <Content Include="Assets\Foods\grape_image.jpg" />
     <Content Include="Assets\Foods\orange_image.jpg" />
     <Content Include="Assets\Foods\pepper_image.jpg" />
     <Content Include="Assets\Foods\pineapple_image.jpg" />
+    <Content Include="Assets\Game\bgGame1.jpg" />
+    <Content Include="Assets\Game\bgGame2.png" />
+    <Content Include="Assets\Game\BorderProfile.png" />
+    <Content Include="Assets\Game\endOfGameFrame.png" />
+    <Content Include="Assets\Game\FrameGameITem.jpg" />
     <Content Include="Assets\Game\Lv10\blackcar_image.jpg" />
     <Content Include="Assets\Game\Lv10\bluecar_image.jpg" />
     <Content Include="Assets\Game\Lv10\greencar_image.jpeg" />
     <Content Include="Assets\Game\Lv10\orangecar_image.jpg" />
     <Content Include="Assets\Game\Lv10\redcar_image2.jpg" />
     <Content Include="Assets\Game\Lv10\whitecar_image.jpg" />
+    <Content Include="Assets\Game\PictureProfile.png" />
+    <Content Include="Assets\Game\question.png" />
+    <Content Include="Assets\Game\Rank.png" />
     <Content Include="Assets\greenblock.png" />
     <Content Include="Assets\icon\back.png" />
     <Content Include="Assets\icon\back.svg" />
+    <Content Include="Assets\icon\loading.gif" />
+    <Content Include="Assets\icon\loading.svg" />
     <Content Include="Assets\icon\next-3-icon.png" />
     <Content Include="Assets\icon\previous-3-icon.png" />
+    <Content Include="Assets\Logo\Accelrys.jpg" />
+    <Content Include="Assets\Logo\back.png" />
+    <Content Include="Assets\Logo\back2.png" />
     <Content Include="Assets\Logo\Circle.png" />
     <Content Include="Assets\Logo\dgaLogo.png" />
+    <Content Include="Assets\Logo\movieBg.png" />
     <Content Include="Assets\Mp4\demo.mp4" />
+    <Content Include="Assets\Mp4\fishes.wmv" />
     <Content Include="Assets\mystery_image.jpg" />
     <Content Include="Assets\PictureProfile\mystery_image.jpg" />
     <Content Include="Assets\PlaceholderImage.png" />
@@ -519,6 +617,9 @@
     <Content Include="Assets\SampleData\SamplePhoto7.png" />
     <Content Include="Assets\SampleData\SamplePhoto8.png" />
     <Content Include="Assets\SampleData\SamplePhoto9.png" />
+    <Content Include="Assets\Service\circle1.png" />
+    <Content Include="Assets\Service\circle2.png" />
+    <Content Include="Assets\Service\circle3.png" />
     <Content Include="Assets\SoundEffects\card_flip.mp3" />
     <Content Include="Assets\SoundEffects\correct_match.mp3" />
     <Content Include="Assets\SoundEffects\incorrect_match.mp3" />
@@ -530,12 +631,75 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Views\AppConfig\Settings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\MallKioskDemoConfig\MallKioskDemoSettings.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+    <Content Include="Assets\Fonts\nKKU-Go6G5tXcr5aOhWnVaE.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Fonts\nKKU-Go6G5tXcr5aOhWzVaF5NQ.woff2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Fonts\Kanit-Black.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Fonts\Kanit-BlackItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Fonts\Kanit-Bold.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Fonts\Kanit-BoldItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Fonts\Kanit-ExtraBold.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Fonts\Kanit-ExtraBoldItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Fonts\Kanit-ExtraLight.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Fonts\Kanit-ExtraLightItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Fonts\Kanit-Italic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Fonts\Kanit-Light.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Fonts\Kanit-LightItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Fonts\Kanit-Medium.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Fonts\Kanit-MediumItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Fonts\Kanit-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Fonts\Kanit-SemiBold.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Fonts\Kanit-SemiBoldItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Fonts\Kanit-Thin.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Fonts\Kanit-ThinItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="KiosBoot_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -557,7 +721,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Temp\" />
-    <Folder Include="NewFolder1\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -82,5 +82,17 @@ namespace KiosBoot
             _effectPlayer.Source = MediaSource.CreateFromUri(pathUri);
             _effectPlayer.MediaPlayer.Play();
         }
+
+
+                public static void PlaySound(string url)
+        {
+            //_effectPlayer.Open(new Uri(Path.Combine(Environment.CurrentDirectory, "Assets/SoundEffects/" + fileName)));
+            //_effectPlayer.Play();
+
+            Uri pathUri = new Uri(url);
+            _effectPlayer.Source = MediaSource.CreateFromUri(pathUri);
+            _effectPlayer.MediaPlayer.Play();
+        }
+
     }
 }

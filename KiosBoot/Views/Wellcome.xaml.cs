@@ -21,6 +21,10 @@ using Windows.UI.Xaml.Navigation;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using Windows.UI.Composition;
 using Microsoft.Toolkit.Uwp.UI.Animations;
+using KiosBoot.ViewModels;
+using Newtonsoft.Json;
+using KiosBoot.Helpers.Config;
+using KiosBoot.Helpers.Server;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace KiosBoot.Views
@@ -104,7 +108,31 @@ namespace KiosBoot.Views
                 if (FaceObjct.faceIdIdentification != null)
                 {
                     string Name = FaceObjct.faceIdIdentification.Person.Name;
-                    NameInformation.Text = Name;
+                    //NameInformation.Text = Name;
+
+
+                    var api = new ApiData();
+
+
+                    string url = DataConfig.ApiDomain() + "/api/collections/get/FaceRecognition";
+                    var result = Task.Run(() => api.GetDataFromServerAsync(url)).Result;
+                    FaceModel faceSet = JsonConvert.DeserializeObject<FaceModel>(result);
+
+
+                    foreach (var item in faceSet.Entries)
+                    {
+                        if (item.Id == Name)
+                        {
+                            //
+
+                            FaceObjct.faceIdIdentification.Person.Name = item.Name;
+                            NameInformation.Text = item.Name;
+                            //Play Sounde
+                            string urlSound = DataConfig.StorageUploadsUrl()+  item.Sound.Path;
+                            SoundManager.PlaySound(urlSound);
+                        }
+                    }
+                 
                 }
 
 

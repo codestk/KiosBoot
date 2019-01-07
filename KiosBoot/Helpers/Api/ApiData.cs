@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KiosBoot.Helpers.Config;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace KiosBoot.Helpers.Server
             //client.BaseAddress = new Uri("http://localhost:8080");
             //HttpResponseMessage response = client.GetAsync("/cockpit/api/collections/get/GameTypeA").Result;
 
-
+            string _url = url + "?token=" + DataConfig.token();
             //Create an HTTP client object
             Windows.Web.Http.HttpClient httpClient = new Windows.Web.Http.HttpClient();
 
@@ -42,7 +43,7 @@ namespace KiosBoot.Helpers.Server
             }
 
             //Uri requestUri = new Uri("http://localhost:8080/cockpit/api/collections/get/GameTypeA");
-            Uri requestUri = new Uri(url);
+            Uri requestUri = new Uri(_url);
 
             //Send the GET request asynchronously and retrieve the response as a string.
             Windows.Web.Http.HttpResponseMessage httpResponse = new Windows.Web.Http.HttpResponseMessage();
@@ -85,6 +86,8 @@ namespace KiosBoot.Helpers.Server
 
             string jsonString = data;
 
+            string _url=url+"?token = " + DataConfig.token();
+
 
             var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
@@ -94,7 +97,7 @@ namespace KiosBoot.Helpers.Server
             client.BaseAddress = new Uri("http://localhost:64195/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = await client.PutAsync(url, content);
+            HttpResponseMessage response = await client.PutAsync(_url, content);
             return "Save";
 
 

@@ -25,7 +25,8 @@ namespace KiosBoot.ViewModels
             //string url = DataConfig.ApiDomain() + "/cockpit/api/collections/save/ScrollList?token=account-e19e9ca6f60d33e270f5bdfc460480";
 
 
-            string url = DataConfig.ApiDomain() + "/api/collections/save/ScrollList?token="+DataConfig.token();
+            //string url = DataConfig.ApiDomain() + "/api/collections/save/ScrollList?token="+DataConfig.token();
+            string url = DataConfig.ApiDomain() + "/api/collections/save/ScrollList";
 
             ApiData api = new ApiData();
 

@@ -55,6 +55,7 @@ using KiosBoot.Helpers.Profile;
 using KiosBoot.Helpers.Server;
 using KiosBoot.ViewModels;
 using KiosBoot.Helpers.Config;
+using KiosBoot.Views.Face;
 
 
 
@@ -100,7 +101,7 @@ namespace KiosBoot.Views
             if (args.KeyCode == 9) //tab
             {
                 // your code here fore Escape key
-                this.Frame.Navigate(typeof(FaceIdentificationSetup), null, new EntranceNavigationTransitionInfo());
+                this.Frame.Navigate(typeof(ManageFace), null, new EntranceNavigationTransitionInfo());
             }
 
         }
@@ -283,7 +284,7 @@ namespace KiosBoot.Views
                 for (double i = 100; i >= 0; i -= decrementPerSecond)
                 {
                     this.resultDisplayTimerUI.Value = i;
-                    await Task.Delay(1000);
+                  //  await Task.Delay(1000);
                 }
 
                 this.photoCaptureBalloonHost.Opacity = 0;

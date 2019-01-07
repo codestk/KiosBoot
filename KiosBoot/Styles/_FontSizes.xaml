@@ -5,4 +5,9 @@
     <x:Double x:Key="LargeFontSize">28</x:Double>
     <x:Double x:Key="MediumFontSize">16</x:Double>
     <x:Double x:Key="BigFontSize">50</x:Double>
+    <Style x:Name="MainFont"  TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="ms-appx:///Assets/Fonts/#kanit">
+        
+        </Setter>
+    </Style>
 </ResourceDictionary>

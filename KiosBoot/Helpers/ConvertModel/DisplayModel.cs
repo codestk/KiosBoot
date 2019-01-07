@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace KiosBoot.Helpers.ConvertModel
 {
+
     public partial class DisplayModel
     {
         [JsonProperty("fields")]
@@ -21,8 +22,14 @@ namespace KiosBoot.Helpers.ConvertModel
 
     public partial class Entry
     {
-        [JsonProperty("Date")]
-        public DateTimeOffset Date { get; set; }
+        [JsonProperty("DateFrom")]
+        public DateTimeOffset DateFrom { get; set; }
+
+
+        [JsonProperty("DateTo")]
+        public DateTimeOffset DateTo { get; set; }
+
+      
 
         [JsonProperty("Topic")]
         public string Topic { get; set; }
@@ -31,7 +38,7 @@ namespace KiosBoot.Helpers.ConvertModel
         public string Text { get; set; }
 
         [JsonProperty("Photo")]
-        public Logo Photo { get; set; }
+        public Photo[] Photo { get; set; }
 
         [JsonProperty("Logo")]
         public Logo Logo { get; set; }
@@ -40,8 +47,18 @@ namespace KiosBoot.Helpers.ConvertModel
         public Logo Vdo { get; set; }
 
      
-    }
+     
+  
 
+        [JsonProperty("_pid")]
+        public object Pid { get; set; }
+
+        [JsonProperty("_o")]
+        public long O { get; set; }
+
+        [JsonProperty("children")]
+        public object[] Children { get; set; }
+    }
 
     public partial class Logo
     {
@@ -106,6 +123,24 @@ namespace KiosBoot.Helpers.ConvertModel
         public string Id { get; set; }
     }
 
+    public partial class Photo
+    {
+        [JsonProperty("meta")]
+        public Meta Meta { get; set; }
+
+        [JsonProperty("path")]
+        public Uri Path { get; set; }
+    }
+
+    public partial class Meta
+    {
+        [JsonProperty("title")]
+        public string Title { get; set; }
+
+        [JsonProperty("asset")]
+        public string Asset { get; set; }
+    }
+
     public partial class Fields
     {
         [JsonProperty("Date")]
@@ -142,3 +177,10 @@ namespace KiosBoot.Helpers.ConvertModel
         public object[] Options { get; set; }
     }
 }
+
+
+
+
+
+
+

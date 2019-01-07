@@ -1,0 +1,212 @@
+﻿<Page
+    x:Class="KiosBoot.Views.CardPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:KiosBoot.Views.connectAnimation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:Media="using:Microsoft.Xaml.Interactions.Media"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:local1="using:AppUIBasics.ControlPages"
+    xmlns:richText="using:RichTextControls"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Storyboard x:Name="AutoFlipView" RepeatBehavior="Forever" AutoReverse="True">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Selector.SelectedIndex)" Storyboard.TargetName="flipView1">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>0</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:1">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>1</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:2">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>2</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:3">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>2</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <DataTemplate x:Key="PhotoTemplate">
+            <Grid>
+                <Image HorizontalAlignment="Center"
+               Stretch="Uniform">
+                    <Image.Source>
+                        <BitmapImage UriSource="{Binding image}" />
+                        <!--<BitmapImage UriSource="https://notebookspec.com/nbs/upload_notebook/20180509-113115_c.jpg"  />-->
+
+                   
+                    </Image.Source>
+                    
+                </Image>
+           
+             
+
+                <!--<MediaElement x:Name="mpe"   Height="800" Margin="0,50,0,0" Source="ms-appx:///Assets/Mp4/fishes.wmv"
+                    MaxWidth="1500"  IsLooping="True"  
+                    AutoPlay="True" />-->
+                <Border VerticalAlignment="Bottom">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0,1">
+                            <GradientStop Offset="0" Color="Transparent" />
+                            <GradientStop Offset="1" Color="Transparent" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <TextBlock Margin="5,20,5,5"
+                     VerticalAlignment="Bottom"
+                     Foreground="White" FontFamily="Tahoma" FontSize="52" TextAlignment="Center"
+                     Text="{Binding IName}" />
+                </Border>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid>
+        <!--<Border Name="BorderPic" Height="100"    Background="DarkBlue"
+         BorderThickness="0" BorderBrush="White" CornerRadius="50,100,50,50">-->
+
+        <!--</Border>-->
+        <Grid.Background>
+            <ImageBrush ImageSource="{StaticResource MainBg}" Stretch="Fill" />
+        </Grid.Background>
+        <!--<Image Source="ms-appx:///Assets/logo/movieBg.png" Margin="0,0,20,0" Width="1150"  ></Image>-->
+        <Canvas x:Name="Panel1"
+                  Height="700"
+                    Width="1000"
+                    Margin="0,150,0,200">
+       
+
+         
+
+                    <controls:RotatorTile x:Name="Tile1"
+                              Width="1000"   Height="650"
+                                
+                                RotationDelay="0:0:10"
+                                ExtraRandomDuration="0:0:0"
+                                Direction="Up" 
+                                ItemTemplate="{StaticResource PhotoTemplate}" />
+
+
+
+            <MediaElement x:Name="mpe"    Canvas.Left="-50" Canvas.Top="30"   
+                      IsLooping="True" Height="650"  Width="auto"  PosterSource="ms-appx:///Assets/icon/loading.gif"
+                    AutoPlay="True" VerticalAlignment="Center"     />
+           
+            <!--<MediaElement x:Name="mpe"   Height="600"  
+                   IsLooping="True"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    AutoPlay="True"  PosterSource="ms-appx:///Assets/icon/loading.gif" />-->
+         
+            <!--<MediaElement x:Name="mpe"   Height="800" Margin="0,50,0,0" Source="ms-appx:///Assets/Mp4/fishes.wmv"
+                    MaxWidth="1500"  IsLooping="True"  
+                    AutoPlay="True" />-->
+            <!--<MediaElement x:Name="mpe"   Height="800" Margin="0,50,0,0" Source="ms-appx:///Assets/Mp4/fishes.wmv"
+                    MaxWidth="1500"  IsLooping="True"  
+                    AutoPlay="True" />-->
+
+
+            
+                <TextBlock VerticalAlignment="Top" Margin="0,10,0,10"
+                       Text="{Binding ElementName=Tile1, Path=CurrentItem.Title}"
+                       TextWrapping="Wrap" />
+ 
+        </Canvas>
+        <GridView x:Name="collection" IsItemClickEnabled="True" ItemClick="TipsGrid_ItemClick" HorizontalAlignment="Center" UseLayoutRounding="False">
+
+            <GridView.ItemContainerStyle>
+                <Style BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem">
+                    <Style.Setters>
+                        <Setter Property="Margin" Value="12" />
+                    </Style.Setters>
+                </Style>
+            </GridView.ItemContainerStyle>
+            <GridView.ItemTemplate>
+                <DataTemplate  x:DataType="local1:CustomDataObject">
+                    <Grid x:Name="connectedElement"   Width="1500">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="100" />
+                        </Grid.RowDefinitions>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="900">
+                            <!--<MediaElement Source="ms-appx:///Assets/Mp4/fishes.wmv" Height="Auto"
+                    MaxWidth="1500"  IsLooping="True"
+                    AutoPlay="True" />-->
+
+                            <!--<StackPanel x:Name="Panel1"
+                    Grid.Column="0"
+                    Width="400"
+                    Margin="0,0,20,0">
+                                <controls1:RotatorTile x:Name="Tile1"
+                                Height="200"
+                                Background="LightGray"
+                                RotationDelay="0:0:3"
+                                ExtraRandomDuration="0:0:3"
+                                Direction="Up"
+                                ItemTemplate="{StaticResource PhotoTemplate}" />
+                                <Border Height="75"
+                  Margin="20,20,20,20"
+                  Padding="5">
+                                    <TextBlock VerticalAlignment="Top"
+                       Text="{Binding ElementName=Tile1, Path=CurrentItem.Title}"
+                       TextWrapping="Wrap" />
+                                </Border>
+                            </StackPanel>-->
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="1000"  Width="1500"  Background="Cornsilk"  Grid.Row="1">
+
+                            <TextBlock x:Name="HeadText" Text="{Binding Title}"  FontFamily="Tahoma" Foreground="Orange" FontSize="40" HorizontalAlignment="Center"></TextBlock>
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+
+        <Grid x:Name="SmokeGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed" Canvas.ZIndex="99">
+            <Grid.Background>
+                <SolidColorBrush Color="{ThemeResource SystemChromeAltHighColor}" Opacity="0.8" />
+            </Grid.Background>
+            <Grid x:Name="destinationElement" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1500" Height="1080" BorderThickness="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center"  Height="100" Padding="0,20,0,20" Background="White">
+                    <Image Source="https://www.dga.or.th/website/images/2018/DGA_Head_bqscWUZ.png"></Image>
+                    <!--<TextBlock Text="Header" Style="{ThemeResource HeaderTextBlockStyle}" Margin="12" VerticalAlignment="Center" />-->
+                    <Button Click="BackButton_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Height="40" Width="40" Margin="5"
+                            ToolTipService.ToolTip="Close" AutomationProperties.Name="Close">
+                        <Button.Content>
+                            <SymbolIcon Symbol="Clear" />
+                        </Button.Content>
+                    </Button>
+                </Grid>
+                <GridView  HorizontalAlignment="Stretch"  Padding="50" VerticalAlignment="Stretch" Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}" Grid.Row="1">
+
+                    <ScrollViewer>
+                        <!--<WebView Source="http://www.javascriptthai.com" Width="1500" Height="Auto"></WebView>-->
+                        <richText:HtmlTextBlock x:Name="HtmlPopupContent" Html="" />
+                    </ScrollViewer>
+                </GridView>
+            </Grid>
+        </Grid>
+
+        <Grid/>
+        <Button x:Name="back" Content="" HorizontalAlignment="Right"  Style="{StaticResource CircleBack}"  VerticalAlignment="Bottom" Height="200" Width="200"  FontFamily="Tahoma" FontWeight="Bold" Click="Back_Click" Margin="0,0,-56,-44">
+            <Button.Background>
+                <ImageBrush ImageSource="{StaticResource backbtnImageSource}" Stretch="Uniform"/>
+            </Button.Background>
+
+        </Button>
+    </Grid>
+</Page>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KiosBoot.Helpers.Config;
+using KiosBoot.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -79,6 +81,11 @@ namespace KiosBoot.Model
 
         public string video { get; set; }
 
+        public string Topic_Heading { get; set; }
+        public string Topic_Text { get; set; }
+        public string Topic_Vdo { get; set; }
+        public string Topic_Photo { get; set; }
+
         #endregion Properties
 
         public Contact()
@@ -107,14 +114,51 @@ namespace KiosBoot.Model
             };
         }
 
-        public static ObservableCollection<Contact> GetContacts(int numberOfContacts)
+        public static ObservableCollection<Contact> GetContacts(TopicDetailas numberOfContacts)
         {
             ObservableCollection<Contact> contacts = new ObservableCollection<Contact>();
 
-            for (int i = 0; i < numberOfContacts; i++)
+            foreach (var item in numberOfContacts.Entries)
             {
-                contacts.Add(GetNewContact());
+                Contact Ct = new Contact();
+                Ct.FirstName = "firstName";
+                Ct.LastName = item.TopicHeading.ToString(); //SubTitle
+                Ct.Biography = item.TopicText;
+
+
+                Ct.name = item.TopicId ;  //Tile
+                Ct.Position = item.TopicHeading.ToString();
+          
+
+
+                string PhotoPAth = "";
+                if (item.TopicPhoto  != null)
+                {
+                    PhotoPAth =  DataConfig.StorageUploadsUrl() + item.TopicPhoto.Path;
+
+                    Ct.image = PhotoPAth;
+                }
+
+                string vdoPAth = "";
+                if (item.TopicVdo != null)
+                {
+                    vdoPAth =DataConfig.StorageUploadsUrl() + item.TopicVdo.Path;
+
+                    Ct.video = vdoPAth;
+                }
+              
+
+
+              
+                Ct.video = vdoPAth;
+
+                contacts.Add(Ct);
             }
+
+            //for (int i = 0; i < numberOfContacts; i++)
+            //{
+            //    contacts.Add(GetNewContact());
+            //}
 
             //Contact c1 = new Contact();
             //c1.firstName = "Product 1";
@@ -131,12 +175,10 @@ namespace KiosBoot.Model
             //c2.Biography = "เปิดตัวแรงส่งท้ายปีกับ ASUS TUF Gaming FX505 ที่เป็นการต่อยอดมาจาก ASUS TUF Gaming FX504 รุ่นก่อนหน้าที่ประสบความสำเร็จเป็นอย่างดี จากความคุ้มค่าที่ตัวเครื่องมอบให้ รวมถึงการระบายความร้อนที่ยอดเยี่ยม ไม่แปลกที่หลายร้านของหมดอยากจะได้ทีต้องสั่งจองล่วงหน้ากันทีเดียว และแน่นอนว่า FX505 ก็ถือเป็นรุ่นที่พัฒนาอัปเกรดจาก FX504 ขึ้นมาอีกขั้น โดยดีไซน์ยังคงเอกลักษณ์แบบเดิม เพิ่มเติมคือขอบจอบางตามสมัยนิยม และวัสดุแข็งแรงขึ้น";
             //c2.name = "Product 2";
             //c2.Position = "7273662773690";
-            
-            
+
             //c2.video = "ms-appx:///Assets/Mp4/demo.mp4";//"ms-appx:///Assets/Mp4/Demo.mkv";
             //c2.image = " ";
             //contacts.Add(c2);
-
 
             //Contact c3 = new Contact();
             //c3.firstName = "Product 1";
@@ -157,7 +199,6 @@ namespace KiosBoot.Model
             //c4.image = "ms-appx:///Assets/Product1/p4.jpg";
             //contacts.Add(c4);
 
-
             //Contact c5 = new Contact();
             //c5.firstName = "Product 1";
             //c5.FirstName = "Product 1";
@@ -168,32 +209,31 @@ namespace KiosBoot.Model
             //c5.video = "";
             //contacts.Add(c5);
 
-
             return contacts;
         }
 
-        public static ObservableCollection<GroupInfoList> GetContactsGrouped(int numberOfContacts)
-        {
-            ObservableCollection<GroupInfoList> groups = new ObservableCollection<GroupInfoList>();
+        //public static ObservableCollection<GroupInfoList> GetContactsGrouped(int numberOfContacts)
+        //{
+        //    ObservableCollection<GroupInfoList> groups = new ObservableCollection<GroupInfoList>();
 
-            var query = from item in GetContacts(numberOfContacts)
-                        group item by item.LastName.Substring(0, 1).ToUpper() into g
-                        orderby g.Key
-                        select new { GroupName = g.Key, Items = g };
+        //    var query = from item in GetContacts(numberOfContacts)
+        //                group item by item.LastName.Substring(0, 1).ToUpper() into g
+        //                orderby g.Key
+        //                select new { GroupName = g.Key, Items = g };
 
-            foreach (var g in query)
-            {
-                GroupInfoList info = new GroupInfoList();
-                info.Key = g.GroupName;
-                foreach (var item in g.Items)
-                {
-                    info.Add(item);
-                }
-                groups.Add(info);
-            }
+        //    foreach (var g in query)
+        //    {
+        //        GroupInfoList info = new GroupInfoList();
+        //        info.Key = g.GroupName;
+        //        foreach (var item in g.Items)
+        //        {
+        //            info.Add(item);
+        //        }
+        //        groups.Add(info);
+        //    }
 
-            return groups;
-        }
+        //    return groups;
+        //}
 
         public override string ToString()
         {

@@ -31,7 +31,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // 
 
+using KiosBoot.Helpers.Config;
+using KiosBoot.Helpers.Server;
+using KiosBoot.ViewModels;
+using Microsoft.ProjectOxford.Face;
 using Microsoft.ProjectOxford.Face.Contract;
+using Newtonsoft.Json;
 using ServiceHelpers;
 using System;
 using System.Collections.Generic;
@@ -39,14 +44,17 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
@@ -64,7 +72,26 @@ namespace KiosBoot.Views
 
         public FaceIdentificationSetup()
         {
+
+
             this.InitializeComponent();
+
+
+
+            this.Loaded += (sender, e) =>
+            {
+                // Keyboard and mouse navigation only apply when occupying the entire window
+
+                // Listen to the window directly so focus isn't required
+                //Window.Current.CoreWindow.Dispatcher.AcceleratorKeyActivated +=
+                //    CoreDispatcher_AcceleratorKeyActivated;
+                //Window.Current.CoreWindow.PointerPressed +=
+                //    this.CoreWindow_PointerPressed;
+                this.Frame.Navigate(typeof(AutomaticPhotoCapturePage), null, new EntranceNavigationTransitionInfo());
+
+            };
+
+
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
@@ -73,8 +100,25 @@ namespace KiosBoot.Views
 
             await this.LoadPersonGroupsFromService();
 
+
+            //LoadAndTrainServer();
+            //await DeletePersonGroupAsync();
+
+
+
+            await LoadAndTrainServerAsync();
+            // await TrainGroupsAsync();
+
+
+        
+            // this.Frame.Navigate(typeof(AutomaticPhotoCapturePage), null, new EntranceNavigationTransitionInfo());
             base.OnNavigatedTo(e);
+
+             
         }
+
+ 
+
 
         protected async override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
@@ -101,6 +145,9 @@ namespace KiosBoot.Views
 
                 if (this.personGroupsListView.Items.Any())
                 {
+                    //Set Group 1
+                    CurrentPersonGroup = PersonGroups[0];
+
                     this.personGroupsListView.SelectedIndex = 0;
                 }
             }
@@ -110,7 +157,150 @@ namespace KiosBoot.Views
             }
 
             this.progressControl.IsActive = false;
+
+
+
+       
+
+
+
         }
+
+
+
+
+     
+
+
+
+        async Task LoadAndTrainServerAsync()
+        {
+
+            //http://localhost:8080/cockpit/api/collections/get/FaceRecognition
+
+            var api = new ApiData();
+
+
+            string url = DataConfig.ApiDomain() + "/api/collections/get/FaceRecognition";
+            var result = Task.Run(() => api.GetDataFromServerAsync(url)).Result;
+            FaceModel faceSet = JsonConvert.DeserializeObject<FaceModel>(result);
+
+
+
+
+            
+
+
+
+
+            List<string> errors = new List<string>();
+
+            try
+            {
+                //foreach (var folder in await autoTrainFolder.GetFoldersAsync())
+                foreach (var folder in   faceSet.Entries)
+
+                {
+                    //string personName = Util.CapitalizeString(folder.Name.Trim());
+                    string personName = Util.CapitalizeString(folder.Id.Trim());
+                    if (string.IsNullOrEmpty(personName) || this.PersonsInCurrentGroup.Any(p => p.Name == personName))
+                    {
+                        continue;
+                    }
+
+                    CreatePersonResult newPersonResult = await FaceServiceHelper.CreatePersonAsync(this.CurrentPersonGroup.PersonGroupId, personName);
+                    Person newPerson = new Person { Name = personName, PersonId = newPersonResult.PersonId };
+
+                    foreach (var photoFile in   folder.Picture)
+                    {
+
+                        StorageFolder appInstalledFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+                        //StorageFolder assetsFolder = await appInstalledFolder.GetFolderAsync("Temp");
+                        //StorageFolder Temp = await Task.Run(() => appInstalledFolder.GetFolderAsync("Temp")).Result;
+
+                        StorageFolder Temp = await Task.Run(() => appInstalledFolder.GetFolderAsync("Assets")).Result;
+
+                        StorageFolder FaceProfile = await Temp.GetFolderAsync("FaceProfile");
+
+
+                        string nameImage = DateTime.Now.ToString("yyyyMMddHHmmss") + ".png";
+
+                        //StorageFolder aaaa = await FaceProfile.CreateFolderAsync("prasert");
+                        StorageFile tempFile = await FaceProfile.CreateFileAsync(nameImage, CreationCollisionOption.GenerateUniqueName);
+
+
+
+
+                     
+                        HttpClient client = new HttpClient();
+
+                        byte[] responseBytes = await client.GetByteArrayAsync(photoFile.Path.AbsoluteUri);
+
+                        var stream = await tempFile.OpenAsync(FileAccessMode.ReadWrite);
+
+                        using (var outputStream = stream.GetOutputStreamAt(0))
+                        {
+                            DataWriter writer = new DataWriter(outputStream);
+                            writer.WriteBytes(responseBytes);
+                            await writer.StoreAsync();
+                            await outputStream.FlushAsync();
+                        }
+
+
+
+
+
+
+
+                        try
+                        {
+                        
+                             await FaceServiceHelper.AddPersonFaceAsync(
+                              this.CurrentPersonGroup.PersonGroupId,
+                              newPerson.PersonId,
+                             imageStreamCallback: tempFile.OpenStreamForReadAsync,
+                               userData: newPerson.Name,
+                              targetFace: null);
+
+
+                            //await FaceServiceHelper.AddPersonFaceAsync(
+                            //    this.CurrentPersonGroup.PersonGroupId,
+                            //    newPerson.PersonId,
+                            //    //imageStreamCallback: photoFile.OpenStreamForReadAsync,
+                            //      imageStreamCallback: pho,
+                            //    userData: photoFile.Path.AbsoluteUri,
+                            //    targetFace: null);
+
+                            // Force a delay to reduce the chance of hitting API call rate limits 
+                            await Task.Delay(250);
+                        }
+                        catch (Exception ex)
+                        {
+                            // errors.Add(photoFile.Path);
+
+                           // errors.Add(ex.ToString());
+                        }
+                    }
+
+                    this.needsTraining = true;
+
+                    this.PersonsInCurrentGroup.Add(newPerson);
+                }
+            }
+            catch (Exception ex)
+            {
+                await Util.GenericApiCallExceptionHandler(ex, "Failure processing the folder and files");
+            }
+
+            if (errors.Any())
+            {
+                await new MessageDialog(string.Join("\n", errors), "Failure importing the folllowing photos").ShowAsync();
+            }
+
+            this.progressControl.IsActive = false;
+           
+        }
+
 
         private async void OnAddPersonGroupButtonClicked(object sender, RoutedEventArgs e)
         {
@@ -221,7 +411,7 @@ namespace KiosBoot.Views
             await this.AddPerson(args.ChosenSuggestion != null ? args.ChosenSuggestion.ToString() : args.QueryText);
         }
 
-        private async Task AddPerson(string name)
+        public async Task AddPerson(string name)
         {
             name = Util.CapitalizeString(name);
 

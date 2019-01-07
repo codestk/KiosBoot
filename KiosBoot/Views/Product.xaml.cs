@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using KiosBoot.Helpers.Config;
+using KiosBoot.Helpers.Instance;
+using KiosBoot.Helpers.Server;
+using KiosBoot.Models;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
@@ -28,13 +23,54 @@ namespace KiosBoot.Views
             this.InitializeComponent();
 
             myStoryboard.Begin();
+
+       
+        }
+ 
+
+
+        public void CallData()
+        {
+
+
+            //string url = DataConfig.ApiDomain() + "/cockpit/api/collections/get/GameTypeA";
+            ////string url = DataConfig.ApiDomain() + "/cockpit/api/collections/get/GameTypeB";
+            ////string url = DataConfig.ApiDomain() + "/cockpit/api/collections/get/GameTypeC";
+
+            //for 1
+           
+            ShowTopic(btnTopic1, "1");
+            //ShowTopic(btnTopic2, "2");
+            //ShowTopic(btnTopic3, "3");
+            //ShowTopic(btnTopic4, "4");
+            //ShowTopic(btnTopic5, "5");
+            //ShowTopic(btnTopic6, "6");
+            //ShowTopic(btnTopic7, "7");
+            //ShowTopic(btnTopic8, "8");
+        }
+
+        private void ShowTopic(Button btnTopic, string item)
+        {
+            var api = new ApiData();
+            string url = TopicInstance.GetCollectionDefinationUrl(item);
+            var result = Task.Run(() => api.GetDataFromServerAsync(url)).Result;
+            Topic topic = JsonConvert.DeserializeObject<Topic>(result);
+
+            if (topic.ItemsCount == 0)
+            {
+                btnTopic.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                btnTopic.Content = topic.Description;
+                btnTopic.Visibility = Visibility.Visible;
+            }
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Menu), null, new DrillInNavigationTransitionInfo());
         }
-
 
         #region Effecft
 
@@ -52,6 +88,8 @@ namespace KiosBoot.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+
+            CallData();
             //if (e.NavigationMode == NavigationMode.Back)
             //    EntranceAnimation.Edge = EdgeTransitionLocation.Top;
 
@@ -62,61 +100,57 @@ namespace KiosBoot.Views
                 animation.TryStart(circle);
             }
 
-
             base.OnNavigatedTo(e);
-           
         }
 
-
-
-
-        #endregion
+        #endregion Effecft
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            DemoRedirect();
+            switch ((sender as Button).Name)
+            {
+                case "btnTopic1":
+
+                    TopicInstance.CurrentTopic = 1;
+
+                    DemoRedirect();
+                    break;
+                case "btnTopic2":
+                    TopicInstance.CurrentTopic = 2;
+                    DemoRedirect();
+                    break;
+                case "btnTopic3":
+                    TopicInstance.CurrentTopic = 3;
+                    DemoRedirect();
+                    break;
+                case "btnTopic4":
+                    TopicInstance.CurrentTopic = 4;
+                    DemoRedirect();
+                    break;
+                case "btnTopic5":
+                    TopicInstance.CurrentTopic = 5;
+                    DemoRedirect();
+                    break;
+                case "btnTopic6":
+                    TopicInstance.CurrentTopic = 6;
+                    DemoRedirect();
+                    break;
+                case "btnTopic7":
+                    TopicInstance.CurrentTopic = 7;
+                    DemoRedirect();
+                    break;
+                case "btnTopic8":
+                    TopicInstance.CurrentTopic = 8;
+                    DemoRedirect();
+                    break;
+                default:
+                    break;
+            }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            DemoRedirect();
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            DemoRedirect();
-        }
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            DemoRedirect();
-        }
-
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            DemoRedirect();
-        }
-
-        private void Button_Click_5(object sender, RoutedEventArgs e)
-        {
-            DemoRedirect();
-        }
-
-        private void Button_Click_6(object sender, RoutedEventArgs e)
-        {
-            DemoRedirect();
-        }
-
-        private void Button_Click_7(object sender, RoutedEventArgs e)
-        {
-            DemoRedirect();
-        }
-
-        void DemoRedirect()
+        private void DemoRedirect()
         {
             this.Frame.Navigate(typeof(MasterDetailSelection), null, new DrillInNavigationTransitionInfo());
-
         }
-
     }
 }

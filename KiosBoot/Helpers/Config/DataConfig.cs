@@ -37,7 +37,7 @@ namespace KiosBoot.Helpers.Config
             return "a12c7b4c6d27fd9d204588d1ede416";
         }
 
-
+       
         public static string ProfileFolder()
         {
             return "ms-appx:///Assets/PictureProfile/";

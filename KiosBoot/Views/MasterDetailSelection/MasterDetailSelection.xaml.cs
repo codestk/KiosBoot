@@ -1,8 +1,12 @@
-﻿using KiosBoot.Model;
+﻿using KiosBoot.Helpers.Instance;
+using KiosBoot.Helpers.Server;
+using KiosBoot.Model;
+using KiosBoot.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -17,28 +21,63 @@ namespace KiosBoot.Views
     {
         private Contact selectedContact;
 
-        private ObservableCollection<Contact> Contacts;
+        public ObservableCollection<Contact> Contacts;
 
         public MasterDetailSelection()
         {
             this.InitializeComponent();
-            this.Loaded += OnLoaded;
-          
+            //this.Loaded += OnLoaded;
+
             // Get the contacts from a Service
             // Remember to enable the NavigationCacheMode of this Page to avoid
-            // load the data every time user navigates back and forward.    
-            Contacts = Contact.GetContacts(5);
-            if (Contacts.Count > 0)
+            // load the data every time user navigates back and forward.
+          
+
+       
+        }
+
+
+        void BindData() {
+            string url = TopicInstance.GetDataCollectionUrl();
+            var api = new ApiData();
+            var result = Task.Run(() => api.GetDataFromServerAsync(url)).Result;
+
+            try
             {
-                MasterListView.ItemsSource = Contacts;
+                if (result != null)
+                {
+
+
+                    TopicDetailas topic = JsonConvert.DeserializeObject<TopicDetailas>(result);
+
+                    Contacts = Contact.GetContacts(topic);
+                    if (Contacts.Count > 0)
+                    {
+                        MasterListView.ItemsSource = Contacts;
+                        //MyItem selectedItem = MasterListView.Items[0] as MyItem;
+                        //MasterListView.SelectedItem[0] =  ;
+
+                        init();
+        
+                        }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
 
 
-           
+ 
+
         }
+
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-           
+            BindData();
             // Details view can remove an item from the list.
             if (e.Parameter as string == "Delete")
             {
@@ -46,14 +85,16 @@ namespace KiosBoot.Views
             }
             base.OnNavigatedTo(e);
         }
-        private void OnLoaded(object sender, RoutedEventArgs e)
+
+
+
+        void init()
         {
-            if (selectedContact == null && Contacts.Count > 0)
-            {
-                selectedContact = Contacts[0];
+          
+             
                 MasterListView.SelectedIndex = 0;
-            }
-            // If the app starts in narrow mode - showing only the Master listView - 
+   
+            // If the app starts in narrow mode - showing only the Master listView -
             // it is necessary to set the commands and the selection mode.
             if (PageSizeStatesGroup.CurrentState == NarrowState)
             {
@@ -61,7 +102,7 @@ namespace KiosBoot.Views
             }
             else if (PageSizeStatesGroup.CurrentState == WideState)
             {
-                // In this case, the app starts is wide mode, Master/Details view, 
+                // In this case, the app starts is wide mode, Master/Details view,
                 // so it is necessary to set the commands and the selection mode.
                 VisualStateManager.GoToState(this, MasterDetailsState.Name, true);
                 MasterListView.SelectionMode = ListViewSelectionMode.Extended;
@@ -72,6 +113,36 @@ namespace KiosBoot.Views
                 new InvalidOperationException();
             }
         }
+
+
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            if (selectedContact == null && Contacts.Count > 0)
+            {
+                selectedContact = Contacts[0];
+                MasterListView.SelectedIndex = 0;
+            }
+            // If the app starts in narrow mode - showing only the Master listView -
+            // it is necessary to set the commands and the selection mode.
+            if (PageSizeStatesGroup.CurrentState == NarrowState)
+            {
+                VisualStateManager.GoToState(this, MasterState.Name, true);
+            }
+            else if (PageSizeStatesGroup.CurrentState == WideState)
+            {
+                // In this case, the app starts is wide mode, Master/Details view,
+                // so it is necessary to set the commands and the selection mode.
+                VisualStateManager.GoToState(this, MasterDetailsState.Name, true);
+                MasterListView.SelectionMode = ListViewSelectionMode.Extended;
+                MasterListView.SelectedItem = selectedContact;
+            }
+            else
+            {
+                new InvalidOperationException();
+            }
+        }
+
         private void OnCurrentStateChanged(object sender, VisualStateChangedEventArgs e)
         {
             bool isNarrow = e.NewState == NarrowState;
@@ -92,9 +163,9 @@ namespace KiosBoot.Views
                 EntranceNavigationTransitionInfo.SetIsTargetElement(DetailContentPresenter, !isNarrow);
             }
         }
+
         private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-          
             if (PageSizeStatesGroup.CurrentState == WideState)
             {
                 if (MasterListView.SelectedItems.Count == 1)
@@ -116,7 +187,8 @@ namespace KiosBoot.Views
                 VisualStateManager.GoToState(this, MasterDetailsState.Name, true);
             }
         }
-        // ItemClick event only happens when user is a Master state. In this state, 
+
+        // ItemClick event only happens when user is a Master state. In this state,
         // selection mode is none and click event navigates to the details view.
         private void OnItemClick(object sender, ItemClickEventArgs e)
         {
@@ -124,7 +196,7 @@ namespace KiosBoot.Views
             selectedContact = e.ClickedItem as Contact;
             if (PageSizeStatesGroup.CurrentState == NarrowState)
             {
-                // Go to the details page and display the item 
+                // Go to the details page and display the item
                 Frame.Navigate(typeof(DetailsPage), selectedContact, new DrillInNavigationTransitionInfo());
             }
             //else
@@ -133,12 +205,15 @@ namespace KiosBoot.Views
                 EnableContentTransitions();
             }
         }
+
         private void EnableContentTransitions()
         {
             DetailContentPresenter.ContentTransitions.Clear();
             DetailContentPresenter.ContentTransitions.Add(new EntranceThemeTransition());
         }
+
         #region Commands
+
         private void AddItem(object sender, RoutedEventArgs e)
         {
             Contact c = Contact.GetNewContact();
@@ -150,10 +225,11 @@ namespace KiosBoot.Views
                 MasterListView.SelectedIndex = 0;
                 selectedContact = MasterListView.SelectedItem as Contact;
                 // Details view is collapsed, in case there is not items.
-                // You should show it just in case. 
+                // You should show it just in case.
                 DetailContentPresenter.Visibility = Visibility.Visible;
             }
         }
+
         private void DeleteItem(object sender, RoutedEventArgs e)
         {
             if (selectedContact != null)
@@ -173,6 +249,7 @@ namespace KiosBoot.Views
                 }
             }
         }
+
         private void DeleteItems(object sender, RoutedEventArgs e)
         {
             if (MasterListView.SelectedIndex != -1)
@@ -197,6 +274,7 @@ namespace KiosBoot.Views
                 }
             }
         }
+
         private void SelectItems(object sender, RoutedEventArgs e)
         {
             if (MasterListView.Items.Count > 0)
@@ -204,6 +282,7 @@ namespace KiosBoot.Views
                 VisualStateManager.GoToState(this, MultipleSelectionState.Name, true);
             }
         }
+
         private void CancelSelection(object sender, RoutedEventArgs e)
         {
             if (PageSizeStatesGroup.CurrentState == NarrowState)
@@ -215,8 +294,9 @@ namespace KiosBoot.Views
                 VisualStateManager.GoToState(this, MasterDetailsState.Name, true);
             }
         }
+
         private void ShowSplitView(object sender, RoutedEventArgs e)
-        { 
+        {
             // Clearing the cache
             int cacheSize = ((Frame)Parent).CacheSize;
             ((Frame)Parent).CacheSize = 0;
@@ -225,17 +305,13 @@ namespace KiosBoot.Views
             //MySamplesPane.SamplesSplitView.IsPaneOpen = !MySamplesPane.SamplesSplitView.IsPaneOpen;
         }
 
-        #endregion
-
-    
-
-      
+        #endregion Commands
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             int max = Contacts.Count;
             int a = MasterListView.SelectedIndex - 1;
-            if (a<0)
+            if (a < 0)
             {
                 a = 0;
             }
@@ -245,11 +321,10 @@ namespace KiosBoot.Views
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             int max = Contacts.Count;
-            int a = MasterListView.SelectedIndex +1;
-            if (a>=max)
+            int a = MasterListView.SelectedIndex + 1;
+            if (a >= max)
             {
                 a = max - 1;
-
             }
             MasterListView.SelectedIndex = a;
         }
