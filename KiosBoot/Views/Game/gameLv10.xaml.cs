@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -39,13 +40,14 @@ namespace KiosBoot.Views.Game
 
             //Menu.Visibility = Visibility.Collapsed;
             Game.Visibility = Visibility.Visible;
-           
-            ImageBrush imgBrush = new ImageBrush();
-            imgBrush.ImageSource = UserProfile.PictureProfile;
-            userPicture.Fill = imgBrush;
-            //userPicture.Source = UserProfile.PictureProfile;
 
-            //ScrollGame.AddScrollInfo(255, "http://www.javascriptthai.com/wp-content/uploads/2013/08/JavaScriptThai174_131-1.png");
+            if (UserProfile.PictureProfile != null)
+            {
+                ImageBrush imgBrush = new ImageBrush();
+                imgBrush.ImageSource = UserProfile.PictureProfile;
+                userPicture.Fill = imgBrush;
+            }
+              
         }
 
 
@@ -83,7 +85,10 @@ namespace KiosBoot.Views.Game
             //GameInstance.CurrentGame = null;
 
             SoundManager._mediaPlayer.MediaPlayer.Pause();
-            this.Frame.Navigate(typeof(Menu));
+            //this.Frame.Navigate(typeof(Menu));
+            GameInstance.CurrentGame.StopGame();
+            this.Frame.Navigate(typeof(Menu), null, new SlideNavigationTransitionInfo());
+
         }
 
 
@@ -101,6 +106,13 @@ namespace KiosBoot.Views.Game
 
             
             base.OnNavigatedTo(e);
+
+            ConnectedAnimation animation =
+      ConnectedAnimationService.GetForCurrentView().GetAnimation("forwardAnimation");
+            if (animation != null)
+            {
+                animation.TryStart(userPicture);
+            }
         }
 
 

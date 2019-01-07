@@ -71,7 +71,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS;CODE_ANALYSIS</DefineConstants>
     <NoWarn>NU1603;2008;</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -546,6 +546,7 @@
     <Content Include="Assets\Background\Bg_Sky_Menu.png" />
     <Content Include="Assets\Background\Poster.jpg" />
     <Content Include="Assets\Background\ScreenMaquuerFrame.png" />
+    <Content Include="Assets\Background\SlideScreen.png" />
     <Content Include="Assets\background_music.mp3" />
     <Content Include="Assets\black_background.jpg" />
     <Content Include="Assets\Cars\blackcar_image.jpg" />

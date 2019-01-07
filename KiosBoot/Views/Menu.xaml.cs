@@ -105,6 +105,10 @@ namespace KiosBoot.Views
             // the recommended Gravity configuration is default.
             // For custom animation, use:
             // animation.Configuration = new BasicConnectedAnimationConfiguration();
+
+            ConnectedAnimationService.GetForCurrentView()
+      .PrepareToAnimate("forwardAnimation", SourceImage);
+
         }
 
         private void btn_Screen_Click(object sender, RoutedEventArgs e)
@@ -115,6 +119,8 @@ namespace KiosBoot.Views
         private void btn_Game_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(gameLv10), null, new SuppressNavigationTransitionInfo());
+
+          //  this.Frame.Navigate(typeof(gameLv10));
         }
 
         private void btn_Product_Click(object sender, RoutedEventArgs e)

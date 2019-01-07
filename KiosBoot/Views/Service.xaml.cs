@@ -130,6 +130,13 @@ namespace KiosBoot.Views
 
             EntranceAnimation.Edge = EdgeTransitionLocation.Left;
             base.OnNavigatedTo(e);
+
+            ConnectedAnimation animation =
+      ConnectedAnimationService.GetForCurrentView().GetAnimation("forwardAnimation");
+            if (animation != null)
+            {
+                animation.TryStart(Topic3);
+            }
         }
 
 

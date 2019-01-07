@@ -157,12 +157,15 @@ namespace KiosBoot.Views
             MarqueeTextControl converter = new MarqueeTextControl();
             converter.Text = text;
             converter.FontSize = 50;
+            converter.Margin = new Thickness(350, 0, 0, 0);
             converter.IsTicker = true;
             converter.Padding = new Thickness(20, 10, 20, 0);
             converter.Height = 100;
-             
-            converter.Foreground = new SolidColorBrush(Colors.White);
-            converter.AnimationDuration = new TimeSpan(0, 2, 8);
+            //converter.HorizontalAlignment = HorizontalAlignment.Right;
+            converter.Width = 900;
+            converter.Foreground = new SolidColorBrush(Colors.Black);
+            //converter.Background = new SolidColorBrush(Colors.Fuchsia);
+            converter.AnimationDuration = new TimeSpan(0, 1, 8);
             return converter;
         }
 

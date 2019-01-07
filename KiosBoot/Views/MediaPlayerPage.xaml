@@ -126,9 +126,9 @@
 
 
 
-            <StackPanel   Grid.Column="1"   Width="1500" Height="120"  Margin="50,70,0,100"   HorizontalAlignment="Center"  x:Name="maqeru"  >
+            <StackPanel   Grid.Column="1"   Width="1500" Height="150"  Margin="50,170,0,100" Padding="0,22,0,0"  HorizontalAlignment="Center"  x:Name="maqeru"  >
                 <StackPanel.Background>
-                    <ImageBrush ImageSource="ms-appx:///Assets/Background/ScreenMaquuerFrame.png" Stretch="None"/>
+                    <ImageBrush ImageSource="ms-appx:///Assets/Background/SlideScreen.png" Stretch="Fill"/>
                 </StackPanel.Background>
 
 
