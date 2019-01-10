@@ -172,21 +172,62 @@ namespace KiosBoot.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+
+            //Call Data
+
+            //if (e.NavigationMode == NavigationMode.Back)
+            //    EntranceAnimation.Edge = EdgeTransitionLocation.Right;
+
+            //ConnectedAnimation animation =
+            //  ConnectedAnimationService.GetForCurrentView().GetAnimation("backAnimation");
+            //if (animation != null)
+            //{
+            //    animation.TryStart(SourceImage);
+            //}
+            base.OnNavigatedTo(e);
+            try
+            {
+                bindData(e);
+            }
+            catch (Exception)
+            {
+                On_BackRequested();
+
+            }
+
+          
+        }
+
+        // Handles system-level BackRequested events and page-level back button Click events
+        private bool On_BackRequested()
+        {
+            if (this.Frame.CanGoBack)
+            {
+                this.Frame.GoBack();
+                return true;
+            }
+            return false;
+        }
+
+
+        void bindData(NavigationEventArgs e)
+        {
+
             var api = new ApiData();
 
             string Data = "";
             if (e.Parameter is string && !string.IsNullOrWhiteSpace((string)e.Parameter))
             {
-                Data = e.Parameter.ToString() ;
+                Data = e.Parameter.ToString();
             }
-           string[] dataValue= Data.Split("|");
-           string Topic=dataValue[0];
-           string id= dataValue[1];
+            string[] dataValue = Data.Split("|");
+            string Topic = dataValue[0];
+            string id = dataValue[1];
             //string url = DataConfig.ApiDomain() + "/cockpit/api/collections/get/GameTypeA";
             ////string url = DataConfig.ApiDomain() + "/cockpit/api/collections/get/GameTypeB";
             //string url = DataConfig.ApiDomain() + "/api/collections/get/TopicX1";
-            string url = DataConfig.ApiDomain() + "/api/collections/get/"+ Topic;
-            
+            string url = DataConfig.ApiDomain() + "/api/collections/get/" + Topic;
+
             var result = Task.Run(() => api.GetDataFromServerAsync(url)).Result;
             TopicModel picture = JsonConvert.DeserializeObject<TopicModel>(result);
 
@@ -232,12 +273,12 @@ namespace KiosBoot.Views
                     ObservableCollection<MenuItem> items000 = new ObservableCollection<MenuItem>();
 
 
-                    if ((item.ShowVdo) && (item.TopicVdo!=null))
+                    if ((item.ShowVdo) && (item.TopicVdo != null))
                     {
                         //BorderPic.Visibility = Visibility.Collapsed;
                         //BorderVdo.Visibility = Visibility.Visible;
 
-                  
+
 
                         var a = new MenuItem();
                         string vdoPAth = DataConfig.StorageUploadsUrl() + item.TopicVdo.Path;
@@ -256,9 +297,10 @@ namespace KiosBoot.Views
                         Tile1.Visibility = Visibility.Collapsed;
 
                     }
-                    else {    
-                    foreach (var imageList in item.TopicPhoto)
+                    else
                     {
+                        foreach (var imageList in item.TopicPhoto)
+                        {
                             //BorderPic.Visibility = Visibility.Visible;
                             // BorderVdo.Visibility = Visibility.Collapsed;
 
@@ -269,9 +311,9 @@ namespace KiosBoot.Views
                                 IName = imageList.Meta.Title,
                                 image = imageList.Path.ToString()
                             });
-                      
 
-                    }
+
+                        }
                     }
 
                     Tile1.ItemsSource = items000;
@@ -280,20 +322,8 @@ namespace KiosBoot.Views
                 }
             }
 
-            //Call Data
-
-            //if (e.NavigationMode == NavigationMode.Back)
-            //    EntranceAnimation.Edge = EdgeTransitionLocation.Right;
-
-            //ConnectedAnimation animation =
-            //  ConnectedAnimationService.GetForCurrentView().GetAnimation("backAnimation");
-            //if (animation != null)
-            //{
-            //    animation.TryStart(SourceImage);
-            //}
-
-            base.OnNavigatedTo(e);
         }
+
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {

@@ -297,9 +297,6 @@
     <Compile Include="Views\ServiceTopic.xaml.cs">
       <DependentUpon>ServiceTopic.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ServiceTopicDetail.xaml.cs">
-      <DependentUpon>ServiceTopicDetail.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\TabbedPage.xaml.cs">
       <DependentUpon>TabbedPage.xaml</DependentUpon>
     </Compile>
@@ -493,10 +490,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ServiceTopicDetail.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\TabbedPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -618,12 +611,26 @@
     <Content Include="Assets\SampleData\SamplePhoto7.png" />
     <Content Include="Assets\SampleData\SamplePhoto8.png" />
     <Content Include="Assets\SampleData\SamplePhoto9.png" />
+    <Content Include="Assets\Service\BgServiceLayer.png" />
     <Content Include="Assets\Service\circle1.png" />
     <Content Include="Assets\Service\circle2.png" />
     <Content Include="Assets\Service\circle3.png" />
+    <Content Include="Assets\Service\HeadLayer.png" />
     <Content Include="Assets\SoundEffects\card_flip.mp3" />
+    <Content Include="Assets\SoundEffects\Cheer.mp3" />
     <Content Include="Assets\SoundEffects\correct_match.mp3" />
+    <Content Include="Assets\SoundEffects\Ding.mp3" />
     <Content Include="Assets\SoundEffects\incorrect_match.mp3" />
+    <Content Include="Assets\SoundEffects\Whistle.mp3" />
+    <Content Include="Assets\Wellcome\Asset 1%402x.png" />
+    <Content Include="Assets\Wellcome\Asset 1%403x.png" />
+    <Content Include="Assets\Wellcome\Asset 1.png" />
+    <Content Include="Assets\Wellcome\Asset 1.svg" />
+    <Content Include="Assets\Wellcome\blackBoard.png" />
+    <Content Include="Assets\Wellcome\blackBoardblackBoard.png" />
+    <Content Include="Assets\Wellcome\MessageBox.png" />
+    <Content Include="Assets\Wellcome\Next.png" />
+    <Content Include="Assets\Wellcome\Wellcome.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -721,6 +728,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assets\NewFolder1\" />
     <Folder Include="Assets\Temp\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

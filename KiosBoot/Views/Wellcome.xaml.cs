@@ -92,7 +92,7 @@ namespace KiosBoot.Views
 
                 if (string.Compare(gender, "male", true) == 0)
                 {
-                    this.SourceImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Animate/male.png"));
+                    this.SourceImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/WellCome/Asset 1.png"));
                     Greeting.Text = "สวัสดีครับ";
                 }
                 else if (string.Compare(gender, "female", true) == 0)

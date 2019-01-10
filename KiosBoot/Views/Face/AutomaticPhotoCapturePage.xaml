@@ -86,5 +86,19 @@
 
             <Image Name="captureImage"   Height="360"  Width="360" Margin="0"  HorizontalAlignment="Right"/>
         </Grid>
+
+
+        <Popup x:Name="ppup" IsOpen="False" IsLightDismissEnabled="True"  
+     Width="320" HorizontalAlignment="Left">
+            <Popup.ChildTransitions>
+                <TransitionCollection>
+                    <!--<EdgeUIThemeTransition Edge="Left" />-->
+                    <PaneThemeTransition Edge="Left" />
+                </TransitionCollection>
+            </Popup.ChildTransitions>
+            <Grid Width="380" Height="{Binding ElementName=flyoutPane, Path=Height}"  Background="{ThemeResource FlyoutBackgroundThemeBrush}" >
+                <TextBlock Text="Grid contents here" />
+            </Grid>
+        </Popup>
     </Grid>
 </Page>

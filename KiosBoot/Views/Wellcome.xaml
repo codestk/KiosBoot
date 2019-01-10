@@ -15,18 +15,34 @@
         </Grid.Background>
 
 
-        <my:ImageEx  x:Name="SourceImage"  Source="ms-appx:///Assets/Animate/main@2x.png" Stretch="Uniform" Width="700"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <my:ImageEx  x:Name="SourceImage"  Source="ms-appx:///Assets/WellCome/Asset 1.svg" Stretch="Uniform" Width="700"  Margin="500,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <!--<my:ImageExBase x:Name="SourceImage" />-->
         <!--<Image x:Name="SourceImage"  Source="ms-appx:///Assets/Animate/main@2x.png" Stretch="Uniform" Width="700"  HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
-        <TextBlock x:Name="Greeting"  Text="สวัสดี......" TextWrapping="Wrap" VerticalAlignment="Bottom" FocusVisualPrimaryBrush="Aqua"  Foreground="#666" FontWeight="Bold" LineHeight="22" HorizontalAlignment="Right" FontSize="150" IsHitTestVisible="False" Margin="0,0,0,200" RenderTransformOrigin="0.5,0.5"   >
-            <TextBlock.RenderTransform>
-                <CompositeTransform Rotation="-17.65"/>
-            </TextBlock.RenderTransform>
-        </TextBlock>
-        <TextBlock x:Name="NameInformation"  Text="คุณ" TextWrapping="Wrap" VerticalAlignment="Top"   Foreground="#333" FontWeight="Bold" LineHeight="22" HorizontalAlignment="Left" FontSize="150" IsHitTestVisible="False" Margin="203,100,0,0"   />
-        <Button Content="" HorizontalAlignment="Right"  VerticalAlignment="Bottom" FontSize="72" RenderTransformOrigin="0.235,-0.276" Click="Button_Click" Margin="0,0,50,53" FontWeight="Bold" Width="100" Height="100">
+
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Height="300" Width="500" >
+            <Grid.Background>
+                <ImageBrush ImageSource="ms-appx:///Assets/Wellcome/MessageBox.png"/>
+            </Grid.Background>
+
+            <TextBlock x:Name="Greeting" Canvas.ZIndex="1000"  Text="สวัสดี......" TextWrapping="Wrap" VerticalAlignment="Top"  Foreground="#FFDE5718" FontWeight="Bold" LineHeight="22" HorizontalAlignment="Center" FontSize="100" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" FocusVisualPrimaryBrush="{x:Null}" Margin="0,40,0,0"   >
+             
+                <TextBlock.RenderTransform>
+                    <CompositeTransform Rotation="-0.333"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+        </Grid>
+
+        <Grid Width="1000" Height="1000" HorizontalAlignment="Left" Margin="10">
+            <Grid.Background>
+                <ImageBrush ImageSource="ms-appx:///Assets/Wellcome/blackBoardblackBoard.png" Stretch="Uniform"/>
+            </Grid.Background>
+            <TextBlock x:Name="NameInformation"  Width="800"  TextAlignment="Center"  Text="คุณ" TextWrapping="WrapWholeWords"  VerticalAlignment="Center"    Foreground="White" FontWeight="Bold" LineHeight="22" HorizontalAlignment="Center" FontSize="80" IsHitTestVisible="False"     />
+        </Grid>
+      
+        <Button Content="" HorizontalAlignment="Right" Style="{StaticResource TransparentPathIconButtonStyle}"  VerticalAlignment="Bottom" FontSize="72" RenderTransformOrigin="0.235,-0.276" Click="Button_Click" Margin="0,0,50,53" FontWeight="Bold" Width="200" Height="200">
             <Button.Background>
-                <ImageBrush ImageSource="ms-appx:///Assets/icon/next-3-icon.png" Stretch="Uniform"/>
+                <ImageBrush ImageSource="ms-appx:///Assets/Wellcome/Next.png" Stretch="Uniform"/>
             </Button.Background>
         </Button>
 

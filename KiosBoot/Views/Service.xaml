@@ -86,7 +86,7 @@
             <ImageBrush ImageSource="{StaticResource MainBg}" Stretch="Fill" />
         </Grid.Background>
 
-         <Button animations:Connected.Key="item" Margin="50,500,0,0" x:Name="Topic1" Content="Topic 1" HorizontalAlignment="Left"   Style="{StaticResource CircleButton}" VerticalAlignment="Center" Height="500" Width="500" FontSize="72" FontFamily="Tahoma" FontWeight="Bold" Click="Topic1_Click">
+         <Button animations:Connected.Key="item" Margin="50,500,0,0" x:Name="Topic1" Content="Topic 1" HorizontalAlignment="Left"   Style="{StaticResource CircleButton}" VerticalAlignment="Center" Height="500" Width="500" FontSize="72" FontFamily="Tahoma" FontWeight="Bold" Foreground="Black" Click="Topic1_Click">
             <Button.Background>
                 <ImageBrush ImageSource="ms-appx:///Assets/Service/circle1.png" Stretch="Fill"/>
             </Button.Background>
@@ -108,7 +108,7 @@
             </Button.Transitions>
         </Button>
 
-        <Button Margin="0,0,0,400" animations:Connected.Key="item" x:Name="Topic3" Content="Topic 3" HorizontalAlignment="Right"  Style="{StaticResource CircleButton}"  VerticalAlignment="Center" Height="600" Width="600" FontSize="72" FontFamily="Tahoma" FontWeight="Bold" Click="Topic3_Click">
+        <Button Margin="0,0,0,400" animations:Connected.Key="item" x:Name="Topic3" Content="Topic 3" HorizontalAlignment="Right"  Style="{StaticResource CircleButton}"  VerticalAlignment="Center" Height="700" Width="700" FontSize="72" FontFamily="Tahoma" FontWeight="Bold" Click="Topic3_Click">
             <Button.Background>
                 <ImageBrush ImageSource="ms-appx:///Assets/Service/circle3.png" Stretch="None"/>
             </Button.Background>

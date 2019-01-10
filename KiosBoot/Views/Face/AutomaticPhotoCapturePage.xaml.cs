@@ -104,6 +104,17 @@ namespace KiosBoot.Views
                 this.Frame.Navigate(typeof(ManageFace), null, new EntranceNavigationTransitionInfo());
             }
 
+
+
+            if (args.KeyCode == 113) //q
+            {
+                // your code here fore Escape key
+                ppup.Height = Window.Current.Bounds.Height;
+                ppup.IsOpen = true;
+            }
+
+    
+
         }
 
 

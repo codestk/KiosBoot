@@ -35,10 +35,10 @@
         
         </RelativePanel>
 
-        <TextBlock x:Name="Greeting"    Style="{StaticResource MainFont}"  Text="ยินดีต้อนรับ......" TextWrapping="Wrap" VerticalAlignment="Bottom"     Width="1609" FocusVisualPrimaryBrush="Aqua"  Foreground="#666" FontWeight="Bold" LineHeight="22" HorizontalAlignment="Left" FontSize="50" IsHitTestVisible="False" Margin="100,0,0,50" FontFamily="Kanit"   />
+        <TextBlock x:Name="Greeting"    Style="{StaticResource MainFont}"  Text="ยินดีต้อนรับ" TextWrapping="Wrap" VerticalAlignment="Bottom"     Width="1609" FocusVisualPrimaryBrush="Aqua"  Foreground="#666" FontWeight="Bold" LineHeight="22" HorizontalAlignment="Left" FontSize="50" IsHitTestVisible="False" Margin="100,0,0,50" FontFamily="Kanit"   />
         <!--<Image  x:Name="capturedPhoto" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5"   Source="ms-appx:///Assets/icon/main@2x.png" Stretch="Fill" Width="555" Height="441" Margin="419,129,835,330" FocusVisualSecondaryBrush="{x:Null}" FocusVisualPrimaryBrush="{x:Null}"/>-->
 
-        <Image x:Name="SourceImage"  Source="ms-appx:///Assets/Animate/main@2x.png" Stretch="Uniform" Width="500" Margin="0,0,500,0"/>
+        <Image x:Name="SourceImage"  Source="ms-appx:///Assets/WellCome/Asset 1.png" Stretch="UniformToFill"   Width="500"   Margin="0,0,500,0"/>
 
 
         <!--<Button x:Name="Back" Style="{StaticResource BackButtonStyle}" Width="56" Height="56" Content="dddd" FontSize="9999" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Back_Click" >

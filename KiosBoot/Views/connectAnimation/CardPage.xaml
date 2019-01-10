@@ -47,12 +47,12 @@
                         <BitmapImage UriSource="{Binding image}" />
                         <!--<BitmapImage UriSource="https://notebookspec.com/nbs/upload_notebook/20180509-113115_c.jpg"  />-->
 
-                   
+
                     </Image.Source>
-                    
+
                 </Image>
-           
-             
+
+
 
                 <!--<MediaElement x:Name="mpe"   Height="800" Margin="0,50,0,0" Source="ms-appx:///Assets/Mp4/fishes.wmv"
                     MaxWidth="1500"  IsLooping="True"  
@@ -71,6 +71,9 @@
                 </Border>
             </Grid>
         </DataTemplate>
+
+
+      
     </Page.Resources>
 
     <Grid>
@@ -82,15 +85,16 @@
             <ImageBrush ImageSource="{StaticResource MainBg}" Stretch="Fill" />
         </Grid.Background>
         <!--<Image Source="ms-appx:///Assets/logo/movieBg.png" Margin="0,0,20,0" Width="1150"  ></Image>-->
-        <Canvas x:Name="Panel1"
+        <Canvas x:Name="Panel1"  
                   Height="700"
                     Width="1000"
                     Margin="0,150,0,200">
-       
-
          
 
-                    <controls:RotatorTile x:Name="Tile1"
+
+
+
+            <controls:RotatorTile x:Name="Tile1"
                               Width="1000"   Height="650"
                                 
                                 RotationDelay="0:0:10"
@@ -100,14 +104,14 @@
 
 
 
-            <MediaElement x:Name="mpe"    Canvas.Left="-50" Canvas.Top="30"   
-                      IsLooping="True" Height="650"  Width="auto"  PosterSource="ms-appx:///Assets/icon/loading.gif"
+            <MediaElement x:Name="mpe"    Canvas.Left="-50" Canvas.Top="30"    Stretch="UniformToFill"
+                      IsLooping="True" Height="650"  Width="auto"  PosterSource="ms-appx:///Assets/icon/loading.gif" 
                     AutoPlay="True" VerticalAlignment="Center"     />
-           
+
             <!--<MediaElement x:Name="mpe"   Height="600"  
                    IsLooping="True"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                     AutoPlay="True"  PosterSource="ms-appx:///Assets/icon/loading.gif" />-->
-         
+
             <!--<MediaElement x:Name="mpe"   Height="800" Margin="0,50,0,0" Source="ms-appx:///Assets/Mp4/fishes.wmv"
                     MaxWidth="1500"  IsLooping="True"  
                     AutoPlay="True" />-->
@@ -116,24 +120,67 @@
                     AutoPlay="True" />-->
 
 
-            
-                <TextBlock VerticalAlignment="Top" Margin="0,10,0,10"
+
+            <TextBlock VerticalAlignment="Top" Margin="0,10,0,10"
                        Text="{Binding ElementName=Tile1, Path=CurrentItem.Title}"
                        TextWrapping="Wrap" />
- 
-        </Canvas>
-        <GridView x:Name="collection" IsItemClickEnabled="True" ItemClick="TipsGrid_ItemClick" HorizontalAlignment="Center" UseLayoutRounding="False">
 
-            <GridView.ItemContainerStyle>
+        </Canvas>
+        <GridView x:Name="collection" FocusVisualMargin="10,0,0,10"  IsSwipeEnabled="True" IsHitTestVisible="True" IsHoldingEnabled="True"  FocusVisualPrimaryThickness="0" FocusVisualSecondaryThickness="0"  UseSystemFocusVisuals="False"   IsItemClickEnabled="True" ItemClick="TipsGrid_ItemClick" HorizontalAlignment="Center" UseLayoutRounding="False" FocusVisualPrimaryBrush="Transparent" Foreground="Transparent" FocusVisualSecondaryBrush="Transparent"  >
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                    </Storyboard>
+                                </VisualState>
+                    <VisualState x:Name="PointerOver">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke" Storyboard.TargetName="PathIcon">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAccentBrush}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="PathIcon">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseHighBrush}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="PathIcon">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundAccentBrush}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke" Storyboard.TargetName="PathIcon">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid"/>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="PathIcon">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseMediumLowBrush}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke" Storyboard.TargetName="PathIcon">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent"/>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <!--<GridView.ItemContainerStyle>
                 <Style BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem">
                     <Style.Setters>
                         <Setter Property="Margin" Value="12" />
+                        
                     </Style.Setters>
                 </Style>
-            </GridView.ItemContainerStyle>
+            </GridView.ItemContainerStyle>-->
             <GridView.ItemTemplate>
                 <DataTemplate  x:DataType="local1:CustomDataObject">
                     <Grid x:Name="connectedElement"   Width="1500">
+
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="100" />
@@ -162,10 +209,19 @@
                        TextWrapping="Wrap" />
                                 </Border>
                             </StackPanel>-->
-                        </Grid>
-                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="1000"  Width="1500"  Background="Cornsilk"  Grid.Row="1">
 
-                            <TextBlock x:Name="HeadText" Text="{Binding Title}"  FontFamily="Tahoma" Foreground="Orange" FontSize="40" HorizontalAlignment="Center"></TextBlock>
+                        </Grid>
+                        <Grid  Height="1000"  Width="1500" HorizontalAlignment="Center"  Padding="0,22,0,0"    Grid.Row="1">
+                            <!--<Grid.Background>
+                                <ImageBrush ImageSource="ms-appx:///Assets/Service/HeadLayer.png"  Stretch="Uniform"/>
+                            </Grid.Background>-->
+                          
+                                <!--<Canvas.Background>
+                                    <ImageBrush ImageSource="ms-appx:///Assets/Service/HeadLayer.png" AlignmentX="Center" AlignmentY="Bottom" Stretch="None"/>
+                                </Canvas.Background>-->
+                                <TextBlock  x:Name="HeadText" Text="{Binding Title}" TextAlignment="Center"  FontFamily="Tahoma" Foreground="Orange" FontSize="44"  ></TextBlock>
+                            
+                           
                         </Grid>
                     </Grid>
                 </DataTemplate>
@@ -176,7 +232,7 @@
             <Grid.Background>
                 <SolidColorBrush Color="{ThemeResource SystemChromeAltHighColor}" Opacity="0.8" />
             </Grid.Background>
-            <Grid x:Name="destinationElement" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1500" Height="1080" BorderThickness="1">
+            <Grid x:Name="destinationElement" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1500" Height="1080" BorderThickness="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
@@ -191,11 +247,11 @@
                         </Button.Content>
                     </Button>
                 </Grid>
-                <GridView  HorizontalAlignment="Stretch"  Padding="50" VerticalAlignment="Stretch" Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}" Grid.Row="1">
+                <GridView  HorizontalAlignment="Stretch"  Padding="50" VerticalAlignment="Stretch"  Background="White" Grid.Row="1">
 
                     <ScrollViewer>
                         <!--<WebView Source="http://www.javascriptthai.com" Width="1500" Height="Auto"></WebView>-->
-                        <richText:HtmlTextBlock x:Name="HtmlPopupContent" Html="" />
+                        <richText:HtmlTextBlock x:Name="HtmlPopupContent" Html=""  />
                     </ScrollViewer>
                 </GridView>
             </Grid>

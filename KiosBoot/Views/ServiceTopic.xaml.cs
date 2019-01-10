@@ -121,6 +121,11 @@ namespace KiosBoot.Views
             if (e.Parameter is string && !string.IsNullOrWhiteSpace((string)e.Parameter))
             {
                 Topic = e.Parameter.ToString();
+
+                string[] UrlAndHead = Topic.Split('|');
+
+                Topic = UrlAndHead[0];
+                HeadTopic.Text = UrlAndHead[1];
             }
 
 
@@ -142,7 +147,7 @@ namespace KiosBoot.Views
 
             ListView1.ItemsSource = listOfHead;
 
-            HeadTopic.Text = "Topic1";
+            //HeadTopic.Text = "Topic1";
 
             //ConnectedAnimation animation =
             //    ConnectedAnimationService.GetForCurrentView().GetAnimation("forwardAnimation");

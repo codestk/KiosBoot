@@ -161,7 +161,7 @@ namespace KiosBoot.Views
             if (Topic1.Content == "")
                 return;
 
-            this.Frame.Navigate(typeof(ServiceTopic), "TopicX1", new DrillInNavigationTransitionInfo());
+            this.Frame.Navigate(typeof(ServiceTopic), "TopicX1|" + Topic1.Content, new DrillInNavigationTransitionInfo());
            // Frame.Navigate(typeof(AlbumPage), albumId, new DrillInNavigationTransitionInfo());
         }
 
@@ -170,14 +170,14 @@ namespace KiosBoot.Views
             if (Topic2.Content == "")
                 return;
 
-            this.Frame.Navigate(typeof(ServiceTopic), "TopicX2", new DrillInNavigationTransitionInfo());
+            this.Frame.Navigate(typeof(ServiceTopic), "TopicX2|"+ Topic2.Content, new DrillInNavigationTransitionInfo());
         }
 
         private void Topic3_Click(object sender, RoutedEventArgs e)
         {
             if (Topic3.Content == "")
                 return;
-            this.Frame.Navigate(typeof(ServiceTopic), "TopicX3", new DrillInNavigationTransitionInfo());
+            this.Frame.Navigate(typeof(ServiceTopic), "TopicX3|" + Topic3.Content, new DrillInNavigationTransitionInfo());
         }
     }
 }
