@@ -1,19 +1,7 @@
 ﻿using KiosBoot.Helpers.Profile;
-using KiosBoot.Models;
 using KiosBoot.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
@@ -38,8 +26,12 @@ namespace KiosBoot.Views.Game
             //2 lv26
             startMenu.StartNewGame(0, Scrollinfo, GameMainBlock);
 
-            //Menu.Visibility = Visibility.Collapsed;
-            Game.Visibility = Visibility.Visible;
+            Scrol.Visibility = Visibility.Collapsed;
+            Game.Visibility = Visibility.Collapsed;
+            Information.Visibility = Visibility.Collapsed;
+            Game.Visibility = Visibility.Collapsed;
+
+            //GameOverPanel.Visibility = Visibility.Collapsed;
 
             if (UserProfile.PictureProfile != null)
             {
@@ -47,25 +39,13 @@ namespace KiosBoot.Views.Game
                 imgBrush.ImageSource = UserProfile.PictureProfile;
                 userPicture.Fill = imgBrush;
             }
-              
         }
-
-
-
-
-
-
-         
-
-
 
         private void Slide_Clicked(object sender, RoutedEventArgs e)
         {
             var game = DataContext as GameViewModel;
             var button = sender as Button;
             game.ClickedSlide(button.DataContext);
-
-
         }
 
         private void PlayAgain_C(object sender, RoutedEventArgs e)
@@ -74,10 +54,7 @@ namespace KiosBoot.Views.Game
 
             GameInstance.CurrentGame = game;
 
-
             game.Restart();
-
-
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -88,23 +65,16 @@ namespace KiosBoot.Views.Game
             //this.Frame.Navigate(typeof(Menu));
             GameInstance.CurrentGame.StopGame();
             this.Frame.Navigate(typeof(Menu), null, new SlideNavigationTransitionInfo());
-
         }
-
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-           
             GameInstance.CurrentGame.StopGame();
             base.OnNavigatingFrom(e);
         }
 
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-    
-
-            
             base.OnNavigatedTo(e);
 
             ConnectedAnimation animation =
@@ -115,7 +85,37 @@ namespace KiosBoot.Views.Game
             }
         }
 
+        #region Btn
 
+        private void BtnPause_Click(object sender, RoutedEventArgs e)
+        {
+            GameInstance.CurrentGame.Timer.Stop();
+        }
 
+        private void BtnStart_Click(object sender, RoutedEventArgs e)
+        {
+            GameInstance.CurrentGame.Timer.Start();
+        }
+
+        private void BtnStop_Click(object sender, RoutedEventArgs e)
+        {
+            GameInstance.CurrentGame.StopGame();
+        }
+
+        #endregion Btn
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            PanelStartGame.Visibility = Visibility.Collapsed;
+
+            //ได้มาตอน Start Game
+
+            GameInstance.CurrentGame.Restart();
+
+            Scrol.Visibility = Visibility.Visible;
+            Game.Visibility = Visibility.Visible;
+            Information.Visibility = Visibility.Visible;
+            Game.Visibility = Visibility.Visible;
+        }
     }
 }

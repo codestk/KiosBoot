@@ -25,8 +25,11 @@ namespace KiosBoot.ViewModels
             GameViewModel newGame = new GameViewModel(category, Scrollinfo, gamebox);
 
             GameInstance.CurrentGame = newGame;
+            //GameInstance.CurrentGame.StopGame();
 
-            //Scrollinfo.ItemsSource = ScrollGame.GetScrollInfo();
+
+
+
             _mainWindow.DataContext = newGame;
 
             

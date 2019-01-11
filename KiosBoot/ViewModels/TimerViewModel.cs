@@ -15,7 +15,7 @@ namespace KiosBoot.ViewModels
         {
             get
             {
-                return _timePlayed ;
+                return _timePlayed;
             }
             set
             {
@@ -39,11 +39,9 @@ namespace KiosBoot.ViewModels
 
         public void Stop()
         {
+            _playedTimer.Stop();
 
-
-            
-           _playedTimer.Stop();
-            _playedTimer = new DispatcherTimer();
+            //_playedTimer = new DispatcherTimer();
         }
 
         private void PlayedTimer_Tick(object sender, object e)
@@ -51,10 +49,9 @@ namespace KiosBoot.ViewModels
             Time = _timePlayed.Add(new TimeSpan(0, 0, 1));
 
             //Set Time
-            if  (Time.Seconds == 30)
+            if (Time.Seconds == 30)
             {
-
-                _timePlayed = new TimeSpan(0, 0,0);
+                _timePlayed = new TimeSpan(0, 0, 0);
                 Time = _timePlayed;
                 //OnPropertyChanged("LostMessage");
                 //GameInfo.GameStatus(false);

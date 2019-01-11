@@ -8,12 +8,12 @@
     xmlns:data1="using:KiosBoot.Models"
     mc:Ignorable="d">
 
-    <Grid  >
+    <Grid>
 
         <Grid.Background>
             <ImageBrush ImageSource="ms-appx:///Assets/Game/bgGame2.png" Stretch="UniformToFill" />
         </Grid.Background>
-        <Grid x:Name="Game" Visibility="Collapsed"   HorizontalAlignment="Left" VerticalAlignment="Top" Width="1000"   >
+        <Grid x:Name="Game" Visibility="Collapsed"   HorizontalAlignment="Left" VerticalAlignment="Top" Width="1000">
             <StackPanel>
                 <!--<StackPanel.Background>
                     <ImageBrush ImageSource="ms-appx:///Assets/black_background.jpg" Stretch="UniformToFill" />
@@ -24,7 +24,6 @@
                 <Run Text="เวลา" />
                 <Run Text="{Binding Timer.Time }" />
                 </TextBlock>-->
-
 
                 <!--<StackPanel Margin="10">
                     <StackPanel>
@@ -43,9 +42,8 @@
                 <Grid x:Name="GamePanel">
                     <Canvas  x:Name="GameMainBlock" Margin="0,50,0,0"    DataContext="{Binding Slides}"  Height="1000"     Width="1000">
 
-
                         <Canvas.Resources>
-                            <!--<Style TargetType="{x:Type Button}"  DataContext="{Binding Slides}"  >
+                            <!--<Style TargetType="{x:Type Button}"  DataContext="{Binding Slides}">
                             <Setter Property="Margin" Value="1" />
                         </Style>-->
 
@@ -153,32 +151,26 @@
                                 </ControlTemplate>
                             </Button.Template>
                         </Button>
-
-
-
                     </Canvas>
-
                 </Grid>
             </StackPanel>
         </Grid>
 
         <Grid x:Name="Information"      Width="600" Height="1080" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,300,0">
-            <StackPanel Width="400" Margin="0,0,0,0" Padding="0,0,0,0" >
+            <StackPanel Width="400" Margin="0,0,0,0" Padding="0,0,0,0">
 
                 <Grid Width="400" Padding="0,0,0,40" Height="400">
                     <Grid.Background>
-                        <ImageBrush ImageSource="ms-appx:///Assets/Game/BorderProfile.png" Stretch="UniformToFill"/>
+                        <ImageBrush ImageSource="ms-appx:///Assets/Game/BorderProfile.png" Stretch="UniformToFill" />
                     </Grid.Background>
 
-
-                    <Ellipse x:Name="userPicture"   Height="200" Width="200"  Margin="0,0,0,0" Canvas.ZIndex="100" HorizontalAlignment="Center"  >
+                    <Ellipse x:Name="userPicture"   Height="200" Width="200"  Margin="0,0,0,0" Canvas.ZIndex="100" HorizontalAlignment="Center">
                         <!--<Ellipse.Fill>
                             -->
                         <!--<ImageBrush ImageSource="ms-appx:///Assets/icon/previous-3-icon.png" Stretch="Uniform" />-->
                         <!--<ImageBrush ImageSource = "{Binding Photo}"  Stretch="Uniform" />-->
                         <!--
                         </Ellipse.Fill>-->
-
                     </Ellipse>
                     <!--<Image  Margin="0,50,0,0" Width="150" Height="150"   Source="ms-appx:///Assets/Background/backgroundDigital.jpg" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill">-->
                     <!--</Image>-->
@@ -206,41 +198,32 @@
                     </TextBlock>
                 </Border>
 
-
-                <Button   VerticalAlignment="Center"  Height="120" Width="400"   Click="PlayAgain_C" Foreground="White"   Style="{StaticResource CircleGameWinButton}" FontSize="{StaticResource  BigFontSize}">Start</Button>
-                <Button   VerticalAlignment="Center"  Height="120" Width="400"   Click="PlayAgain_C" Foreground="White"   Style="{StaticResource CircleButton}" FontSize="{StaticResource  BigFontSize}">Pause</Button>
-                <Button   VerticalAlignment="Center"  Height="120" Width="400"   Click="PlayAgain_C" Foreground="White"   Style="{StaticResource CircleGameOverButton}" FontSize="{StaticResource  BigFontSize}">Stop</Button>
-
+                <Button  x:Name="BtnStart"  VerticalAlignment="Center"  Height="120" Width="400"   Click="BtnStart_Click" Foreground="White"   Style="{StaticResource CircleGameWinButton}" FontSize="{StaticResource  BigFontSize}">Start</Button>
+                <Button   x:Name="BtnPause" VerticalAlignment="Center"  Height="120" Width="400"   Click="BtnPause_Click" Foreground="White"   Style="{StaticResource CircleButton}" FontSize="{StaticResource  BigFontSize}">Pause</Button>
+                <Button  x:Name="BtnStop"  VerticalAlignment="Center"  Height="120" Width="400"   Click="BtnStop_Click" Foreground="White"   Style="{StaticResource CircleGameOverButton}" FontSize="{StaticResource  BigFontSize}">Stop</Button>
             </StackPanel>
-
-
         </Grid>
 
         <Grid x:Name="Scrol"     Width="400"  Height="1080"  HorizontalAlignment="Right" VerticalAlignment="Top">
 
-
-
-
-            <ListView x:Name="Scrollinfo"  Padding="0,0,0,0"  >
+            <ListView x:Name="Scrollinfo"  Padding="0,0,0,0">
                 <ListView.Background>
-                    <ImageBrush ImageSource="ms-appx:///Assets/Game/rank.png" Stretch="UniformToFill"/>
+                    <ImageBrush ImageSource="ms-appx:///Assets/Game/rank.png" Stretch="UniformToFill" />
                 </ListView.Background>
                 <ListView.ItemTemplate>
                     <DataTemplate x:Name="DoubleLineDataTemplate" x:DataType="data1:ScrollInfo">
                         <Border  Background="Transparent" Width="360"  Margin="0,40,10,10"  CornerRadius="20">
 
-                            <StackPanel Orientation="Horizontal"     >
+                            <StackPanel Orientation="Horizontal">
 
                                 <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,0,0,0">
-                                    <TextBlock Text="{x:Bind ranking}" Foreground="White" FontWeight="Bold"    FontSize="80"     />
+                                    <TextBlock Text="{x:Bind ranking}" Foreground="White" FontWeight="Bold"    FontSize="80" />
                                     <!--<TextBlock Text="{x:Bind Scroll}"  FontWeight="Bold" FontSize="50" />-->
                                 </StackPanel>
 
-
-
-                                <Ellipse Height="200" Width="200" VerticalAlignment="Center" >
+                                <Ellipse Height="200" Width="200" VerticalAlignment="Center">
                                     <Ellipse.Fill>
-                                        <ImageBrush ImageSource="{x:Bind Image}"/>
+                                        <ImageBrush ImageSource="{x:Bind Image}" />
                                     </Ellipse.Fill>
                                 </Ellipse>
 
@@ -249,23 +232,18 @@
                                     <TextBlock Text="{x:Bind Scroll}" Foreground="White"  FontWeight="Bold" FontSize="40"  FontFamily="Comic Sans MS" />
                                 </StackPanel>
                             </StackPanel>
-
-
-
                         </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
-
         </Grid>
 
-        <StackPanel DataContext="{Binding GameInfo}" Visibility="{Binding ShowFrame}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,0"  Width="1000" Height="1000"  >
+        <StackPanel x:Name="GameOverPanel" DataContext="{Binding GameInfo}" Visibility="{Binding ShowFrame}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,0"  Width="1000" Height="1000">
             <StackPanel.Background>
-                <ImageBrush ImageSource="ms-appx:///Assets/Game/endOfGameFrame.png" Stretch="Fill"/>
+                <ImageBrush ImageSource="ms-appx:///Assets/Game/endOfGameFrame.png" Stretch="Fill" />
             </StackPanel.Background>
             <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,300">
-                <StackPanel   MinWidth="600" >
+                <StackPanel   MinWidth="600">
                     <StackPanel Visibility="{Binding WinMessage}">
 
                         <TextBlock Foreground="Green" TextAlignment="Center" FontSize="{StaticResource  BigFontSize}">ยินดีด้วยคุณชนะในเกมนี้</TextBlock>
@@ -278,11 +256,28 @@
                 </StackPanel>
             </StackPanel>
         </StackPanel>
+
+
+        <StackPanel x:Name="PanelStartGame"   VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,0"  Width="1000" Height="1000">
+            <StackPanel.Background>
+                <ImageBrush ImageSource="ms-appx:///Assets/Game/endOfGameFrame.png" Stretch="Fill" />
+            </StackPanel.Background>
+            <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,300">
+                <StackPanel   MinWidth="600">
+                    <StackPanel >
+
+                        <TextBlock Foreground="Green" TextAlignment="Center" FontSize="{StaticResource  BigFontSize}">พร้อมเริ่มเกม</TextBlock>
+                        <Button     VerticalAlignment="Stretch" Height="164" Width="580" Click="Button_Click" Foreground="White"  Style="{StaticResource CircleGameWinButton}" FontSize="{StaticResource  BigFontSize}">Begin</Button>
+                    </StackPanel>
+        
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
         <Button x:Name="back" Content="" HorizontalAlignment="Right"  Style="{StaticResource CircleBack}"  VerticalAlignment="Bottom" Height="200" Width="200"  FontFamily="Tahoma" FontWeight="Bold" Click="Back_Click" Margin="0,0,-56,-44">
             <Button.Background>
-                <ImageBrush ImageSource="{StaticResource backbtnImageSource}" Stretch="Uniform"/>
+                <ImageBrush ImageSource="{StaticResource backbtnImageSource}" Stretch="Uniform" />
             </Button.Background>
-
         </Button>
     </Grid>
 </Page>

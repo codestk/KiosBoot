@@ -1,12 +1,7 @@
-﻿using KiosBoot.Helpers.Config;
-using KiosBoot.Helpers.Profile;
-using KiosBoot.Helpers.Server;
+﻿using KiosBoot.Helpers.Profile;
 using KiosBoot.Models;
 using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Imaging;
 
 namespace KiosBoot.ViewModels
 {
@@ -32,7 +27,6 @@ namespace KiosBoot.ViewModels
         //Game timer for elapsed time
         public TimerViewModel Timer { get; private set; }
 
-
         private ListView _Scrollinfo;
 
         private Canvas _GameBox;
@@ -46,16 +40,12 @@ namespace KiosBoot.ViewModels
             _Scrollinfo = Scrollinfo;
             _Scrollinfo.ItemsSource = ScrollGame.GetScrollInfo();
             _GameBox = GameBox;
-           SetupGame(category);
-            
-           
+            //SetupGame(category); //Recover
         }
 
         //Initialize game essentials
         private void SetupGame(SlideCategories category)
         {
-
-    
             Slides = new SlideCollectionViewModel();
             Timer = new TimerViewModel(new TimeSpan(0, 0, 1));
             GameInfo = new GameInfoViewModel();
@@ -65,7 +55,6 @@ namespace KiosBoot.ViewModels
 
             //Create slides from image folder then display to be memorized
             //Slides.CreateSlides("Assets/Game/" + category.ToString());
-         
 
             Slides.CreateSlides(category);
 
@@ -73,10 +62,7 @@ namespace KiosBoot.ViewModels
 
             //Game has started, begin count.
 
-           
             Timer.Start();
-
-
 
             foreach (Control ctrl in _GameBox.Children)
             {
@@ -92,13 +78,11 @@ namespace KiosBoot.ViewModels
             //{
             //    ctrl.IsEnabled = true;
             //}
-
         }
 
         //Slide has been clicked
         public void ClickedSlide(object slide)
         {
-            
             if (Slides.canSelect)
             {
                 var selected = slide as PictureViewModel;
@@ -129,8 +113,6 @@ namespace KiosBoot.ViewModels
                 {
                     ctrl.IsEnabled = false;
                 }
-
-
             }
 
             if (Slides.AllSlidesMatched)
@@ -142,38 +124,23 @@ namespace KiosBoot.ViewModels
                     ctrl.IsEnabled = false;
                 }
 
-
                 //Add คะแนนใหม่
 
                 string Path = UserProfile.PicturePath;
 
-
                 // var result = Task.Run(() => api.GetDataFromServerAsync(url)).Result;
 
-
-                
                 ScrollGame.AddScrollInfo(GameInfo.Score, Path);
                 _Scrollinfo.ItemsSource = ScrollGame.GetScrollInfo();
-
-
-
-               
-
             }
         }
 
         //Restart game
         public void Restart()
         {
-
-
             SoundManager.PlayIncorrect();
             SetupGame(Category);
-
-
         }
-
-
 
         public void StopGame()
         {
@@ -181,17 +148,13 @@ namespace KiosBoot.ViewModels
             Slides.RevealUnmatched();
             Timer.Stop();
 
-
-    
-          foreach (Control ctrl in _GameBox.Children)
-            { 
+            foreach (Control ctrl in _GameBox.Children)
+            {
                 ctrl.IsEnabled = false;
             }
 
             //Timer.Stop();
             //GameInfo.ClearInfo();
-
         }
-
     }
 }
