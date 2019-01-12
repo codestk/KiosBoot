@@ -63,7 +63,8 @@ namespace KiosBoot.Views.Game
 
             SoundManager._mediaPlayer.MediaPlayer.Pause();
             //this.Frame.Navigate(typeof(Menu));
-            GameInstance.CurrentGame.StopGame();
+            if (GameInstance.CurrentGame.GameInfo != null)
+            { GameInstance.CurrentGame.StopGame(); }
             this.Frame.Navigate(typeof(Menu), null, new SlideNavigationTransitionInfo());
         }
 

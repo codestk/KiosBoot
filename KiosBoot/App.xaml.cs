@@ -202,7 +202,7 @@ namespace KiosBoot
             // return new ActivationService(this, typeof(Views.MediaPlayerPage));
 
 
-            return new ActivationService(this, typeof(Views.Game.gameLv10));
+            return new ActivationService(this, typeof(Menu));
            // return new ActivationService(this, typeof(Views.FaceIdentificationSetup));
 
         }
