@@ -84,6 +84,9 @@ namespace KiosBoot.Views
 
 
 
+            App.Current.idleTimer.Start();
+            App.Current.IsIdleChanged += onIsIdleChanged;
+
             //ScrollGame.AddScrollInfo(555, "00444");
         }
 
@@ -113,8 +116,8 @@ namespace KiosBoot.Views
                 ppup.IsOpen = true;
             }
 
-    
-
+         
+           
         }
 
 
@@ -139,8 +142,17 @@ namespace KiosBoot.Views
 
         private async void CameraControl_AutoCaptureStateChanged(object sender, AutoCaptureState e)
         {
+
+
+            App.Current.idleTimer.Stop();
+            App.Current.idleTimer.Start();
+            App.Current.isIdle = false;
             switch (e)
             {
+
+
+
+
                 case AutoCaptureState.WaitingForFaces:
                     this.cameraGuideBallon.Opacity = 1;
                     this.cameraGuideText.Text = "ก้าวไปข้างหน้ากล้องเพื่อเริ่มต้น!";
@@ -152,6 +164,9 @@ namespace KiosBoot.Views
                     break;
 
                 case AutoCaptureState.ShowingCountdownForCapture:
+
+                
+
                     this.cameraGuideText.Text = "";
                     this.cameraGuideBallon.Opacity = 0;
 
@@ -245,6 +260,12 @@ namespace KiosBoot.Views
 
         private void ProcessCameraCapture(ImageAnalyzer e)
         {
+
+
+            App.Current.idleTimer.Stop();
+            App.Current.idleTimer.Start();
+            App.Current.isIdle = false;
+
             this.photoCaptureBalloonHost.Opacity = 0;
             if (e == null)
             {
@@ -269,16 +290,11 @@ namespace KiosBoot.Views
                     {
                         UserProfile.Name = FaceObjct.faceIdIdentification.Person.Name;
                     }
-                    await Task.Delay(5000);
+                    await Task.Delay(1000);
 
                     Frame.Navigate(typeof(Wellcome), null, new SuppressNavigationTransitionInfo());
                     return;
              
-
-
-                // string imagePath = "ms -appx:///Assets/Category-other-dark.png";
-                //string imagePath = "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b?ver=5c31";
-
  
 
             };
@@ -305,140 +321,27 @@ namespace KiosBoot.Views
             };
 
 
-            //if (e == null)
-            //{
-            //    this.cameraControl.RestartAutoCaptureCycle();
-            //    return;
-            //}
-
-            //this.imageFromCameraWithFaces.DataContext = e;
-
-            //e.FaceRecognitionCompleted += async (s, args) =>
-            //{
-
-            //    this.photoCaptureBalloonHost.Opacity = 0;
-
-            //    //int photoDisplayDuration = 10;
-            //    int photoDisplayDuration = 10;
-            //    double decrementPerSecond = 100.0 / photoDisplayDuration;
-            //    for (double i = 100; i >= 0; i -= decrementPerSecond)
-            //    {
-
-            //        if (FaceObjct.MyFace != null)
-            //        {
-
-            //            //this.cameraControl.RestartAutoCaptureCycle();
-
-
-            //            try
-            //            {
-
-
-            //            this.photoCaptureBalloonHost.Opacity = 0;
-
-            //            FaceRectangle rect = e.DetectedFaces.First().FaceRectangle;
-            //            double heightScaleFactor = 1.8;
-            //            double widthScaleFactor = 1.8;
-            //            FaceRectangle biggerRectangle = new FaceRectangle
-            //            {
-            //                Height = Math.Min((int)(rect.Height * heightScaleFactor), e.DecodedImageHeight),
-            //                Width = Math.Min((int)(rect.Width * widthScaleFactor), e.DecodedImageWidth)
-            //            };
-            //            biggerRectangle.Left = Math.Max(0, rect.Left - (int)(rect.Width * ((widthScaleFactor - 1) / 2)));
-            //            biggerRectangle.Top = Math.Max(0, rect.Top - (int)(rect.Height * ((heightScaleFactor - 1) / 1.4)));
-
-            //            //StorageFile tempFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(
-            //            //                                        "FaceRecoCameraCapture.jpg",
-            //            //                                        CreationCollisionOption.GenerateUniqueName);
-
-
-
-            //            //work
-            //            //StorageFile tempFile = await Windows.ApplicationModel.Package.Current.InstalledLocation.CreateFileAsync(
-            //            //                                        "FaceRecoCameraCapture.jpg",
-            //            //                                        CreationCollisionOption.GenerateUniqueName); 
-            //            //======================================================================================================
-
-
-            //            StorageFolder appInstalledFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
-            //            //StorageFolder assetsFolder = await appInstalledFolder.GetFolderAsync("Temp");
-            //            StorageFolder Temp = await Task.Run(() => appInstalledFolder.GetFolderAsync("Temp")).Result;
-            //            //move file from public folder to assets
-            //            //StorageFile tempFile = await appInstalledFolder.CreateFileAsync(
-            //            //                                        "FaceRecoCameraCapture.jpg",
-            //            //                                        CreationCollisionOption.GenerateUniqueName);
-
-            //            StorageFile tempFile = await Temp.CreateFileAsync("FaceRecoCameraCapture.jpg", CreationCollisionOption.GenerateUniqueName);
-
-
-            //            //StorageFile tempFile = await appInstalledFolder.CreateFileAsync("FaceRecoCameraCapture.jpg", CreationCollisionOption.GenerateUniqueName);
-
-            //            //
-            //            await Util.CropBitmapAsync(e.GetImageStreamCallback, biggerRectangle, tempFile);
-            //            //await Task.Run(() => Util.CropBitmapAsync(e.GetImageStreamCallback, biggerRectangle, tempFile));
-
-
-            //            // string imagePath = "ms -appx:///Assets/Category-other-dark.png";
-            //            //string imagePath = "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b?ver=5c31";
-
-            //            string imagePath = tempFile.Path;
-            //            Uri uri = new Uri(imagePath, UriKind.RelativeOrAbsolute);
-            //            ImageSource imgSource = new BitmapImage(uri);
-            //            captureImage.Source = imgSource;
-
-
-            //            UserProfile.PictureProfile = imgSource;
-            //            UserProfile.Name = FaceObjct.faceIdIdentification.Person.Name;
-
-
-            //            this.photoCaptureBalloonHost.Opacity = 0;
-
-
-            //                break;
-
-            //            }
-            //            catch (Exception ex)
-            //            {
-            //             this.cameraControl.RestartAutoCaptureCycle();
-
-            //            }
-
-
-            //        }
-            //        //Show Ballon
-            //        this.photoCaptureBalloonHost.Opacity = 1;
-            //        this.resultDisplayTimerUI.Value = i;
-            //        await Task.Delay(1000);
-            //    }
-
-            //    this.photoCaptureBalloonHost.Opacity = 0;
-            //    this.imageFromCameraWithFaces.DataContext = null;
-            //    //if (FaceObjct.MyFace != null)
-            //    //{
-
-            //    //    Frame.Navigate(typeof(Menu), null, new SuppressNavigationTransitionInfo());
-
-            //    //    return;
-            //    //}
-
-
-
-
-            //    this.cameraControl.RestartAutoCaptureCycle();
-            //};
+        
 
 
 
 
         }
 
+        private void onIsIdleChanged(object sender, EventArgs e)
+        {
+            App.Current.idleTimer.Stop();
+            System.Diagnostics.Debug.WriteLine($"IsIdle: {App.Current.IsIdle}");
+            Frame.Navigate(typeof(ScreenServer), null, new SuppressNavigationTransitionInfo());
 
+        }
 
-
+        
 
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+         
             FaceObjct.Clear();
 
             EnterKioskMode();
@@ -451,6 +354,10 @@ namespace KiosBoot.Views
             {
                 await this.cameraControl.StartStreamAsync();
             }
+
+
+            //App.Current.IsIdleChanged += onIsIdleChanged;
+
 
             base.OnNavigatedTo(e);
         }
@@ -466,14 +373,16 @@ namespace KiosBoot.Views
 
         protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-           
 
+            App.Current.IsIdleChanged -= onIsIdleChanged;
 
             Window.Current.Activated -= CurrentWindowActivationStateChanged;
             this.cameraControl.AutoCaptureStateChanged -= CameraControl_AutoCaptureStateChanged;
             this.cameraControl.CameraAspectRatioChanged -= CameraControl_CameraAspectRatioChanged;
 
             await this.cameraControl.StopStreamAsync();
+            
+
             base.OnNavigatingFrom(e);
         }
 

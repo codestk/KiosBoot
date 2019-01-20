@@ -26,9 +26,9 @@ namespace KiosBoot
 
         public event EventHandler IsIdleChanged;
 
-        private DispatcherTimer idleTimer;
+        public DispatcherTimer idleTimer;
 
-        private bool isIdle;
+        public bool isIdle;
         public bool IsIdle
         {
             get
@@ -53,12 +53,7 @@ namespace KiosBoot
             IsIdle = true;
         }
 
-        private void onCoreWindowPointerMoved(CoreWindow sender, PointerEventArgs args)
-        {
-            idleTimer.Stop();
-            idleTimer.Start();
-            IsIdle = false;
-        }
+   
 
         #endregion
 
@@ -75,20 +70,10 @@ namespace KiosBoot
         {
             InitializeComponent();
 
- 
-
             // Deferred execution until used. Check https://msdn.microsoft.com/library/dd642331(v=vs.110).aspx for further info on Lazy<T> class.
             _activationService = new Lazy<ActivationService>(CreateActivationService);
 
-            //FaceTain ft = new FaceTain();
-            //Task.Run(() => ft.LoadPersonGroupsFromService());
-            //ft.AddPerson("Momojojoj000");
-
-            //CreateProfile
-
-
-           
-
+   
         }
 
  
@@ -111,11 +96,6 @@ namespace KiosBoot
             idleTimer = new DispatcherTimer();
             idleTimer.Interval = TimeSpan.FromSeconds(10);  // 10s idle delay
             idleTimer.Tick += onIdleTimerTick;
-            Window.Current.CoreWindow.PointerMoved += onCoreWindowPointerMoved;
-
-
-
-
 
 
 
@@ -185,13 +165,14 @@ namespace KiosBoot
 
         private ActivationService CreateActivationService()
         {
-
+            //Go
+            //return new ActivationService(this, typeof(Views.FaceIdentificationSetup));
 
 
             //return new ActivationService(this, typeof(Views.RecognitionPage));
 
             //return new ActivationService(this, typeof(Views.SettingsPage));
-            //return new ActivationService(this, typeof(Views.FaceIdentificationSetup));
+
 
             //return new ActivationService(this, typeof(Views.Game.MainWindow));
 
@@ -202,14 +183,14 @@ namespace KiosBoot
             // return new ActivationService(this, typeof(Views.MediaPlayerPage));
 
 
-            return new ActivationService(this, typeof(Menu));
-           // return new ActivationService(this, typeof(Views.FaceIdentificationSetup));
-
+            //return new ActivationService(this, typeof(AutomaticPhotoCapturePage));
+            // return new ActivationService(this, typeof(Views.FaceIdentificationSetup));
+            return new ActivationService(this, typeof(Views.ScreenServer));
         }
 
 
 
- 
+
 
 
 

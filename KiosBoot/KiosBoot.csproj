@@ -291,6 +291,9 @@
     <Compile Include="Views\Product2.xaml.cs">
       <DependentUpon>Product2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ScreenServer.xaml.cs">
+      <DependentUpon>ScreenServer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Service.xaml.cs">
       <DependentUpon>Service.xaml</DependentUpon>
     </Compile>
@@ -482,6 +485,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ScreenServer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Service.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -620,6 +627,8 @@
     <Content Include="Assets\SoundEffects\Cheer.mp3" />
     <Content Include="Assets\SoundEffects\correct_match.mp3" />
     <Content Include="Assets\SoundEffects\Ding.mp3" />
+    <Content Include="Assets\SoundEffects\HelloKa.m4a" />
+    <Content Include="Assets\SoundEffects\HelloKrub.m4a" />
     <Content Include="Assets\SoundEffects\incorrect_match.mp3" />
     <Content Include="Assets\SoundEffects\Whistle.mp3" />
     <Content Include="Assets\Wellcome\Asset 1%402x.png" />

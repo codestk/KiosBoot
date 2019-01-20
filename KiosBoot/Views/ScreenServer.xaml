@@ -1,0 +1,153 @@
+﻿<Page
+    x:Class="KiosBoot.Views.ScreenServer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:MarqueeText"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d"
+   xmlns:interactivity="using:Microsoft.Xaml.Interactivity"  
+    xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:ctl="using:KiosBoot.Controls">
+
+    <Page.Transitions>
+        <TransitionCollection>
+            <EdgeUIThemeTransition Edge="Right"
+                               x:Name="EntranceAnimation" />
+        </TransitionCollection>
+    </Page.Transitions>
+    <Page.Resources>
+        <Storyboard x:Name="AutoFlipView" RepeatBehavior="Forever" AutoReverse="True">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Selector.SelectedIndex)" Storyboard.TargetName="flipView1">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>0</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:1">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>1</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:2">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>2</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:3">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Int32>2</x:Int32>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <DataTemplate x:Key="PhotoTemplate">
+            <Grid Margin="0,0,0,0" Background="Transparent">
+                <Image HorizontalAlignment="Center"   Width="500" Height="550"
+               Stretch="Fill">
+                    <Image.Source>
+                        <BitmapImage  UriSource="{Binding image}" />
+                        <!--<BitmapImage UriSource="https://notebookspec.com/nbs/upload_notebook/20180509-113115_c.jpg"  />-->
+
+
+                    </Image.Source>
+
+                </Image>
+
+
+
+                <!--<MediaElement x:Name="mpe"   Height="800" Margin="0,50,0,0" Source="ms-appx:///Assets/Mp4/fishes.wmv"
+                    MaxWidth="1500"  IsLooping="True"  
+                    AutoPlay="True" />-->
+                <Border VerticalAlignment="Bottom">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0,1">
+                            <GradientStop Offset="0" Color="Transparent" />
+                            <GradientStop Offset="1" Color="Gray" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <TextBlock Margin="5,29,5,5"
+                     VerticalAlignment="Bottom"
+                     Foreground="White"   FontSize="52" TextAlignment="Center"
+                     Text="{Binding IName}" />
+                </Border>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid   >
+        <Grid.Background>
+            <ImageBrush ImageSource="ms-appx:///Assets/Background/Bg_Sky_Menu.png" Stretch="UniformToFill" />
+        </Grid.Background>
+        <!--AutoPlay="True"-->
+       
+         
+         
+        <MediaPlayerElement x:Name="mpe"   Height="700"  HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Stretch" Margin="50,100,0,0" Background="DodgerBlue"
+                           
+                            AreTransportControlsEnabled="False" IsFullWindow="False" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <MediaPlayerElement.TransportControls>
+                <MediaTransportControls IsCompact="False"/>
+            </MediaPlayerElement.TransportControls>
+        </MediaPlayerElement>
+
+        <StackPanel Width="500" Margin="50,100,50,0" Background="Transparent"  HorizontalAlignment="Right"  Padding="10,0,10,0"  >
+            <Image x:Name="DestinationImage"   Width="500" Height="300" Stretch="Fill"   Source="ms-appx:///Assets/Logo/dgaLogo.png" VerticalAlignment="Top"  />
+            <!--<Image x:Name="PhotoImage"  Opacity="1"  Source="ms-appx:///Assets/Logo/dgaLogo.png" VerticalAlignment="Top" Margin="0,50,0,0"/>-->
+
+            <!--<FlipView  Margin="0,50,0,0"   Height="400">
+                <Image Source="ms-appx:///Assets/SampleData/SamplePhoto1.png" AutomationProperties.Name="Cliff"/>
+                <Image Source="ms-appx:///Assets/SampleData/SamplePhoto2.png" AutomationProperties.Name="Grapes"/>
+                <Image Source="ms-appx:///Assets/SampleData/SamplePhoto3.png" AutomationProperties.Name="Rainier"/>
+                <Image Source="ms-appx:///Assets/SampleData/SamplePhoto4.png" AutomationProperties.Name="Sunset"/>
+                <Image Source="ms-appx:///Assets/SampleData/SamplePhoto5.png" AutomationProperties.Name="Valley"/>
+            </FlipView>-->
+
+            <controls:RotatorTile x:Name="Tile1"
+                                Height="330"  
+                                Margin="0,70,0,0"
+                                RotationDelay="0:0:10"
+                                ExtraRandomDuration="0:0:0"
+                                Direction="Right" 
+                                ItemTemplate="{StaticResource PhotoTemplate}" />
+
+        </StackPanel>
+
+
+
+
+
+
+        <Grid   VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition Width="1920"/>
+
+            </Grid.ColumnDefinitions>
+
+
+
+            <StackPanel   Grid.Column="1"   Width="1500" Height="150"  Margin="50,170,0,100" Padding="0,22,0,0"  HorizontalAlignment="Center"  x:Name="maqeru"  >
+                <StackPanel.Background>
+                    <ImageBrush ImageSource="ms-appx:///Assets/Background/SlideScreen.png" Stretch="Fill"/>
+                </StackPanel.Background>
+
+
+                
+
+
+            </StackPanel>
+
+
+
+
+        </Grid>
+        <Grid Width="1" Height="1" Canvas.ZIndex="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <ctl:CameraControl  x:Name="cameraControl" />
+        </Grid>
+     
+
+    </Grid>
+</Page>

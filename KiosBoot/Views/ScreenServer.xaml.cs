@@ -1,4 +1,5 @@
-﻿using KiosBoot.Helpers.Config;
+﻿using KiosBoot.Controls;
+using KiosBoot.Helpers.Config;
 using KiosBoot.Helpers.ConvertModel;
 using KiosBoot.Helpers.Server;
 using MarqueeText;
@@ -9,6 +10,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Windows.Devices.Input;
 using Windows.Media.Core;
 using Windows.Media.Playback;
 using Windows.System.Display;
@@ -21,10 +23,16 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+ 
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace KiosBoot.Views
 {
-    public sealed partial class MediaPlayerPage : Page, INotifyPropertyChanged
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+ 
+    public sealed partial class ScreenServer : Page, INotifyPropertyChanged
     {
         // TODO WTS: Set your default video and image URIs
         // For more on the MediaPlayer and adjusting controls and behavior see https://docs.microsoft.com/en-us/windows/uwp/controls-and-patterns/media-playback
@@ -40,18 +48,23 @@ namespace KiosBoot.Views
 
         private DisplayModel MediaDisplay;
 
-        public MediaPlayerPage()
+        public ScreenServer()
         {
             InitializeComponent();
 
-            //ApplicationView view = ApplicationView.GetForCurrentView();
-            //if (!view.IsFullScreenMode)
-            //{
-            //    view.TryEnterFullScreenMode();
-            //}
-            //mpe.Source = MediaSource.CreateFromUri(new Uri(DefaultSource));
+
+         
+
+            this.cameraControl.EnableAutoCaptureMode = true;
+            this.cameraControl.FilterOutSmallFaces = true;
+            this.cameraControl.AutoCaptureStateChanged += CameraControl_AutoCaptureStateChanged;
+            //this.cameraControl.CameraAspectRatioChanged += CameraControl_CameraAspectRatioChanged;
+
+            Window.Current.Activated += CurrentWindowActivationStateChanged;
+
+
             LoadDataFromServer();
-            //LoadEmbeddedAppFile();
+          
 
 
             if (MediaDisplay.Total > 0)
@@ -70,30 +83,56 @@ namespace KiosBoot.Views
             }
         }
 
+        private async void CameraControl_AutoCaptureStateChanged(object sender, AutoCaptureState e)
+        {
+            this.Frame.Navigate(typeof(AutomaticPhotoCapturePage), null, new EntranceNavigationTransitionInfo());
+        }
+        //private void CameraControl_CameraAspectRatioChanged(object sender, EventArgs e)
+        //{
+        //    this.UpdateCameraHostSize();
+        //}
+        //private void UpdateCameraHostSize()
+        //{
+        //    this.cameraHostGrid.Width = this.cameraHostGrid.ActualHeight * (this.cameraControl.CameraAspectRatio != 0 ? this.cameraControl.CameraAspectRatio : 1.777777777777);
+        //}
+
+        private async void CurrentWindowActivationStateChanged(object sender, Windows.UI.Core.WindowActivatedEventArgs e)
+        {
+            if ((e.WindowActivationState == Windows.UI.Core.CoreWindowActivationState.CodeActivated ||
+                e.WindowActivationState == Windows.UI.Core.CoreWindowActivationState.PointerActivated) &&
+                this.cameraControl.CameraStreamState == Windows.Media.Devices.CameraStreamState.Shutdown)
+            {
+                // When our Window loses focus due to user interaction Windows shuts it down, so we
+                // detect here when the window regains focus and trigger a restart of the camera.
+                await this.cameraControl.StartStreamAsync();
+            }
+        }
+
+
         private void SetFirstVdeo()
         {
-            string vdoPAth="";
-            if (MediaDisplay.Entries[0].Vdo!=null)
-              vdoPAth = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[0].Vdo.Path;
+            string vdoPAth = "";
+            if (MediaDisplay.Entries[0].Vdo != null)
+                vdoPAth = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[0].Vdo.Path;
 
             //string PhotoPAth = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[0].Photo.Path;
 
-            string Logo="";
-            if (MediaDisplay.Entries[0].Logo!=null)
-              Logo = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[0].Logo.Path;
+            string Logo = "";
+            if (MediaDisplay.Entries[0].Logo != null)
+                Logo = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[0].Logo.Path;
 
 
 
-    
-             string text = MediaDisplay.Entries[0].Text;
+
+            string text = MediaDisplay.Entries[0].Text;
 
             string Topic = "";
-            if (MediaDisplay.Entries[0].Topic!=null)
-              Topic = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[0].Topic;
+            if (MediaDisplay.Entries[0].Topic != null)
+                Topic = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[0].Topic;
 
 
 
-             
+
 
             ObservableCollection<MenuItem> items000 = new ObservableCollection<MenuItem>();
             if (MediaDisplay.Entries[0].Photo.Length > 0)
@@ -129,30 +168,12 @@ namespace KiosBoot.Views
 
             CurrentSet++;
 
-            //textSlide.Text = text;
-            //textSlide.KeyTipHorizontalOffset = -150.00;
-            //textSlide.StartBringIntoView();
-
-            //< !--< local:MarqueeTextControl x:Name = "textSlide"  Background = "Green"   Foreground = "White" AnimationDuration = "0:2:9" IsTicker = "True"   FontSize = "60" Height = "110" >
-
-            //                      < local:MarqueeTextControl.Text >
-
-            //                    </ local:MarqueeTextControl.Text >
-
-            //                    </ local:MarqueeTextControl >
-            //AnimationDuration="0:2:8" FontSize="50"   Height="100" IsTicker="True"   Padding="20,10,20,0"
-            //MarqueeTextControl converter = new MarqueeTextControl();
-            //converter.Text= text;
-            //converter.FontSize = 50;
-            //converter.IsTicker = true;
-            //converter.Padding = new Thickness(20, 10, 20, 0);
-            //converter.Height = 100;
-            // textSlide.Text = text;
+           
 
             maqeru.Children.Add(GenMaqueer(text));
-         
+
         }
-          MarqueeTextControl GenMaqueer(string text)
+        MarqueeTextControl GenMaqueer(string text)
         {
             MarqueeTextControl converter = new MarqueeTextControl();
             converter.Text = text;
@@ -169,7 +190,7 @@ namespace KiosBoot.Views
             return converter;
         }
 
- 
+
         private void setCorrentRender(int rowSet, MediaPlayer _MediaPlayer)
         {
             //string vdoPAth = DataConfig.StorageUploadsUrl() + MediaDisplay.Entries[rowSet].Vdo.Path;
@@ -219,7 +240,7 @@ namespace KiosBoot.Views
             }
 
 
-            
+
             //Reder แต่ละ item
             try
             {
@@ -230,7 +251,7 @@ namespace KiosBoot.Views
 
     // textSlide.StartBringIntoView();
 
-   
+
 
     Uri pathLogo = new Uri(Logo);
     DestinationImage.Source = new BitmapImage(pathLogo);
@@ -250,12 +271,12 @@ namespace KiosBoot.Views
 
 
 
-   
+
 
     Tile1.ItemsSource = items000;
 
 
-   // MarqueeTextControl converter = new MarqueeTextControl();
+    // MarqueeTextControl converter = new MarqueeTextControl();
     //converter.Text = text;
     // textSlide.Text = text;
     maqeru.Children.Clear();
@@ -302,7 +323,7 @@ namespace KiosBoot.Views
 
             DateTime dt = System.DateTime.Today;
 
-           
+
             int a = 0;
             foreach (var item in MediaDisplay.Entries)
             {
@@ -310,8 +331,8 @@ namespace KiosBoot.Views
                 {
                     a = a + 1;
                 }
-        
-                
+
+
             }
 
             DisplayModel dtnew = new DisplayModel();
@@ -329,7 +350,7 @@ namespace KiosBoot.Views
 
             }
 
-        
+
 
             //MediaDisplay.Entries = dtnew.Entries.OrderBy(x => x.DateTo).ToArray();
 
@@ -348,31 +369,7 @@ namespace KiosBoot.Views
         //ScrollBar
         private DispatcherTimer timer;
 
-        //private void scrollViewer_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    timer = new DispatcherTimer();
-
-        //    timer.Tick += (ss, ee) =>
-        //    {
-        //        if (timer.Interval.Ticks == 300)
-        //        {
-        //            //each time set the offset to scrollviewer.HorizontalOffset + 5
-        //            scrollviewer.ScrollToHorizontalOffset(scrollviewer.HorizontalOffset + 2);
-        //            //if the scrollviewer scrolls to the end, scroll it back to the start.
-        //            if (scrollviewer.HorizontalOffset == (scrollviewer.ScrollableWidth))
-        //            {
-        //                scrollviewer.ScrollToHorizontalOffset(0);
-        //            }
-        //        }
-        //    };
-        //    timer.Interval = new TimeSpan(300);
-        //    timer.Start();
-        //}
-
-        //private void scrollviewer_Unloaded(object sender, RoutedEventArgs e)
-        //{
-        //    timer.Stop();
-        //}
+      
 
         #endregion SlideShow
 
@@ -405,8 +402,16 @@ namespace KiosBoot.Views
 
         #region Effecft
 
-        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
+            await this.cameraControl.StartStreamAsync();
+            Window.Current.Activated -= CurrentWindowActivationStateChanged;
+            this.cameraControl.AutoCaptureStateChanged -= CameraControl_AutoCaptureStateChanged;
+            //this.cameraControl.CameraAspectRatioChanged -= CameraControl_CameraAspectRatioChanged;
+
+           
+
+
             if (e.NavigationMode == NavigationMode.Back)
             {
                 ConnectedAnimationService.GetForCurrentView()
@@ -417,10 +422,11 @@ namespace KiosBoot.Views
             }
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             //if (e.NavigationMode == NavigationMode.Back)
             //    EntranceAnimation.Edge = EdgeTransitionLocation.Top;
+             await this.cameraControl.StartStreamAsync();
 
             ConnectedAnimation animation =
                 ConnectedAnimationService.GetForCurrentView().GetAnimation("forwardAnimation");
@@ -479,10 +485,9 @@ namespace KiosBoot.Views
 
         private void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            // Frame.GoBack();
-            this.Frame.Navigate(typeof(Menu), null, new DrillInNavigationTransitionInfo());
-        }
+ 
+
+
+
     }
 }

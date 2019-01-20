@@ -32,38 +32,38 @@ namespace KiosBoot.Views
             }
 
 
-            if (FaceObjct.MyFace != null)
-            {
-                //face.FaceAttributes.Gender
-                string gender = FaceObjct.MyFace.FaceAttributes.Gender;
+            //if (FaceObjct.MyFace != null)
+            //{
+            //    //face.FaceAttributes.Gender
+            //    string gender = FaceObjct.MyFace.FaceAttributes.Gender;
 
-                ImageAnalyzer img = this.DataContext as ImageAnalyzer;
-                if (img != null)
-                {
-                    img.UpdateDecodedImageSize(100, 100);
-                }
+            //    ImageAnalyzer img = this.DataContext as ImageAnalyzer;
+            //    if (img != null)
+            //    {
+            //        img.UpdateDecodedImageSize(100, 100);
+            //    }
 
-                if (string.Compare(gender, "male", true) == 0)
-                {
-                    this.SourceImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Animate/male.png"));
-                    Greeting.Text = "ยินดีต้อนรับครับ";
-                }
-                else if (string.Compare(gender, "female", true) == 0)
-                {
-                    //this.SourceImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Animate/female.png"));
+            //    if (string.Compare(gender, "male", true) == 0)
+            //    {
+            //        this.SourceImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Animate/male.png"));
+            //        Greeting.Text = "ยินดีต้อนรับครับ";
+            //    }
+            //    else if (string.Compare(gender, "female", true) == 0)
+            //    {
+            //        //this.SourceImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Animate/female.png"));
 
-                    this.SourceImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Animate/main@2x.png"));
-                    Greeting.Text = "ยินดีต้อนรับค่ะ";
-                    //
-                }
+            //        this.SourceImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Animate/main@2x.png"));
+            //        Greeting.Text = "ยินดีต้อนรับค่ะ";
+                
+            //    }
 
-                //if มี Name
-                if (FaceObjct.faceIdIdentification != null)
-                {
-                    string Name = FaceObjct.faceIdIdentification.Person.Name;
-                    Greeting.Text = "ยินดีต้อนรับคุณ " + Name + " ";
-                }
-            }
+            //    //if มี Name
+            //    if (FaceObjct.faceIdIdentification != null)
+            //    {
+            //        string Name = FaceObjct.faceIdIdentification.Person.Name;
+            //        Greeting.Text = "ยินดีต้อนรับคุณ " + Name + " ";
+            //    }
+            //}
         }
 
         private void onIsIdleChanged(object sender, EventArgs e)

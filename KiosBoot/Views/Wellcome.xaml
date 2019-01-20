@@ -33,7 +33,7 @@
 
         </Grid>
 
-        <Grid Width="1000" Height="1000" HorizontalAlignment="Left" Margin="10">
+        <Grid x:Name="BlackBoard" Width="1000" Height="1000" HorizontalAlignment="Left" Margin="10">
             <Grid.Background>
                 <ImageBrush ImageSource="ms-appx:///Assets/Wellcome/blackBoardblackBoard.png" Stretch="Uniform"/>
             </Grid.Background>

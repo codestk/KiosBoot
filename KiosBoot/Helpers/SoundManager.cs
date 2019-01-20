@@ -73,7 +73,7 @@ namespace KiosBoot
             PlayEffect("incorrect_match.mp3");
         }
 
-        private static void PlayEffect(string fileName)
+        public static void PlayEffect(string fileName)
         {
             //_effectPlayer.Open(new Uri(Path.Combine(Environment.CurrentDirectory, "Assets/SoundEffects/" + fileName)));
             //_effectPlayer.Play();

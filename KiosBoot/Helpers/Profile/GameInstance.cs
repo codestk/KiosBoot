@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KiosBoot.Helpers.Profile
 {
-   public static class GameInstance
+   public   class GameInstance
     {
         public static GameViewModel CurrentGame { get; set; }
         

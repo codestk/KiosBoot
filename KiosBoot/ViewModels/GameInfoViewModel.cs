@@ -10,7 +10,7 @@ namespace KiosBoot.ViewModels
 {
     public class GameInfoViewModel : ObservableObject
     {
-        private const int _maxAttempts = 3;
+        private const int _maxAttempts = 10;   
         private const int _pointAward = 1;
         private const int _pointDeduction = 1;
 

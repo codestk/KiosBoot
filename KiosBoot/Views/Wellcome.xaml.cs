@@ -99,7 +99,7 @@ namespace KiosBoot.Views
                 {
                     //this.SourceImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Animate/female.png"));
 
-                    this.SourceImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Animate/main@2x.png"));
+                    this.SourceImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/WellCome/Asset 1.png"));
                     Greeting.Text = "สวัสดีค่ะ";
                     //
                 }
@@ -107,6 +107,8 @@ namespace KiosBoot.Views
                 //if มี Name
                 if (FaceObjct.faceIdIdentification != null)
                 {
+                    BlackBoard.Visibility = Visibility.Visible;
+
                     string Name = FaceObjct.faceIdIdentification.Person.Name;
                     //NameInformation.Text = Name;
 
@@ -128,11 +130,28 @@ namespace KiosBoot.Views
                             FaceObjct.faceIdIdentification.Person.Name = item.Name;
                             NameInformation.Text = item.Name;
                             //Play Sounde
-                            string urlSound = DataConfig.StorageUploadsUrl()+  item.Sound.Path;
+                            string urlSound = DataConfig.StorageUploadsUrl() + item.Sound.Path;
                             SoundManager.PlaySound(urlSound);
                         }
                     }
-                 
+
+                }
+                else
+                {
+
+                    BlackBoard.Visibility = Visibility.Collapsed;
+
+
+                    if (string.Compare(gender, "male", true) == 0)
+                    {
+
+                        SoundManager.PlayEffect("HelloKrub.m4a"); 
+                    }
+                    else if (string.Compare(gender, "female", true) == 0)
+                    {
+   
+                        SoundManager.PlayEffect("HelloKa.m4a");
+                    }
                 }
 
 

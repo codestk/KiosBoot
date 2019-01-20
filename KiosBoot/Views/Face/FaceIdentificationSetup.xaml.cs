@@ -77,19 +77,25 @@ namespace KiosBoot.Views
             this.InitializeComponent();
 
 
+            //this.Frame.Navigate(typeof(AutomaticPhotoCapturePage), null, new EntranceNavigationTransitionInfo());
+
 
             this.Loaded += (sender, e) =>
             {
-                // Keyboard and mouse navigation only apply when occupying the entire window
 
                 // Listen to the window directly so focus isn't required
                 //Window.Current.CoreWindow.Dispatcher.AcceleratorKeyActivated +=
                 //    CoreDispatcher_AcceleratorKeyActivated;
                 //Window.Current.CoreWindow.PointerPressed +=
                 //    this.CoreWindow_PointerPressed;
+
+
+                LoadAndTrainServerAsync();
+
                 this.Frame.Navigate(typeof(AutomaticPhotoCapturePage), null, new EntranceNavigationTransitionInfo());
 
             };
+
 
 
         }
@@ -98,23 +104,31 @@ namespace KiosBoot.Views
         {
             this.DataContext = this;
 
-            await this.LoadPersonGroupsFromService();
+            //await this.LoadPersonGroupsFromService();
+
+            //await LoadPersonGroupsFromService();
+
+            //await LoadAndTrainServerAsync();
+
+            //Task.Run(async () =>  await LoadPersonGroupsFromService()).RunSynchronously();
 
 
-            //LoadAndTrainServer();
-            //await DeletePersonGroupAsync();
+            //var result2 = Task.Run(async () =>   await LoadAndTrainServerAsync() ).RunSynchronously();
+
+
+            //this.Frame.Navigate(typeof(AutomaticPhotoCapturePage), null, new EntranceNavigationTransitionInfo());
+
+            //await LoadAndTrainServerAsync();
 
 
 
-            await LoadAndTrainServerAsync();
-            // await TrainGroupsAsync();
+            await LoadPersonGroupsFromService();
 
+       
+            //await Task.Delay(10000);
 
-        
-            // this.Frame.Navigate(typeof(AutomaticPhotoCapturePage), null, new EntranceNavigationTransitionInfo());
             base.OnNavigatedTo(e);
-
-             
+          
         }
 
  
@@ -127,8 +141,9 @@ namespace KiosBoot.Views
                 e.Cancel = true;
                 await Util.ConfirmActionAndExecute("It looks like you made modifications but didn't train the model afterwards. Would you like to train now?", async () => await this.TrainGroupsAsync());
             }
-
+         
             base.OnNavigatingFrom(e);
+            this.Frame.Navigate(typeof(AutomaticPhotoCapturePage), null, new EntranceNavigationTransitionInfo());
         }
 
         #region Group management
@@ -298,7 +313,8 @@ namespace KiosBoot.Views
             }
 
             this.progressControl.IsActive = false;
-           
+           // this.Frame.Navigate(typeof(AutomaticPhotoCapturePage), null, new EntranceNavigationTransitionInfo());
+
         }
 
 
